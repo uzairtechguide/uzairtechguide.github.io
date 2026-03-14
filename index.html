@@ -5,14 +5,9 @@
   <meta name="msvalidate.01" content="4CDBD8E71E4AC79770CB7F9D23DCF600" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Your concise and compelling description of the page goes here.">
+  <meta name="description" content="Practical Android tutorials, troubleshooting guides, and tools!">
   <title>UzairTechGuide - Think Digital, Live Real!</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8884255549677716"
-     crossorigin="anonymous"></script>
-
-
-
-  <!-- Google fonts used for nice typography -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8884255549677716" crossorigin="anonymous"></script>
 
  <style>
 @font-face {
@@ -22,13 +17,46 @@
   font-display: swap;
   src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJLmy15VF9eO.woff2) format('woff2');
 }
+
+/* FIXES FOR DESKTOP VIEW */
+.hero-inner, .nav-tiles, .grid, .section, .footer-inner {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo {
+  object-fit: contain; /* Prevents squishing */
+  height: auto; 
+  display: block;
+  margin: 0 auto 15px;
+}
+
+@media (min-width: 768px) {
+  .nav-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-tiles {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 </style> 
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 
-  <!-- main CSS -->
-  <link rel="stylesheet" href="styles.css">
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -40,38 +68,22 @@
     "query-input": "required name=search_term_string"
   }
 }
-  </script>
+</script>
 </head>
 <body>
-  <!-- ---------- TOP CONTROLS ----------
-       These are the little round buttons in the top-right:
-       - theme toggle (changes dark/light)
-       - hamburger menu (opens the side navigation)
-       The theme icon text will be inserted by JS (avoids encoding problems).
-  -->
-  <div class="top-controls" aria-hidden="false">
-    <button id="theme-toggle" class="control-btn" aria-label="Toggle theme" title="Toggle theme"></button>
 
-    <!--
-      The hamburger button contains 3 empty <span> elements. CSS draws the bars.
-      If for some reason those bars fail, JS will show a Unicode fallback ().
-    -->
+  <div class="top-controls">
+    <button id="theme-toggle" class="control-btn" aria-label="Toggle theme" title="Toggle theme"></button>
     <button id="hamburger-btn" class="hamburger" aria-label="Open menu" aria-expanded="false" title="Open menu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
-      <!-- fallback (hidden by default) -->
-      <span class="hamburger-fallback" aria-hidden="true"></span>
+      <span class="hamburger-fallback" aria-hidden="true"></span>
     </button>
   </div>
 
-  <!-- ---------- SIDE NAV ----------
-       This slides in from the right. Each link will eventually point to a page.
-       For now they are same-page anchors (or external YouTube link).
-  -->
-  <aside id="side-nav" class="side-nav" aria-hidden="true" aria-labelledby="hamburger-btn">
+  <aside id="side-nav" class="side-nav" aria-hidden="true">
     <button id="side-close" class="side-close" aria-label="Close menu">&times;</button>
-
     <nav class="side-links" role="navigation" aria-label="Main navigation">
       <a href="https://uzair-902.github.io">Home</a>
       <a href="tutorials/tutorials.html">Tutorials</a>
@@ -81,48 +93,15 @@
     </nav>
   </aside>
 
-  <!-- overlay displayed when side nav is open -->
   <div id="page-overlay" class="overlay" hidden></div>
 
   <main>
-    <!-- ---------- HERO ----------
-         Large header area with background image, logo, title, and CTAs.
-         It is centered and scales with the viewport.
-        For now they are same-page anchors (or external YouTube link).
-  -->
-  <aside id="side-nav" class="side-nav" aria-hidden="true" aria-labelledby="hamburger-btn">
-    <button id="side-close" class="side-close" aria-label="Close menu">&times;</button>
-
-    <nav class="side-links" role="navigation" aria-label="Main navigation">
-      <a href="https://uzair-902.github.io">Home</a>
-      <a href="tutorials/tutorials.html">Tutorials</a>
-      <a href="contact.html">Contact</a>
-      <a href="about.html">About</a>
-      <a href="https://youtube.com/@muhammduzairshah23">YouTube Channel</a>
-    </nav>
-  </aside>
-
-  <!-- overlay displayed when side nav is open -->
-  <div id="page-overlay" class="overlay" hidden></div>
-
-  <main>
-    <!-- ---------- HERO ----------
-         Large header area with background image, logo, title, and CTAs.
-         It is centered and scales with the viewport.
-    -->
     <header id="home" class="hero" role="banner">
       <div class="hero-bg" role="img" aria-label="Technical dark background image"></div>
-
       <div class="hero-inner">
-        <!-- logo image should be present in same folder -->
         <img src="logo.webp" width="120" height="90" alt="UzairTechGuide logo" class="logo" />
-
         <h1 class="site-title">UzairTechGuide</h1>
-
-        <!-- Lead paragraph (short description) -->
         <p class="lead">Practical Android tutorials, troubleshooting guides, and tools! Clear, tested, and ready to use.</p>
-
-        <!-- CTA (call to action) buttons -->
         <div class="hero-cta">
           <a class="btn primary" href="tutorials/tutorials.html">Explore Tutorials</a>
           <a class="btn ghost" href="https://m.youtube.com/@MuhammdUzairShah23">YouTube</a>
@@ -130,82 +109,52 @@
       </div>
     </header>
 
-    <!-- ---------- NAV TILES ----------
-         Large clickable tiles for main sections. Easy to tap on mobile.
-    -->
     <section class="nav-tiles" aria-label="Quick links to site sections">
       <a class="tile" href="tutorials/tutorials.html">
         <h3>Tutorials</h3>
         <p>Step-by-step lessons and guides.</p>
       </a>
-
       <a class="tile" href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener">
         <h3>YouTube</h3>
         <p>Video walkthroughs & demonstrations.</p>
       </a>
-
       <a class="tile" href="contact.html">
         <h3>Contact</h3>
         <p>Report an issue or request a tutorial.</p>
       </a>
-
       <a class="tile" href="about.html">
         <h3>About</h3>
         <p>Who runs UzairTechGuide and what we do?</p>
       </a>
     </section>
 
-    <!-- ---------- FEATURES GRID ----------
-         Small cards describing site strengths.
-    -->
-<!-- ----------- ADS BY GOOGLE ---------- -->
+    <div id="ad-container" style="text-align:center; position:relative; margin: 20px 0;">
+      <div id="ad-fallback" style="font-size:14px; color:#666; padding:10px;">
+        Ad Placeholder — your support keeps this site running ❤️
+      </div>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-format="fluid"
+           data-ad-layout-key="-6t+ed+2i-1n-4w"
+           data-ad-client="ca-pub-8884255549677716"
+           data-ad-slot="6310245756"></ins>
+    </div>
 
- <div id="ad-container" style="text-align:center; position:relative;">
-  <div id="ad-fallback" style="font-size:14px; color:#666; padding:10px;">
-    Ad Placeholder — your support keeps this site running ❤️
-  </div>
-
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-format="fluid"
-       data-ad-layout-key="-6t+ed+2i-1n-4w"
-       data-ad-client="ca-pub-8884255549677716"
-       data-ad-slot="6310245756"></ins>
-</div>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8884255549677716"
-     crossorigin="anonymous"></script>
-<script>
-  try {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    // document.getElementById('ad-fallback').style.display = 'none';
-  } catch (e) {
-    console.warn('Ad failed to load:', e);
-  }
-</script>
-
-<!-- ----------------------------------- -->
-
-</div>
     <section id="features" class="section" aria-labelledby="why-title">
       <h2 id="why-title" class="section-title">Why Visit UzairTechGuide</h2>
-
       <div class="grid">
         <article class="card">
           <h3>Step-by-step guides</h3>
           <p>Clear procedures that work, no guesswork.</p>
         </article>
-
         <article class="card">
           <h3>Downloadable tools</h3>
           <p>Verified utilities and files referenced in tutorials.</p>
         </article>
-
         <article class="card">
           <h3>Practical solutions</h3>
           <p>Fix common issues fast with tested methods.</p>
         </article>
-
         <article class="card">
           <h3>Device compatibility</h3>
           <p>Notes and alternatives for older devices.</p>
@@ -213,68 +162,67 @@
       </div>
     </section>
 
-    <!-- ---------- FOOTER ---------- -->
-<footer class="footer" role="contentinfo">
-  <div class="footer-inner">
-    <small>&copy; 2026 UzairTechGuide - All Right Reserved.</small>
-    <p>
-      <a href="privacy.html">Privacy Policy</a> |
-      <a href="terms.html">Terms of Use</a> |
-      <a href="contact.html">Contact</a>
-    </p>
-  </div>
-</footer>
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <small>&copy; 2026 UzairTechGuide - All Right Reserved.</small>
+        <p>
+          <a href="privacy.html">Privacy Policy</a> |
+          <a href="terms.html">Terms of Use</a> |
+          <a href="contact.html">Contact</a>
+        </p>
+      </div>
+    </footer>
 
-<style>
-.footer {
-  background: inherit; /* keep your page’s default background */
-  border-top: 2px solid rgba(255,255,255,0.1);
-  text-align: center;
-  padding: 20px 10px;
-  font-family: "Poppins", sans-serif;
-  color: #ccc;
-  margin-top: 40px;
-  backdrop-filter: blur(6px);
-}
-
-.footer-inner {
-  display: inline-block;
-  background: rgba(0,0,0,0.4);
-  border-radius: 12px;
-  padding: 12px 25px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.footer-inner:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 20px rgba(0,0,0,0.6);
-}
-
-.footer a {
-  color: #00a8ff;
-  text-decoration: none;
-  margin: 0 8px;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.footer a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.footer small {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.9em;
-  color: #aaa;
-}
-</style>
+    <style>
+      .footer {
+        background: inherit;
+        border-top: 2px solid rgba(255,255,255,0.1);
+        text-align: center;
+        padding: 20px 10px;
+        font-family: "Poppins", sans-serif;
+        color: #ccc;
+        margin-top: 40px;
+        backdrop-filter: blur(6px);
+      }
+      .footer-inner {
+        display: inline-block;
+        background: rgba(0,0,0,0.4);
+        border-radius: 12px;
+        padding: 12px 25px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .footer-inner:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      }
+      .footer a {
+        color: #00a8ff;
+        text-decoration: none;
+        margin: 0 8px;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+      .footer a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      .footer small {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.9em;
+        color: #aaa;
+      }
+    </style>
   </main>
 
-  <!-- Defer script so DOM exists; script.js contains robust JS -->
   <script src="script.js" defer></script>
-
+  <script>
+    try {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.warn('Ad failed to load:', e);
+    }
+  </script>
 </body>
 </html>
