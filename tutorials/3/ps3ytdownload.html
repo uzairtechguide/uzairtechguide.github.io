@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UzairTechGuide — How to Install YouTube on PS3 (2026 Fix)</title>
+<title>UzairTechGuide - YouTube on PS3 </title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-            UzairTechGuide - PS3 YouTube Tutorial
+   UzairTechGuide — PS3 YouTube Install Guide
    ============================================================ */
 :root{
   --bg-dark:#0f1113;
@@ -21,60 +21,104 @@
   --text-dark:#111214;
   --muted-dark:#6b6f73;
   --radius-md:14px;
-  --shadow-dark:0 8px 24px rgba(3,6,8,0.1);
+  --shadow-dark:0 8px 24px rgba(3,6,8,0.10);
   --shadow-light:0 8px 24px rgba(16,24,32,0.06);
   --transition:220ms cubic-bezier(.2,.9,.3,1);
   --max-width:1100px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
   font-family:"Roboto",system-ui,Arial;
   background:var(--bg-dark);
   color:var(--text-light);
   transition:background .3s,color .3s;
 }
-body.light{background:var(--bg-light);color:var(--text-dark);}
+body.light{
+  background:var(--bg-light);
+  color:var(--text-dark);
+}
 
 /* ===== top controls ===== */
 .top-controls{
-  position:fixed;top:10px;right:10px;
-  display:flex;gap:10px;z-index:1200;
+  position:fixed;
+  top:10px;
+  right:10px;
+  display:flex;
+  gap:10px;
+  z-index:1200;
 }
 .control-btn{
-  width:42px;height:42px;
-  border:none;border-radius:10px;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:10px;
   background:rgba(255,255,255,0.06);
-  cursor:pointer;font-size:20px;
-  display:flex;align-items:center;justify-content:center;
-  color:inherit;transition:background .2s,transform .2s;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:inherit;
+  transition:background .2s,transform .2s,border-color .2s,box-shadow .2s;
+  outline:none;
 }
 .control-btn:hover{transform:translateY(-2px);}
-body.light .control-btn{background:#fff;box-shadow:var(--shadow-dark);}
+.control-btn:focus-visible{
+  box-shadow:0 0 0 3px rgba(29,185,84,0.25);
+}
+body.light .control-btn{
+  background:#fff;
+  border:1px solid rgba(17,18,20,0.08);
+  box-shadow:var(--shadow-light);
+  color:var(--text-dark);
+}
+body.light .control-btn:hover{
+  box-shadow:0 10px 24px rgba(16,24,32,0.10);
+}
 
 /* ===== header ===== */
 .header{
-  position:fixed;top:0;left:0;right:0;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
   height:56px;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-family:"Montserrat",sans-serif;
-  font-weight:600;font-size:1.2rem;
+  font-weight:600;
+  font-size:1.2rem;
   background:rgba(255,255,255,0.02);
   backdrop-filter:blur(10px);
   box-shadow:0 2px 8px rgba(0,0,0,0.15);
   z-index:1000;
 }
-body.light .header{background:#fff;box-shadow:var(--shadow-light);}
+body.light .header{
+  background:#fff;
+  box-shadow:var(--shadow-light);
+  color:var(--text-dark);
+}
 
 /* ===== hamburger ===== */
 .hamburger{
-  height:36px;width:36px;padding:6px 10px;
-  display:flex;flex-direction:column;justify-content:space-between;align-items:center;
-  background:transparent;border:none;cursor:pointer;
+  height:36px;
+  width:36px;
+  padding:6px 10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  background:transparent;
+  border:none;
+  cursor:pointer;
 }
 .hamburger span{
-  width:16px;height:2.5px;
+  width:16px;
+  height:2.5px;
   background:var(--accent-2);
-  border-radius:2px;margin:1.5px 0;
+  border-radius:2px;
+  margin:1.5px 0;
   transition:all .3s ease;
 }
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(2px,2px);}
@@ -85,53 +129,463 @@ body.light .hamburger span{background:var(--accent-2);}
 
 /* ===== side nav ===== */
 .side-nav{
-  position:fixed;top:0;right:-320px;
-  width:300px;height:100vh;
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  height:100vh;
   background:var(--panel-dark);
-  padding:70px 20px;transition:right .3s;
+  padding:70px 20px;
+  transition:right .3s;
   z-index:1100;
 }
 .side-nav.open{right:0;}
 body.light .side-nav{background:var(--panel-light);}
 .side-links a{
-  display:block;padding:10px 12px;
-  color:inherit;text-decoration:none;
-  font-weight:600;border-radius:10px;
+  display:block;
+  padding:10px 12px;
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
+  border-radius:10px;
   transition:background .2s;
 }
-.side-links a:hover{background:rgba(255,255,255,0.06);color:var(--accent);}
-body.light .side-links a:hover{background:rgba(0,0,0,0.05);color:var(--accent-2);}
+.side-links a:hover{
+  background:rgba(255,255,255,0.06);
+  color:var(--accent);
+}
+body.light .side-links a:hover{
+  background:rgba(0,0,0,0.05);
+  color:var(--accent-2);
+}
 .side-close{
-  position:absolute;top:10px;left:10px;
-  font-size:28px;background:none;border:none;color:inherit;cursor:pointer;
+  position:absolute;
+  top:10px;
+  left:10px;
+  font-size:28px;
+  background:none;
+  border:none;
+  color:inherit;
+  cursor:pointer;
 }
 .overlay{
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background:rgba(0,0,0,0.45);
-  opacity:0;pointer-events:none;
-  transition:opacity .2s;z-index:1050;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:1050;
 }
 .overlay.show{opacity:1;pointer-events:auto;}
 body.light .overlay{background:rgba(0,0,0,0.25);}
 
 /* ===== main ===== */
-main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
-.content-placeholder{
+main{
+  max-width:var(--max-width);
+  margin:112px auto 0;
+  padding:0 20px 10px;
+}
+.tutorial-container{
+  max-width:980px;
+  margin:20px auto 26px;
+  padding:0;
+  font-family:"Roboto",system-ui,Arial;
+  color:var(--text-light);
+  line-height:1.65;
+}
+body.light .tutorial-container{color:var(--text-dark);}
+.card{
   background:rgba(255,255,255,0.03);
-  border-radius:12px;padding:30px;
-  min-height:60vh;
+  border-radius:12px;
+  padding:26px;
   box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  color:inherit;
+}
+body.light .card{
+  background:#fff;
+  color:var(--text-dark);
+  box-shadow:var(--shadow-light);
+  border:1px solid rgba(17,18,20,0.08);
+}
+h1#tut-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:clamp(1.4rem,2.4vw,1.9rem);
+  line-height:1.25;
+  margin:0 0 12px;
+  letter-spacing:-0.01em;
+  scroll-margin-top:112px;
+}
+p.lead{
+  margin:12px 0 18px;
+  color:rgba(255,255,255,0.88);
+}
+body.light p.lead{color:rgba(0,0,0,0.80);}
+a{color:#58b7ff;text-decoration:none}
+a:hover{text-decoration:underline}
+body.light a{color:#0077cc}
+
+.section-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:1.05rem;
+  margin:18px 0 8px;
+  font-weight:700;
+  color:inherit;
+}
+.step{
+  margin:16px 0;
+}
+.step h3{
+  font-size:1.02rem;
+  margin:0 0 8px;
+  font-weight:700;
+  color:inherit;
+}
+.step p{margin:8px 0 12px;}
+ul,ol{
+  margin:8px 0 14px 1.25rem;
+}
+li{margin:8px 0;}
+
+figure{
+  margin:12px 0;
+  text-align:center;
+}
+figure img{
+  width:100%;
+  max-width:820px;
+  border-radius:10px;
+  display:block;
+  margin:8px auto;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+figcaption{
+  font-size:0.92rem;
+  opacity:0.75;
+  margin-top:6px;
+}
+
+.video-wrap{
+  position:relative;
+  width:100%;
+  padding-bottom:56.25%;
+  margin:12px 0 18px;
+  border-radius:10px;
+  overflow:hidden;
+  background:rgba(0,0,0,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+}
+body.light .video-wrap{
+  background:#f7f9fb;
+  border:1px solid rgba(17,18,20,0.08);
+}
+.video-wrap iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+.notice{
+  margin:14px 0 18px;
+  padding:12px 14px;
+  border-left:4px solid var(--accent);
+  border-radius:10px;
+  background:rgba(255,255,255,0.04);
+}
+body.light .notice{
+  background:#f3f5f7;
+  border-left-color:var(--accent-2);
+}
+.notice strong,
+.notice span{color:inherit;}
+
+.code-block{
+  position:relative;
+  margin:14px 0;
+  border-radius:10px;
+  overflow:auto;
+  padding:12px 14px;
+  background:rgba(0,0,0,0.06);
+}
+body.light .code-block{
+  background:linear-gradient(180deg,#f6f8fb,#ffffff);
+  box-shadow:0 6px 18px rgba(16,24,32,0.04);
+}
+.code-block pre{
+  margin:0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;
+  font-size:0.95rem;
+  white-space:pre-wrap;
+  word-break:break-word;
+  color:inherit;
+}
+.code-block code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;
+  color:inherit;
+}
+.code-inline{
+  display:inline-block;
+  padding:2px 7px;
+  border-radius:6px;
+  background:rgba(255,255,255,0.08);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;
+  font-size:0.94em;
+}
+body.light .code-inline{
+  background:#f0f3f6;
+  border:1px solid rgba(17,18,20,0.08);
+}
+
+.copy-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:36px;
+  height:32px;
+  border:none;
+  border-radius:8px;
+  background:rgba(255,255,255,0.10);
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .15s,background .15s,box-shadow .15s;
+}
+.copy-btn:hover{transform:translateY(-1px);}
+body.light .copy-btn{
+  background:rgba(0,0,0,0.06);
+  color:#111;
+  box-shadow:0 4px 12px rgba(16,24,32,0.06);
+}
+.copy-btn.copied{
+  background:#1db954;
+  color:#fff;
+}
+.copy-status{
+  position:absolute;
+  top:12px;
+  right:54px;
+  padding:6px 8px;
+  border-radius:8px;
+  font-size:0.84rem;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  opacity:0;
+  transform:translateY(-6px);
+  transition:opacity .18s,transform .18s;
+  pointer-events:none;
+  white-space:nowrap;
+}
+body.light .copy-status{
+  background:rgba(0,0,0,0.06);
+  color:var(--text-dark);
+}
+.copy-status.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.callout{
+  margin-top:22px;
+  padding:16px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+}
+body.light .callout{background:#f3f5f7;}
+
+.youtube-cta{
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  margin-top:18px;
+  padding:12px 14px;
+  background:#000;
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
+}
+.youtube-cta svg{
+  flex:0 0 auto;
+  width:40px;
+  height:24px;
+}
+
+.note{
+  font-size:0.96rem;
+  opacity:0.92;
+  margin-top:10px;
+}
+
+.footer{
+  text-align:center;
+  padding:25px;
   color:var(--muted-light);
 }
-body.light .content-placeholder{background:#fff;color:var(--muted-dark);}
-
-/* ===== footer ===== */
-.footer{text-align:center;padding:25px;color:var(--muted-light);}
 body.light .footer{color:var(--muted-dark);}
+
+/* ===== light theme contrast fix for tutorial text ===== */
+body.light .card p,
+body.light .card li,
+body.light .card .note,
+body.light .card .small,
+body.light .card .section-title,
+body.light .card h1,
+body.light .card h3,
+body.light .card strong{
+  color:#111214;
+}
+body.light .card .lead{
+  color:#17191c;
+}
+
+
+
+
+/* ===== Download Buttons ===== */
+.download-grid{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:12px;
+}
+
+.download-btn{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  border-radius:8px; /* small radius like you wanted */
+  text-decoration:none;
+  color:#fff;
+  font-weight:600;
+  transition:all .25s cubic-bezier(.2,.9,.3,1);
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  position:relative;
+  overflow:hidden;
+}
+
+/* subtle shine effect */
+.download-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.15),transparent);
+  opacity:0;
+  transition:opacity .3s;
+}
+.download-btn:hover::before{opacity:1;}
+
+.download-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.35);
+}
+
+.download-btn img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+/* text */
+.download-text{
+  display:flex;
+  flex-direction:column;
+  font-size:1rem;
+}
+
+.download-text span{
+  font-size:0.85rem;
+  opacity:0.85;
+  font-weight:500;
+}
+
+/* brand colors */
+.download-btn.gdrive{
+  background:linear-gradient(135deg,#1a73e8,#4285f4);
+}
+
+.download-btn.mega{
+  background:linear-gradient(135deg,#d9272e,#ff3b3b);
+}
+
+.download-btn.mediafire{
+  background:linear-gradient(135deg,#0077ff,#2aa7ff);
+}
+
+/* light mode fix */
+body.light .download-btn{
+  color:#fff;
+  box-shadow:0 6px 18px rgba(16,24,32,0.15);
+}
+
+
+
+
+
+
+
+
+/* ===== responsive ===== */
+@media(max-width:720px){
+  .top-controls{
+    top:9px;
+    right:9px;
+    gap:8px;
+  }
+  .control-btn{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+  }
+  .hamburger{
+    height:34px;
+    width:34px;
+    padding:6px 9px;
+  }
+  .header{
+    height:54px;
+    font-size:1.05rem;
+  }
+  main{
+    margin-top:102px;
+    padding:0 14px 10px;
+  }
+  .tutorial-container{
+    margin:18px auto 24px;
+  }
+  .card{
+    padding:18px;
+    border-radius:14px;
+  }
+  .copy-btn{
+    width:34px;
+    height:30px;
+    top:8px;
+    right:8px;
+  }
+  .copy-status{
+    top:10px;
+    right:44px;
+    font-size:0.78rem;
+  }
+  h1#tut-title{
+    scroll-margin-top:104px;
+  }
+}
+
+
+
 </style>
 </head>
 <body>
 
+<!-- controls -->
 <div class="top-controls">
   <button id="theme-toggle" class="control-btn" title="Toggle theme" aria-pressed="false" aria-label="Toggle color theme"></button>
   <button id="hamburger-btn" class="hamburger" title="Menu" aria-label="Open menu" aria-expanded="false">
@@ -140,114 +594,285 @@ body.light .footer{color:var(--muted-dark);}
   </button>
 </div>
 
+<!-- header -->
 <header class="header">UzairTechGuide</header>
 
+<!-- side nav -->
 <aside id="side-nav" class="side-nav" aria-hidden="true">
   <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
-  <nav class="side-links" role="navigation">
-    <a href="/index.html">Home</a>
-    <a href="/tutorials/tutorials.html">Tutorials</a>
-    <a href="/about.html">About</a>
-    <a href="/contact.html">Contact</a>
-    <a href="https://youtube.com/@muhammduzairshah23">YouTube Channel</a>
-    <a href="/privacy.html">Privacy Policy</a>
-    <a href="/terms.html">Terms Of Use</a>
+  <nav class="side-links" role="navigation" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <a href="#">Tutorials</a>
+    <a href="#">Downloads</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
   </nav>
 </aside>
 
 <div id="overlay" class="overlay" hidden></div>
 
-<main class="tutorial-container" aria-labelledby="tut-title">
+<main>
+  <article class="tutorial-container" aria-labelledby="tut-title">
+    <div class="card" role="article">
 
-  <style>
-    /* --- tutorial: local scoped styles --- */
-    :root{
-      --card-bg-dark: rgba(255,255,255,0.03);
-      --card-bg-light: #ffffff;
-      --text-dark: #111214;
-      --text-light: #eef1f3;
-      --muted-dark: #6b6f73;
-      --muted-light: #bfc7cb;
-      --accent: #1db954;
-      --radius: 12px;
-    }
-    .tutorial-container{
-      max-width:980px;
-      margin:36px auto;
-      padding:28px;
-      color: var(--text-light);
-      line-height:1.6;
-    }
-    body.light .tutorial-container{ color: var(--text-dark); }
-    .card{
-      background: var(--card-bg-dark);
-      border-radius: var(--radius);
-      padding:20px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
-    }
-    body.light .card{ background: var(--card-bg-light); box-shadow: 0 8px 20px rgba(16,24,32,0.06); }
-    h1#tut-title{ font-family: "Montserrat", sans-serif; font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin:0 0 12px; }
-    .video-wrap{
-      position:relative; width:100%; padding-bottom:56.25%; margin:18px 0;
-      border-radius:10px; overflow:hidden; background:rgba(0,0,0,0.06);
-    }
-    .video-wrap iframe{ position:absolute;inset:0;width:100%;height:100%;border:0; }
-    .btn-container { text-align: center; margin: 30px 0; }
-    .dl-btn {
-      display: inline-block;
-      background: var(--accent-2);
-      color: #fff;
-      padding: 16px 30px;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(29, 185, 84, 0.4);
-      transition: transform 0.2s;
-    }
-    .dl-btn:hover { transform: translateY(-3px); }
-  </style>
+      <h1 id="tut-title">Install YouTube on PS3 in 2026 — Full Working Method</h1>
 
-  <article class="card" role="article">
-    <h1 id="">How to Install YouTube on PS3 in 2026 (No PSN Required)</h1>
-    <p class="lead">If you're having trouble with the official YouTube app on your PlayStation 3 or want to watch videos without signing into PSN, this updated 2026 fix is all you need. Works on HEN and CFW 4.92!</p>
+      <p class="lead">
+        This guide shows how to install the YouTube app on a PlayStation 3 using a PKG file, FTP transfer, and the PS3 package manager. The flow is simple, but every step matters. If one step is skipped, the app may fail to install or open with a black screen.
+      </p>
 
-     <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/vciq2qSLM40"
-        title="PS3 YouTube Tutorial"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen 
-        loading="lazy">
-      </iframe>
+      <!-- video -->
+      <div class="video-wrap" aria-hidden="false">
+        <iframe
+          src="https://www.youtube.com/embed/vciq2qSLM40"
+          title="YouTube Tutorial"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+
+      <div class="notice">
+        <strong style="display:block;margin-bottom:6px;">What this tutorial covers</strong>
+        <span>HEN setup, PS3 IP check, FTP transfer, package installation, and the quick fix for the black-screen issue.</span>
+      </div>
+
+      <h2 class="section-title">Before you start</h2>
+      <ul>
+        <li>A PlayStation 3 with <strong>HEN</strong> enabled.</li>
+        <li>A working internet connection on the PS3.</li>
+        <li>mmCM(Multiman), webmanMOD, or another FTP-capable homebrew tool.</li>
+        <li>A phone with CX File Explorer or any FTP-capable file manager.</li>
+        <li>The YouTube PKG <span class="code-inline">.pkg</span> file ready to transfer.</li>
+      </ul>
+
+      <div class="step">
+        <h3>STEP 1: Enable HEN</h3>
+        <p>
+          Boot the PS3 and Enable <strong>HEN</strong>. This is the base requirement for this method because the console needs the homebrew environment before it can accept the package installation flow.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 2: Connect the PS3 to the internet</h3>
+        <p>
+          Go into the network settings and connect the PS3 to Wi-Fi or Ethernet. Then open the network status screen and note down the IP address assigned to the console.
+        </p>
+        <p class="note"><strong>Example:</strong> in the guide, the console IP appears as <span class="code-inline">192.168.1.10</span>, but your device may use a different number.</p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 3: Open Multiman/mmCM</h3>
+        <p>
+          Launch <strong>Multiman</strong> or <strong>MMCM</strong> on the PS3. If you already use another FTP-capable homebrew app, that can work too, but this guide follows the mmCM method.
+        </p>
+        <p>
+          Inside the app, open the settings or the page that exposes FTP service. The goal is to turn the PS3 into a temporary file server so the phone can access its internal folders.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 4: Enable FTP service and disable timeout</h3>
+        <p>
+          Turn FTP on and make sure the timeout is disabled. That matters because you do not want the connection to drop while the file is still being copied.
+        </p>
+        <p>
+          When FTP is active, the PS3 is ready to receive the YouTube package file from your phone.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 5: Open CX File Explorer on your phone</h3>
+        <p>
+          Now move to the phone. Open <strong>CX File Explorer</strong> and create a new remote FTP location.
+        </p>
+        <p>
+          Enter the IP address you saved from the PS3. This is the exact number that links the phone to the console on the same network.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 6: Connect to the PS3 through FTP</h3>
+        <p>
+          After entering the IP address, connect. If everything is correct, the PS3 file system will appear inside the file manager.
+        </p>
+        <p>
+          If the connection fails, check the IP again, confirm that FTP is still enabled in mmCM, and make sure both devices are on the same network.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 7: Go to the package folder</h3>
+        <p>
+          Open the PS3 internal storage path and go to the packages folder. The folder you need is:
+        </p>
+
+        <div class="code-block" data-copy>
+          <button class="copy-btn" type="button" aria-label="Copy folder path">⧉</button>
+          <span class="copy-status">Copied</span>
+          <pre><code>/dev_hdd0/packages</code></pre>
+        </div>
+
+        <p>
+          That folder is where the YouTube PKG must go. If it is placed somewhere else, the package manager may not detect it properly.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 8: Copy the YouTube PKG from your phone</h3>
+        <p>
+          Open the download folder on your phone, find the YouTube package file, long-press it, and choose copy.
+        </p>
+        <p>
+          Then return to the FTP location for the PS3 and paste the file into the package folder. Wait for the transfer to finish completely before closing anything.
+        </p>
+        <p class="note"><strong>Important:</strong> A half-copied PKG is one of the easiest ways to break this process.</p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 9: Now Go back to the PS3 </h3>
+        <p>
+          Once the file has been transferred, go back to the PS3 and exit mmCM. Return to the XMB screen, because the actual install is done from there.
+        </p>
+        <p>
+          mmCM is only used for FTP. After the file is in place, the package manager handles the rest.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 10: Open Install Package Files</h3>
+        <p>
+          On the PS3 XMB Screen, open <strong>Install Package Files</strong>. That menu is where the console checks for PKG files placed in the packages directory.
+        </p>
+        <p>
+          Find the YouTube package you copied earlier and select it.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 11: Install the YouTube app</h3>
+        <p>
+          Start the installation and let the PS3 finish the process. After that, the YouTube app will be installed on the console.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>STEP 12: Launch YouTube and test it</h3>
+        <p>
+          Open the app and test it normally. If everything was done correctly, YouTube should start and load its interface on the PS3.
+        </p>
+        <p>
+          If you are already signed in, your account options may appear. If not, guest mode is still useful for a quick test.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>IMPORTANT: Black screen fix</h3>
+        <p>
+          Go to the PS3 <strong>Date &amp; Time Settings</strong> and choose <strong>Set via Internet</strong>. Then open YouTube again.
+        </p>
+        <p>
+          This fix is simple, but it matters a lot. A wrong system clock can cause sign-in problems, loading issues, and other weird behavior in apps that depend on time sync.
+        </p>
+      </div>
+
+      <h2 class="section-title">Common mistakes to avoid:</h2>
+      <ul>
+        <li>Typing the wrong PS3 IP address.</li>
+        <li>Forgetting to enable FTP in mmCM.</li>
+        <li>Leaving timeout enabled and getting disconnected mid-transfer.</li>
+        <li>Copying the PKG into the wrong folder.</li>
+        <li>Interrupting the transfer before it finishes.</li>
+        <li>Skipping the date/time fix when the app opens black.</li>
+        <li>Not Connecting Both devices to same Network.</li>
+      </ul>
+
+
+
+    
+
+
+
+
+
+<h2 class="section-title">Download YouTube PKG:</h2>
+
+<div class="download-grid">
+
+  <!-- Google Drive -->
+  <a href="#" class="download-btn gdrive">
+    <img src="/icons/gdrive.png" alt="Google Drive">
+    <div class="download-text">
+      Google Drive
+      <span>Fast & reliable download</span>
     </div>
+  </a>
 
-
-    <h2 style="font-size:1.1rem; margin-top:20px;">Instructions:</h2>
-    <p>Watch the video above for the full setup. You can download the patched YouTube PKG file below. This version is modified to bypass the PSN login requirement and works perfectly on the latest firmware.</p>
-   <p> (Don't Forget To Set the PS3 Time via Internet before Launching YouTube. Enjoy! </p>
-
-    <div class="btn-container">
-      <a href="https://drive.google.com/file/d/1nsA7E3LguDqvc6VyPANFrCUbRDznl84j/view?usp=drivesdk" class="dl-btn">DOWNLOAD YOUTUBE PKG (2026)</a>
+  <!-- Mega -->
+  <a href="#" class="download-btn mega">
+    <img src="/icons/mega.png" alt="MEGA">
+    <div class="download-text">
+      MEGA (Mirror)
+      <span>Secure cloud mirror</span>
     </div>
+  </a>
 
-    <p class="note" style="font-size: 0.9rem; opacity: 0.8;"><strong>Note:</strong> Make sure you have enabled HEN or are running a Custom Firmware (CFW) before installing the package via the Package Manager.</p>
-    <p>Hope This Tutorial Was Helpful For You! </p>
-    <p>Check our <a href="/tutorials/tutorials.html" style="color:#1E90FF;">other tutorials</a> for more guides.</p>
+  <!-- MediaFire -->
+  <a href="#" class="download-btn mediafire">
+    <img src="/icons/mediafire.png" alt="MediaFire">
+    <div class="download-text">
+      MediaFire (Mirror)
+      <span>Alternative fast link</span>
+    </div>
+  </a>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+      <h2 class="section-title">Why this method still matters</h2>
+      <p>
+        Old consoles can still do practical things when the setup is done properly. 
+And I Proved that With this tutorial. I Spent Days and Weeks Just finding the Original NoPSN YouTube PKG for you guys because the NoPSN.org site has been down...So Please Subscribe my channel and Help me Do more Good stuff for you!
+      </p>
+
+
+
+      <p style="margin-top:22px;">Support the channel:</p>
+
+      <a class="youtube-cta" href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#FF0000" d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.112C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.392.574a2.99 2.99 0 0 0-2.106 2.112A31.554 31.554 0 0 0 0 12a31.554 31.554 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.112C4.209 20.5 12 20.5 12 20.5s7.79 0 9.392-.574a2.99 2.99 0 0 0 2.106-2.112A31.554 31.554 0 0 0 24 12a31.554 31.554 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        <span style="font-size:1rem;">YouTube Channel</span>
+      </a>
+
+    </div>
   </article>
 </main>
 
-<footer class="footer" role="contentinfo">
-  <div class="footer-inner">
-    <small>&copy; 2026 UzairTechGuide</small>
-    <p>
-      <a href="/privacy.html">Privacy Policy</a> |
-      <a href="/terms.html">Terms of Use</a> |
-      <a href="/contact.html">Contact</a>
-    </p>
-  </div>
+<!-- footer -->
+<footer class="footer">
+  <small>&copy; 2025 UzairTechGuide</small>
 </footer>
 
 <script>
-/* RE-APPLYING YOUR ORIGINAL SCRIPT LOGIC */
+/*
+  Fix notes:
+  - theme icons use inline SVG (no emoji/font needed)
+  - theme persists via localStorage
+  - accessible titles + aria attributes
+  - copy buttons for code blocks
+*/
+
 (function(){
   const THEME_KEY = 'utg_theme';
   const bodyEl = document.body;
@@ -258,27 +883,139 @@ body.light .footer{color:var(--muted-dark);}
   const closeBtn = document.getElementById('side-close');
 
   const SVG = {
-    moon: '<svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
-    sun:  '<svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
+    moon: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+    sun:  '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
   };
 
   function applyTheme(mode){
-    if(mode === 'light'){ bodyEl.classList.add('light'); themeBtn.innerHTML = SVG.sun; }
-    else { bodyEl.classList.remove('light'); themeBtn.innerHTML = SVG.moon; }
-    localStorage.setItem(THEME_KEY, mode);
+    const light = mode === 'light';
+    bodyEl.classList.toggle('light', light);
+    bodyEl.classList.toggle('dark', !light);
+    themeBtn.innerHTML = light ? SVG.sun : SVG.moon;
+    themeBtn.title = light ? 'Switch to dark' : 'Switch to light';
+    themeBtn.setAttribute('aria-pressed', light ? 'true' : 'false');
+    try { localStorage.setItem(THEME_KEY, mode); } catch(e){}
   }
 
-  const saved = localStorage.getItem(THEME_KEY) || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  applyTheme(saved);
+  (function initTheme(){
+    let saved = null;
+    try { saved = localStorage.getItem(THEME_KEY); } catch(e) { saved = null; }
+    if (!saved) {
+      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      saved = prefersLight ? 'light' : 'dark';
+    }
+    applyTheme(saved);
+  })();
 
-  themeBtn.addEventListener('click', () => applyTheme(bodyEl.classList.contains('light') ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', () => {
+    const current = bodyEl.classList.contains('light') ? 'light' : 'dark';
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  });
 
-  function openSide(){ burger.classList.add('open'); nav.classList.add('open'); overlay.classList.add('show'); overlay.hidden = false; }
-  function closeSide(){ burger.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('show'); setTimeout(()=> overlay.hidden = true, 220); }
+  themeBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      themeBtn.click();
+    }
+  });
 
-  burger.addEventListener('click', () => nav.classList.contains('open') ? closeSide() : openSide());
+  function openSide(){
+    burger.classList.add('open');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    overlay.hidden = false;
+    burger.setAttribute('aria-expanded','true');
+    nav.setAttribute('aria-hidden','false');
+    const first = nav.querySelector('.side-links a');
+    if(first) first.focus();
+  }
+
+  function closeSide(){
+    burger.classList.remove('open');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    setTimeout(()=> overlay.hidden = true, 220);
+    burger.setAttribute('aria-expanded','false');
+    nav.setAttribute('aria-hidden','true');
+    try { burger.focus(); } catch(e){}
+  }
+
+  burger.addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    if(nav.classList.contains('open')) closeSide(); else openSide();
+  });
   closeBtn.addEventListener('click', closeSide);
   overlay.addEventListener('click', closeSide);
+  document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && nav.classList.contains('open')) closeSide(); });
+  document.addEventListener('click', (e)=> {
+    if(!nav.contains(e.target) && !burger.contains(e.target) && nav.classList.contains('open')) closeSide();
+  });
+
+  if (!document.getElementById('overlay')) {
+    const ov = document.createElement('div');
+    ov.id = 'overlay';
+    ov.className = 'overlay';
+    ov.hidden = true;
+    document.body.appendChild(ov);
+  }
+
+  function copyText(text){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve, reject) => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error('Copy failed'));
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  document.querySelectorAll('.code-block[data-copy]').forEach((block) => {
+    const btn = block.querySelector('.copy-btn');
+    const status = block.querySelector('.copy-status');
+    const code = block.querySelector('code');
+    if (!btn || !code) return;
+
+    btn.addEventListener('click', async () => {
+      const text = code.textContent.trim();
+      try {
+        await copyText(text);
+        btn.classList.add('copied');
+        if (status) {
+          status.classList.add('show');
+          status.textContent = 'Copied';
+          setTimeout(() => status.classList.remove('show'), 1000);
+        }
+        setTimeout(() => btn.classList.remove('copied'), 900);
+      } catch (e) {
+        if (status) {
+          status.classList.add('show');
+          status.textContent = 'Copy failed';
+          setTimeout(() => status.classList.remove('show'), 1200);
+        }
+      }
+    });
+  });
+
+  try {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.video-wrap iframe').forEach(f => {
+        f.setAttribute('loading','lazy');
+      });
+    }
+  } catch(e){}
 })();
 </script>
 
