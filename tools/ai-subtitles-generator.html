@@ -580,20 +580,26 @@ body.light .footer{color:var(--muted-dark);}
 
   <!-- Privacy note -->
   <p class="note" style="margin-top:28px;">
-    🔒 Your API key and file are never sent to UzairTechGuide servers. The request goes directly from your browser to Groq via a CORS proxy — nothing is logged or stored. Key is cleared when you close the tab.
+    🔒 Your API key and file(s) are never sent to Our servers. The request goes directly from your browser to Groq via a CloudFlare proxy. Nothing is logged or stored. Key is cleared when you close the tab.
   </p>
 
 </main>
 
-<!-- footer -->
-<footer class="footer">
-  <small>&copy; 2026 UzairTechGuide</small>
-</footer>
+<!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <small>&copy; 2026 UzairTechGuide - All Rights Reserved.</small>
+        <p>
+          <a href="/privacy.html">Privacy Policy</a> |
+          <a href="/terms.html">Terms of Use</a> |
+          <a href="/contact.html">Contact</a>
+        </p>
+      </div>
+    </footer>
 
 <script>
 /* ============================================================
-   THEME + NAV  (identical logic to your original template)
-   ============================================================ */
+   THEME + NAV ============================================================ */
 (function(){
   const THEME_KEY='utg_theme';
   const bodyEl=document.body;
