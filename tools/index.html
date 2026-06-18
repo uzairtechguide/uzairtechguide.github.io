@@ -125,13 +125,38 @@ main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
 }
 body.light .content-placeholder{background:#fff;color:var(--muted-dark);}
 
-/* ===== footer ===== */
-.footer{text-align:center;padding:25px;color:var(--muted-light);}
-body.light .footer{color:var(--muted-dark);}
-</style>
-</head>
-<body>
 
+
+/* Footer */
+    .footer {
+      background: inherit;
+      border-top: 2px solid rgba(255,255,255,0.1);
+      text-align: center;
+      padding: 20px 10px;
+      font-family: "Poppins", sans-serif;
+      color: #ccc;
+      margin-top: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .footer-inner {
+      display: inline-block;
+      background: rgba(0,0,0,0.4);
+      border-radius: 12px;
+      padding: 10px 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    .footer a {
+      color: #00a8ff;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: 500;
+    }
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+</style>
 <!-- controls -->
 <div class="top-controls">
   <button id="theme-toggle" class="control-btn" title="Toggle theme" aria-pressed="false" aria-label="Toggle color theme"></button>
@@ -144,17 +169,19 @@ body.light .footer{color:var(--muted-dark);}
 <!-- header -->
 <header class="header">UzairTechGuide</header>
 
-<!-- side nav -->
-<aside id="side-nav" class="side-nav" aria-hidden="true">
-  <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
-  <nav class="side-links" role="navigation">
-    <a href="index.html">Home</a>
-    <a href="#">Tutorials</a>
-    <a href="#">Downloads</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </nav>
-</aside>
+<!-- Side navigation -->
+  <aside id="side-nav" class="side-nav" aria-hidden="true">
+    <button id="side-close" class="side-close" aria-label="Close menu">&times;</button>
+    <nav class="side-links" role="navigation" aria-label="Main navigation">
+      <a href="/index.html">Home</a>
+      <a href="/tutorials/tutorials.html">Tutorials</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms Of Use</a>
+      <a href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener">YouTube Channel</a>
+    </nav>
+  </aside>
 
 <div id="overlay" class="overlay" hidden></div>
 
@@ -187,10 +214,17 @@ body.light .footer{color:var(--muted-dark);}
 
 
 
-<!-- footer -->
-<footer class="footer">
-  <small>&copy; 2025 UzairTechGuide</small>
-</footer>
+<!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <small>&copy; 2026 UzairTechGuide - All Rights Reserved.</small>
+        <p>
+          <a href="/privacy.html">Privacy Policy</a> |
+          <a href="/terms.html">Terms of Use</a> |
+          <a href="/contact.html">Contact</a>
+        </p>
+      </div>
+    </footer>
 
 <script>
 /*
