@@ -1,91 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="bitmedia-site-verification" content="b734f1febb1ebaf77f0535c2fc5e50cd" />
-  <meta name="google-adsense-account" content="ca-pub-8884255549677716">
-  <meta name="msvalidate.01" content="4CDBD8E71E4AC79770CB7F9D23DCF600" />
+  <!-- ═══════════════════════════════════════════════
+       UzairTechGuide — index.html
+       Cleaned & fixed version
+  ════════════════════════════════════════════════ -->
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Practical Android tutorials, troubleshooting guides, and tools!">
+
+  <!-- Site verification tags -->
+  <meta name="msvalidate.01" content="4CDBD8E71E4AC79770CB7F9D23DCF600">
+  <meta name="bitmedia-site-verification" content="b734f1febb1ebaf77f0535c2fc5e50cd">
+
+  <!-- ✅ Adsense tag REMOVED — add back only after approval -->
+
   <title>UzairTechGuide - Think Digital, Live Real!</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8884255549677716" crossorigin="anonymous"></script>
 
- <style>
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJLmy15VF9eO.woff2) format('woff2');
-}
-
-/* --- LAYOUT FOR DESKTOP --- */
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 20px;
-}
-
-.hero, .nav-tiles, #ad-container, .section, .footer {
-  width: 100%;
-  max-width: 1100px;
-}
-
-.hero {
-  padding: 40px 20px; /* Reduced vertical space */
-}
-
-.logo {
-  object-fit: contain;
-  height: auto;
-  width: 100px; /* Kept fixed for consistency */
-  display: block;
-  margin: 0 auto 10px;
-}
-
-.nav-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 15px;
-  padding: 10px 20px;
-}
-
-.section {
-  padding: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 15px;
-}
-
-/* Ensure no excessive min-heights pushing content */
-.hero, .section {
-  min-height: auto;
-}
-</style> 
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "UzairTechGuide",
-  "url": "https://uzairtechguide.github.io/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://uzairtechguide.github.io/?s={search_term_string}",
-    "query-input": "required name=search_term_string"
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "UzairTechGuide",
+    "url": "https://uzairtechguide.github.io/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://uzairtechguide.github.io/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   }
-}
-</script>
+  </script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
+  <!-- ═══════════════════════════════════════════════
+       ALL STYLES IN <head> — none in <body>
+  ════════════════════════════════════════════════ -->
+  <style>
+    @font-face {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJLmy15VF9eO.woff2) format('woff2');
+    }
+
+    /* Layout */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 80px; /* space for sticky ad bar */
+    }
+
+    .hero, .nav-tiles, .section, .footer {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .hero {
+      padding: 40px 20px;
+    }
+
+    .logo {
+      object-fit: contain;
+      height: auto;
+      width: 100px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .nav-tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+      padding: 10px 20px;
+    }
+
+    .section {
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+    }
+
+    /* Footer — moved here from <body> */
+    .footer {
+      background: inherit;
+      border-top: 2px solid rgba(255,255,255,0.1);
+      text-align: center;
+      padding: 20px 10px;
+      font-family: "Poppins", sans-serif;
+      color: #ccc;
+      margin-top: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .footer-inner {
+      display: inline-block;
+      background: rgba(0,0,0,0.4);
+      border-radius: 12px;
+      padding: 10px 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    .footer a {
+      color: #00a8ff;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: 500;
+    }
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* ═══ A-ADS sticky bottom bar — FIXED ═══
+       Outer wrapper must NOT be position:absolute.
+       The inner bar uses position:fixed correctly. */
+    #aads-sticky-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      text-align: center;
+      font-size: 0;
+    }
+    #aads-close-cb {
+      display: none;
+    }
+    #aads-close-cb:checked ~ #aads-bar {
+      display: none;
+    }
+    #aads-bar {
+      position: relative;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+    }
+    #aads-close-label {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      background: rgba(248,248,249,0.75);
+      border-radius: 4px;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 10000;
+      line-height: 0;
+    }
+    #aads-bar iframe {
+      border: 0;
+      padding: 0;
+      width: 70%;
+      max-width: 728px;
+      height: auto;
+      overflow: hidden;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+  <!-- Top controls (theme toggle + hamburger) -->
   <div class="top-controls">
     <button id="theme-toggle" class="control-btn" aria-label="Toggle theme" title="Toggle theme"></button>
     <button id="hamburger-btn" class="hamburger" aria-label="Open menu" aria-expanded="false" title="Open menu">
@@ -96,6 +183,7 @@ main {
     </button>
   </div>
 
+  <!-- Side navigation -->
   <aside id="side-nav" class="side-nav" aria-hidden="true">
     <button id="side-close" class="side-close" aria-label="Close menu">&times;</button>
     <nav class="side-links" role="navigation" aria-label="Main navigation">
@@ -105,26 +193,29 @@ main {
       <a href="/about.html">About</a>
       <a href="/privacy.html">Privacy Policy</a>
       <a href="/terms.html">Terms Of Use</a>
-      <a href="https://youtube.com/@muhammduzairshah23">YouTube Channel</a>
+      <a href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener">YouTube Channel</a>
     </nav>
   </aside>
 
   <div id="page-overlay" class="overlay" hidden></div>
 
   <main>
+
+    <!-- Hero -->
     <header id="home" class="hero" role="banner">
       <div class="hero-bg" role="img" aria-label="Technical dark background image"></div>
       <div class="hero-inner">
-        <img src="logo.webp" width="120" height="90" alt="UzairTechGuide logo" class="logo" />
+        <img src="logo.webp" width="120" height="90" alt="UzairTechGuide logo" class="logo">
         <h1 class="site-title">UzairTechGuide</h1>
         <p class="lead">Practical Android tutorials, troubleshooting guides, and tools! Clear, tested, and ready to use.</p>
         <div class="hero-cta">
           <a class="btn primary" href="tutorials/tutorials.html">Explore Tutorials</a>
-          <a class="btn ghost" href="https://m.youtube.com/@MuhammdUzairShah23">YouTube</a>
+          <a class="btn ghost" href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener">YouTube</a>
         </div>
       </div>
     </header>
 
+    <!-- Quick nav tiles -->
     <section class="nav-tiles" aria-label="Quick links to site sections">
       <a class="tile" href="tutorials/tutorials.html">
         <h3>Tutorials</h3>
@@ -132,7 +223,7 @@ main {
       </a>
       <a class="tile" href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener">
         <h3>YouTube</h3>
-        <p>Video walkthroughs & demonstrations.</p>
+        <p>Video walkthroughs &amp; demonstrations.</p>
       </a>
       <a class="tile" href="contact.html">
         <h3>Contact</h3>
@@ -144,36 +235,7 @@ main {
       </a>
     </section>
 
-
-
-
-
-
-
-    <!-- BEGIN AADS AD UNIT 2444704 -->
-
-<div style="position: absolute; z-index: 99999">
-      <input autocomplete="off" type="checkbox" id="aadsstickymqiyxleg" hidden />
-      <div style="padding-top: 0; padding-bottom: auto;">
-        <div style="width:100%;height:auto;position:fixed;text-align:center;font-size:0;bottom:0;left:0;right:0;margin:auto">
-          <label for="aadsstickymqiyxleg" style="top: 50%;transform: translateY(-50%);right:24px;; position: absolute;border-radius: 4px; background: rgba(248, 248, 249, 0.70); padding: 4px;z-index: 99999;cursor:pointer">
-            <svg fill="#000000" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-              <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 "/>
-            </svg>
-          </label>
-          <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;"><iframe data-aa=2444704 src=//acceptable.a-ads.com/2444704/?size=Adaptive style='border:0; padding:0; width:70%; height:auto; overflow:hidden; margin: auto'></iframe></div>
-        </div>
-        <style>
-      #aadsstickymqiyxleg:checked + div {
-        display: none;
-      }
-    </style>
-    </div></div>
-
-<!-- END AADS AD UNIT 2444704 -->
-
-
-
+    <!-- Why section -->
     <section id="features" class="section" aria-labelledby="why-title">
       <h2 id="why-title" class="section-title">Why Visit UzairTechGuide</h2>
       <div class="grid">
@@ -196,9 +258,10 @@ main {
       </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer" role="contentinfo">
       <div class="footer-inner">
-        <small>&copy; 2026 UzairTechGuide - All Right Reserved.</small>
+        <small>&copy; 2026 UzairTechGuide - All Rights Reserved.</small>
         <p>
           <a href="/privacy.html">Privacy Policy</a> |
           <a href="/terms.html">Terms of Use</a> |
@@ -207,37 +270,33 @@ main {
       </div>
     </footer>
 
-    <style>
-      .footer {
-        background: inherit;
-        border-top: 2px solid rgba(255,255,255,0.1);
-        text-align: center;
-        padding: 20px 10px;
-        font-family: "Poppins", sans-serif;
-        color: #ccc;
-        margin-top: 20px;
-        backdrop-filter: blur(6px);
-      }
-      .footer-inner {
-        display: inline-block;
-        background: rgba(0,0,0,0.4);
-        border-radius: 12px;
-        padding: 10px 20px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      }
-      .footer a {
-        color: #00a8ff;
-        text-decoration: none;
-        margin: 0 8px;
-        font-weight: 500;
-      }
-      .footer a:hover { color: #fff; text-decoration: underline; }
-    </style>
   </main>
 
+  <!-- ═══════════════════════════════════════════════
+       A-ADS STICKY BOTTOM BAR — unit 2444704
+       Fixed: no position:absolute on outer wrapper,
+              https:// protocol, clean structure
+  ════════════════════════════════════════════════ -->
+  <div id="aads-sticky-wrap">
+    <input type="checkbox" id="aads-close-cb" autocomplete="off">
+    <div id="aads-bar">
+      <label id="aads-close-label" for="aads-close-cb" title="Close ad" aria-label="Close advertisement">
+        <svg fill="#000000" height="16" width="16" viewBox="0 0 490 490" aria-hidden="true">
+          <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337"/>
+        </svg>
+      </label>
+      <iframe
+        data-aa="2444704"
+        src="https://acceptable.a-ads.com/2444704/?size=Adaptive"
+        title="Advertisement"
+        aria-label="Advertisement"
+        scrolling="no">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script src="script.js" defer></script>
-  <script>
-    try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { console.warn(e); }
-  </script>
+
 </body>
 </html>
