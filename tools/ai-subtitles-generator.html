@@ -235,6 +235,78 @@ select.input{cursor:pointer;appearance:none;
   padding-right:36px;
 }
 
+/* ===== remember-key row ===== */
+.remember-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-top:12px;
+}
+.remember-row input[type="checkbox"]{
+  width:18px;height:18px;
+  flex-shrink:0;
+  margin-top:1px;
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+.remember-row label{
+  margin-bottom:0;
+  cursor:pointer;
+  font-size:.8rem;
+  line-height:1.5;
+  color:var(--muted-light);
+}
+body.light .remember-row label{color:var(--muted-dark);}
+.remember-row label strong{
+  color:var(--text-light);
+  font-weight:600;
+}
+body.light .remember-row label strong{color:var(--text-dark);}
+
+/* saved-key chip */
+.saved-key-chip{
+  display:none;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  background:var(--green-glow);
+  border:1px solid rgba(29,185,84,0.25);
+  border-radius:var(--radius-sm);
+  margin-bottom:14px;
+}
+.saved-key-chip.active{display:flex;}
+.saved-key-chip svg{
+  color:var(--accent-2);
+  flex-shrink:0;
+}
+.saved-key-chip span{
+  font-size:.82rem;
+  font-family:"JetBrains Mono",monospace;
+  color:var(--accent-2);
+  flex-grow:1;
+}
+.saved-key-chip button{
+  background:none;
+  border:none;
+  color:var(--muted-light);
+  font-size:.75rem;
+  font-family:"Roboto",sans-serif;
+  font-weight:600;
+  cursor:pointer;
+  padding:4px 8px;
+  border-radius:6px;
+  transition:background .2s,color .2s;
+  flex-shrink:0;
+}
+.saved-key-chip button:hover{
+  background:rgba(255,255,255,0.08);
+  color:var(--text-light);
+}
+body.light .saved-key-chip button:hover{
+  background:rgba(0,0,0,0.06);
+  color:var(--text-dark);
+}
+
 /* ===== file drop zone ===== */
 .drop-zone{
   border:2px dashed rgba(255,255,255,0.12);
@@ -479,8 +551,16 @@ body.light .footer{color:var(--muted-dark);}
       <span class="step-num">1</span>
       Your Groq API Key
     </div>
+
+    <!-- shown only when a key is already saved on this device -->
+    <div class="saved-key-chip" id="saved-key-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      <span id="saved-key-preview">Key loaded from this device</span>
+      <button type="button" id="forget-key-btn">Forget</button>
+    </div>
+
     <div class="field">
-      <label for="api-key">Paste your key — it stays in your browser only</label>
+      <label for="api-key">Paste your key (saved only on this device if you choose)</label>
       <div class="input-wrap">
         <input class="input" type="password" id="api-key" placeholder="gsk_••••••••••••••••••••••••••••••••••••••••••••••••••••" autocomplete="off" spellcheck="false">
         <button class="eye-btn" id="eye-btn" aria-label="Show/hide key" title="Show/hide key">
@@ -489,7 +569,13 @@ body.light .footer{color:var(--muted-dark);}
           </svg>
         </button>
       </div>
-      <p class="note" style="text-align:left;margin-top:8px;">
+
+      <div class="remember-row">
+        <input type="checkbox" id="remember-key-cb">
+        <label for="remember-key-cb"><strong>Remember this key on this device</strong> (stored only in this browser's local storage, never sent anywhere except directly to Groq. Skip re-entering it next time.) </label>
+      </div>
+
+      <p class="note" style="text-align:left;margin-top:10px;">
         Get a free key at <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>. Free tier is generous — no credit card needed.
       </p>
     </div>
@@ -580,7 +666,7 @@ body.light .footer{color:var(--muted-dark);}
 
   <!-- Privacy note -->
   <p class="note" style="margin-top:28px;">
-    🔒 Your API key and file(s) are never sent to Our servers. The request goes directly from your browser to Groq via a CloudFlare proxy. Nothing is logged or stored. Key is cleared when you close the tab.
+    🔒 Your API key and file(s) are never sent to Our servers. The request goes directly from your browser to Groq via a CloudFlare proxy. Nothing is logged or stored. If you choose "Remember this key," it stays only in this browser's local storage on this device — clear it anytime with the Forget button.
   </p>
 
 </main>
@@ -671,28 +757,79 @@ body.light .footer{color:var(--muted-dark);}
    ============================================================ */
 (function(){
   // ── CLOUDFLARE WORKER URL ─────────────────────────────────
-  // After deploying worker.js, paste your worker URL here:
-  const PROXY_URL = 'https://uzairtechguide01.uzairshah4270.workers.dev/';
+  const PROXY_URL = 'https://uzairtechguide01.uzairshah4270.workers.dev';
   // ──────────────────────────────────────────────────────────
 
-  const apiKeyInput   = document.getElementById('api-key');
-  const eyeBtn        = document.getElementById('eye-btn');
-  const eyeIcon       = document.getElementById('eye-icon');
-  const fileInput     = document.getElementById('file-input');
-  const dropZone      = document.getElementById('drop-zone');
-  const fileNameEl    = document.getElementById('file-name');
-  const langSelect    = document.getElementById('lang-select');
-  const filenameOut   = document.getElementById('filename-out');
-  const btnRun        = document.getElementById('btn-run');
-  const progressArea  = document.getElementById('progress-area');
-  const progressBar   = document.getElementById('progress-bar');
-  const progressStage = document.getElementById('progress-stage');
-  const progressPct   = document.getElementById('progress-pct');
-  const statusText    = document.getElementById('status-text');
-  const resultArea    = document.getElementById('result-area');
-  const btnDownload   = document.getElementById('btn-download');
+  // ── REMEMBER-KEY storage settings ─────────────────────────
+  const STORAGE_KEY = 'utg_groq_api_key';
+
+  const apiKeyInput     = document.getElementById('api-key');
+  const eyeBtn          = document.getElementById('eye-btn');
+  const eyeIcon         = document.getElementById('eye-icon');
+  const rememberCb      = document.getElementById('remember-key-cb');
+  const savedKeyChip    = document.getElementById('saved-key-chip');
+  const savedKeyPreview = document.getElementById('saved-key-preview');
+  const forgetKeyBtn    = document.getElementById('forget-key-btn');
+  const fileInput       = document.getElementById('file-input');
+  const dropZone        = document.getElementById('drop-zone');
+  const fileNameEl      = document.getElementById('file-name');
+  const langSelect      = document.getElementById('lang-select');
+  const filenameOut     = document.getElementById('filename-out');
+  const btnRun          = document.getElementById('btn-run');
+  const progressArea    = document.getElementById('progress-area');
+  const progressBar     = document.getElementById('progress-bar');
+  const progressStage   = document.getElementById('progress-stage');
+  const progressPct     = document.getElementById('progress-pct');
+  const statusText      = document.getElementById('status-text');
+  const resultArea      = document.getElementById('result-area');
+  const btnDownload     = document.getElementById('btn-download');
 
   let selectedFile = null;
+
+  // ── load saved key on page load ───────────────────────────
+  function maskKey(key){
+    if(key.length <= 10) return key;
+    return key.slice(0,7) + '••••••••' + key.slice(-4);
+  }
+
+  function loadSavedKey(){
+    let saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch(e){}
+    if(saved){
+      apiKeyInput.value = saved;
+      rememberCb.checked = true;
+      savedKeyChip.classList.add('active');
+      savedKeyPreview.textContent = maskKey(saved);
+      checkReady();
+    }
+  }
+
+  function forgetKey(){
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+    apiKeyInput.value = '';
+    rememberCb.checked = false;
+    savedKeyChip.classList.remove('active');
+    checkReady();
+    apiKeyInput.focus();
+  }
+
+  forgetKeyBtn.addEventListener('click', forgetKey);
+
+  // save / unsave whenever the checkbox or key changes
+  function syncKeyStorage(){
+    if(rememberCb.checked && apiKeyInput.value.trim().length > 10){
+      try { localStorage.setItem(STORAGE_KEY, apiKeyInput.value.trim()); } catch(e){}
+      savedKeyChip.classList.add('active');
+      savedKeyPreview.textContent = maskKey(apiKeyInput.value.trim());
+    } else {
+      try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+      savedKeyChip.classList.remove('active');
+    }
+  }
+
+  rememberCb.addEventListener('change', syncKeyStorage);
+
+  loadSavedKey();
 
   // ── eye toggle ─────────────────────────────────────────────
   const EYE_OPEN  = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
@@ -709,7 +846,10 @@ body.light .footer{color:var(--muted-dark);}
     const ready = apiKeyInput.value.trim().length > 10 && selectedFile !== null;
     btnRun.disabled = !ready;
   }
-  apiKeyInput.addEventListener('input', checkReady);
+  apiKeyInput.addEventListener('input', () => {
+    checkReady();
+    syncKeyStorage();
+  });
 
   // ── drag and drop ──────────────────────────────────────────
   dropZone.addEventListener('dragover', e => {
@@ -731,7 +871,6 @@ body.light .footer{color:var(--muted-dark);}
     selectedFile = f;
     dropZone.classList.add('has-file');
     fileNameEl.textContent = f.name;
-    // auto-fill output filename from input filename (without extension)
     if(!filenameOut.value){
       filenameOut.value = f.name.replace(/\.[^.]+$/, '');
     }
@@ -803,7 +942,6 @@ body.light .footer{color:var(--muted-dark);}
     resetUI();
 
     try {
-      // ── Step 1: upload with XHR for real progress ────────────
       showProgress('Uploading to Groq…', 0);
       setStatus('Preparing file…');
 
@@ -813,8 +951,6 @@ body.light .footer{color:var(--muted-dark);}
       formData.append('response_format', 'verbose_json');
       if(lang) formData.append('language', lang);
 
-      // We always use transcriptions endpoint
-      // (whisper-large-v3-turbo doesn't support translations)
       const endpoint = 'transcriptions';
 
       const srtContent = await new Promise((resolve, reject) => {
@@ -858,7 +994,6 @@ body.light .footer{color:var(--muted-dark);}
         xhr.send(formData);
       });
 
-      // ── Step 2: done ─────────────────────────────────────────
       showProgress('Done', 100);
       setStatus('✅ Transcription complete', 'success');
 
@@ -868,7 +1003,6 @@ body.light .footer{color:var(--muted-dark);}
       btnDownload.download = `${outName}.srt`;
       resultArea.classList.add('active');
 
-      // auto-trigger download
       btnDownload.click();
 
     } catch(err){
