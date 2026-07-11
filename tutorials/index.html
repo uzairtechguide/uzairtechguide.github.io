@@ -3,28 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UzairTechGuide — Tools</title>
-<meta name="description" content="Free practical tools by UzairTechGuide — subtitle generator, video utilities, and more.">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<title>UzairTechGuide - Tutorials  </title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   Tools — UzairTechGuide
+   UzairTechGuide - Tutorials Main Page
    ============================================================ */
 :root{
   --bg-dark:#0f1113;
   --panel-dark:#15181a;
-  --panel-dark-2:#1b1e20;
   --text-light:#eef1f3;
   --muted-light:#bfc7cb;
   --accent:#ff7a2d;
   --accent-2:#1db954;
   --bg-light:#f6f7f8;
   --panel-light:#ffffff;
-  --panel-light-2:#eef0f2;
   --text-dark:#111214;
   --muted-dark:#6b6f73;
   --radius-md:14px;
-  --radius-sm:8px;
   --shadow-dark:0 8px 24px rgba(3,6,8,0.1);
   --shadow-light:0 8px 24px rgba(16,24,32,0.06);
   --transition:220ms cubic-bezier(.2,.9,.3,1);
@@ -38,6 +34,45 @@ body{
   transition:background .3s,color .3s;
 }
 body.light{background:var(--bg-light);color:var(--text-dark);}
+
+/* ===== Reading Progress Bar ===== */
+.progress-container {
+  position: fixed;
+  top: 56px; /* Below header */
+  left: 0;
+  width: 100%;
+  height: 4px;
+  z-index: 1001;
+  background: transparent;
+}
+.progress-bar {
+  height: 4px;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* ===== Back to Top Button ===== */
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  background: var(--accent-2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s, opacity 0.2s;
+}
+#back-to-top:hover { transform: translateY(-5px); }
 
 /* ===== top controls ===== */
 .top-controls{
@@ -119,258 +154,137 @@ body.light .side-links a:hover{background:rgba(0,0,0,0.05);color:var(--accent-2)
 body.light .overlay{background:rgba(0,0,0,0.25);}
 
 /* ===== main ===== */
-main{max-width:var(--max-width);margin:80px auto;padding:0 20px 60px;}
-
-/* ===== TOOLS PAGE CONTENT ===== */
-.tools-intro{
-  text-align:center;
-  margin-bottom:28px;
-}
-.tools-intro h1{
-  font-family:"Montserrat",sans-serif;
-  font-size:clamp(1.6rem,4vw,2.2rem);
-  font-weight:700;
-  margin-bottom:8px;
-  letter-spacing:-.01em;
-}
-.tools-intro h1 em{
-  font-style:normal;
-  color:var(--accent);
-}
-.tools-intro p{
-  color:var(--muted-light);
-  font-size:.95rem;
-  max-width:480px;
-  margin:0 auto;
-  line-height:1.6;
-}
-body.light .tools-intro p{color:var(--muted-dark);}
-
-/* ===== search & sort bar ===== */
-.toolbar{
-  display:flex;
-  gap:10px;
-  margin-bottom:24px;
-  flex-wrap:wrap;
-}
-.search-wrap{
-  flex:1;
-  min-width:200px;
-  position:relative;
-  display:flex;
-  align-items:center;
-}
-.search-wrap svg{
-  position:absolute;
-  left:14px;
-  color:var(--muted-light);
-  pointer-events:none;
-}
-body.light .search-wrap svg{color:var(--muted-dark);}
-#tool-search{
-  width:100%;
-  padding:11px 14px 11px 40px;
-  background:var(--panel-dark-2);
-  border:1px solid rgba(255,255,255,0.09);
-  border-radius:var(--radius-sm);
-  color:var(--text-light);
-  font-size:.9rem;
-  outline:none;
-  transition:border-color .2s,box-shadow .2s;
-}
-body.light #tool-search{
-  background:var(--panel-light-2);
-  border-color:rgba(0,0,0,0.1);
-  color:var(--text-dark);
-}
-#tool-search:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(255,122,45,0.15);
-}
-#tool-search::placeholder{color:rgba(191,199,203,0.45);}
-body.light #tool-search::placeholder{color:rgba(107,111,115,0.5);}
-
-#tool-sort{
-  padding:11px 36px 11px 14px;
-  background:var(--panel-dark-2);
-  border:1px solid rgba(255,255,255,0.09);
-  border-radius:var(--radius-sm);
-  color:var(--text-light);
-  font-size:.85rem;
-  cursor:pointer;
-  outline:none;
-  appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23bfc7cb' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 14px center;
-  transition:border-color .2s;
-}
-body.light #tool-sort{
-  background-color:var(--panel-light-2);
-  border-color:rgba(0,0,0,0.1);
-  color:var(--text-dark);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b6f73' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-}
-#tool-sort:focus{border-color:var(--accent);}
-
-/* ===== results count / empty state ===== */
-.results-meta{
-  font-size:.78rem;
-  color:var(--muted-light);
-  margin-bottom:14px;
-  min-height:18px;
-}
-body.light .results-meta{color:var(--muted-dark);}
-
-.empty-state{
-  display:none;
-  text-align:center;
-  padding:60px 20px;
+main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
+.content-placeholder{
+  background:rgba(255,255,255,0.03);
+  border-radius:12px;padding:30px;
+  min-height:60vh;
+  box-shadow:0 4px 20px rgba(0,0,0,0.25);
   color:var(--muted-light);
 }
-body.light .empty-state{color:var(--muted-dark);}
-.empty-state.show{display:block;}
-.empty-state svg{margin-bottom:14px;opacity:.5;}
-.empty-state p{font-size:.9rem;}
-
-/* ===== tools grid ===== */
-.tools-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-}
-.tool-card{
-  background:var(--panel-dark);
-  border:1px solid rgba(255,255,255,0.07);
-  border-radius:var(--radius-md);
-  overflow:hidden;
-  text-decoration:none;
-  color:inherit;
-  display:flex;
-  flex-direction:column;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-  box-shadow:var(--shadow-dark);
-}
-.tool-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--accent);
-  box-shadow:0 12px 28px rgba(255,122,45,0.16);
-}
-body.light .tool-card{
-  background:#fff;
-  border-color:rgba(0,0,0,0.08);
-  box-shadow:var(--shadow-light);
-}
-
-/* thumbnail */
-.tool-thumb{
-  width:100%;
-  aspect-ratio:16/9;
-  background:var(--panel-dark-2);
-  position:relative;
-  overflow:hidden;
-}
-body.light .tool-thumb{background:var(--panel-light-2);}
-.tool-thumb img{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .3s;
-}
-.tool-card:hover .tool-thumb img{transform:scale(1.04);}
-.tool-thumb.placeholder{
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(191,199,203,0.3);
-}
-body.light .tool-thumb.placeholder{color:rgba(107,111,115,0.3);}
-
-.tool-body{
-  padding:18px 20px 20px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  flex-grow:1;
-}
-.tool-card h3{
-  font-family:"Montserrat",sans-serif;
-  font-size:1.02rem;
-  font-weight:600;
-}
-.tool-card p{
-  font-size:.84rem;
-  color:var(--muted-light);
-  line-height:1.55;
-  flex-grow:1;
-}
-body.light .tool-card p{color:var(--muted-dark);}
-
-.tool-tag{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  font-size:.66rem;
-  font-weight:700;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  color:var(--accent-2);
-  background:rgba(29,185,84,0.1);
-  padding:4px 10px;
-  border-radius:100px;
-  align-self:flex-start;
-  margin-top:2px;
-}
-.tool-tag svg{width:10px;height:10px;}
-.tool-tag.soon{
-  color:var(--muted-light);
-  background:rgba(255,255,255,0.06);
-}
-body.light .tool-tag.soon{
-  color:var(--muted-dark);
-  background:rgba(0,0,0,0.05);
-}
-.tool-card[aria-disabled="true"]{
-  cursor:default;
-}
-.tool-card[aria-disabled="true"]:hover{
-  transform:none;
-  border-color:rgba(255,255,255,0.07);
-  box-shadow:var(--shadow-dark);
-}
-body.light .tool-card[aria-disabled="true"]:hover{
-  border-color:rgba(0,0,0,0.08);
-  box-shadow:var(--shadow-light);
-}
+body.light .content-placeholder{background:#fff;color:var(--muted-dark);}
 
 /* ===== footer ===== */
-.footer {
-  background: inherit;
-  border-top: 2px solid rgba(255,255,255,0.1);
-  text-align: center;
-  padding: 20px 10px;
-  font-family: "Montserrat", sans-serif;
-  color: #ccc;
-  margin-top: 20px;
-  backdrop-filter: blur(6px);
+.footer{text-align:center;padding:25px;color:var(--muted-light);}
+body.light .footer{color:var(--muted-dark);}
+
+/* =========================
+   Tutorial cards redesign
+   ========================= */
+.tutorials-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:18px;
+  margin-bottom:40px;
+  align-items:start;
 }
-.footer-inner {
-  display: inline-block;
-  background: rgba(0,0,0,0.4);
-  border-radius: 12px;
-  padding: 10px 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+/* each item is the anchor itself */
+.tutorial-item{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  border-radius:12px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  transition:transform var(--transition), box-shadow var(--transition), background var(--transition);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+  border:1px solid rgba(255,255,255,0.02);
+  position:relative;
 }
-.footer a {
-  color: #00a8ff;
-  text-decoration: none;
-  margin: 0 8px;
-  font-weight: 500;
+
+/* thumbnail - youtube aspect ratio */
+.tutorial-thumb{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  height:auto;
+  object-fit:cover;
+  background:#0b0b0c;
 }
-.footer a:hover { color: #fff; text-decoration: underline; }
+
+/* add subtle overlay on thumbnail for better contrast */
+.tutorial-item::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: calc((100% - 0px) * (9/16)); /* matches thumb area */
+  pointer-events:none;
+  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0));
+  mix-blend-mode: multiply;
+}
+
+/* title area */
+.tutorial-card{
+  padding:14px 16px;
+  font-weight:700;
+  font-size:1rem;
+  color:var(--text-light);
+  display:block;
+  background:linear-gradient(180deg, transparent, rgba(0,0,0,0.03));
+}
+
+/* nicer title + small info row */
+.tutorial-title{
+  font-weight:800;
+  font-size:1.03rem;
+  margin-bottom:8px;
+  color:inherit;
+}
+.tutorial-info{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.badge{
+  font-size:0.78rem;
+  padding:6px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.03);
+  color:var(--muted-light);
+  font-weight:700;
+}
+
+/* small meta row (optional space for future) */
+.tutorial-meta{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font-size:0.86rem;
+  color:var(--muted-light);
+  padding:0 16px 12px;
+}
+
+/* hover */
+.tutorial-item:hover{
+  transform:translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+}
+body.light .tutorial-item{
+  background: #fff;
+  border:1px solid rgba(16,24,32,0.04);
+  box-shadow: 0 6px 18px rgba(16,24,32,0.06);
+}
+body.light .tutorial-card{ color:var(--text-dark); }
+body.light .tutorial-meta{ color:var(--muted-dark); }
+
+/* responsive */
+@media (max-width:900px){
+  .tutorials-grid{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+}
+@media (max-width:600px){
+  .tutorial-thumb{ height:auto; }
+  .tutorials-grid{ gap:12px; grid-template-columns: 1fr; }
+}
 </style>
+
 </head>
 <body>
 
-<!-- controls -->
+<div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+<button id="back-to-top" title="Go to top">↑</button>
+
 <div class="top-controls">
   <button id="theme-toggle" class="control-btn" title="Toggle theme" aria-pressed="false" aria-label="Toggle color theme"></button>
   <button id="hamburger-btn" class="hamburger" title="Menu" aria-label="Open menu" aria-expanded="false">
@@ -379,112 +293,240 @@ body.light .tool-card[aria-disabled="true"]:hover{
   </button>
 </div>
 
-<!-- header -->
 <header class="header">UzairTechGuide</header>
 
-<!-- side nav -->
 <aside id="side-nav" class="side-nav" aria-hidden="true">
   <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
   <nav class="side-links" role="navigation">
-    <a href="/">Home</a>
-    <a href="/tutorials/">Tutorials</a>
-    <a href="/tools/">Tools</a>
-    <a href="/tools/index.html">Tools</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/about.html">About</a>
-    <a href="/privacy.html">Privacy Policy</a>
-    <a href="/terms.html">Terms Of Use</a>
-    <a href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener">YouTube Channel</a>
+    <a href="https://uzair-902.github.io/index.html">Home</a>
+    <a href="https://uzair-902.github.io/tutorials/tutorials.html">Tutorials</a>
+    <a href="https://uzair-902.github.io/about.html">About</a>
+    <a href="https://uzair-902.github.io/contact.html">Contact</a>
+    <a href="https://youtube.com/@muhammduzairshah23">YouTube Channel</a>
   </nav>
 </aside>
 
 <div id="overlay" class="overlay" hidden></div>
 
-<!-- ================================================= -->
-
 <main>
-
-  <div class="tools-intro">
-    <h1>Free <em>Tools</em></h1>
-    <p>Practical utilities built by UzairTechGuide. No sign-up, no card, no catch — just useful tools that work.</p>
-  </div>
-
-  <!-- search & sort -->
-  <div class="toolbar">
-    <div class="search-wrap">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="tool-search" placeholder="Search tools…" autocomplete="off" aria-label="Search tools">
+  <section class="hero-search">
+    <h1>Explore Tutorials</h1>
+    <p>Search through all our tech guides, Python projects, and electronics experiments.</p>
+    <div class="search-container">
+      <input type="text" id="tutorial-search" placeholder="Search tutorials..." />
+      <button id="search-btn" aria-label="Search Tutorials">&#128269</button>
     </div>
-    <select id="tool-sort" aria-label="Sort tools">
-      <option value="default">Sort: Featured</option>
-      <option value="az">Sort: A  Z</option>
-      <option value="za">Sort: Z  A</option>
-      <option value="status">Sort: Live first</option>
-    </select>
-  </div>
+  </section>
 
-  <p class="results-meta" id="results-meta"></p>
+  <div class="tutorials-grid" id="tutorials-grid">
 
-  <!-- tools grid -->
-  <div class="tools-grid" id="tools-grid">
-
-    <a class="tool-card" data-name="AI Subtitle Generator" data-status="live" href="/tools/autocaptions/index.html">
-      <div class="tool-thumb">
-        <img src="/assets/tools/autocaptions-thumb.jpg" alt="AI Subtitle Generator preview" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.remove();">
+    <a class="tutorial-item" href="How-To-Unlock-Bootloader-in-Nokia-3.2.html">
+      <img class="tutorial-thumb" src="https://uzair-902.github.io/tutorials/nokia3.2unlock.jpg" alt="Nokia 3.2 bootloader unlock" loading="lazy" decoding="async">
+      <div class="tutorial-card">
+        <div class="tutorial-title">How to Unlock Bootloader In Nokia 3.2</div>
+        <div class="tutorial-info">
+          <span class="badge">Guide</span>
+          <span class="badge">Steps</span>
+        </div>
       </div>
-      <div class="tool-body">
-        <h3>AI Subtitle Generator</h3>
-        <p>Upload any audio or video and generate accurate, timed .srt subtitles in seconds - powered by Groq Whisper.</p>
-        <span class="tool-tag">
-          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
-          Live
-        </span>
-      </div>
+      <div class="tutorial-meta"></div>
     </a>
 
-    <a class="tool-card" data-name="Karaoke Subtitle Burner" data-status="soon" href="#" aria-disabled="true" onclick="return false;">
-      <div class="tool-thumb">
-        <img src="/assets/tools/karaoke-thumb.jpg" alt="Karaoke Subtitle Burner preview" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.remove();">
+    <a class="tutorial-item" href="https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html">
+      <img class="tutorial-thumb" src="https://uzair-902.github.io/tutorials/2/shizumux.jpg" alt="Connect Shizuku to Termux" loading="lazy" decoding="async">
+      <div class="tutorial-card">
+        <div class="tutorial-title">How to Connect Shizuku To Termux In Android</div>
+        <div class="tutorial-info">
+          <span class="badge">Video</span>
+          <span class="badge">Article</span>
+        </div>
       </div>
-      <div class="tool-body">
-        <h3>Test Tool Box</h3>
-        <p>Test</p>
-        <span class="tool-tag soon">Coming Soon</span>
-      </div>
+      <div class="tutorial-meta"></div>
     </a>
 
-    <a class="tool-card" data-name="Batch Subtitle Burner" data-status="soon" href="#" aria-disabled="true" onclick="return false;">
-      <div class="tool-thumb">
-        <img src="/assets/tools/batch-thumb.jpg" alt="Batch Subtitle Burner preview" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.remove();">
+    <a class="tutorial-item" href="https://uzair-902.github.io/tutorials/3/ps3ytdownload.html">
+      <img class="tutorial-thumb" src="https://uzair-902.github.io/tutorials/3/ytps3.jpg" alt="Install YouTube on PS3" loading="lazy" decoding="async">
+      <div class="tutorial-card">
+        <div class="tutorial-title">How to Install YouTube in PS3 (2026)</div>
+        <div class="tutorial-info">
+          <span class="badge">Video</span>
+          <span class="badge">Tutorial</span>
+        </div>
+          <span class="badge">Download</span>
       </div>
-      <div class="tool-body">
-          <h3>Test Tool Box</h3>
-        <p>Test</p>
-        <span class="tool-tag soon">Coming Soon</span>
+      <div class="tutorial-meta"></div>
+    </a>
+
+   <a class="tutorial-item" href="https://uzair-902.github.io/tutorials/4/block-ads">
+      <img class="tutorial-thumb" src="https://uzair-902.github.io/tutorials/4/block-ads.webp" alt="Block Ads on Android" loading="lazy" decoding="async">
+      <div class="tutorial-card">
+        <div class="tutorial-title">How to Block All Ads on Android!</div>
+        <div class="tutorial-info">
+          <span class="badge">Video</span>
+          <span class="badge">Tutorial</span>
+        </div>
+          <span class="badge">2026</span>
       </div>
+      <div class="tutorial-meta"></div>
     </a>
 
   </div>
 
-  <!-- empty state -->
-  <div class="empty-state" id="empty-state">
-    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <p>No tools match your search.</p>
-  </div>
+  <style>
+    /* Hero Section (kept local for safety) */
+    .hero-search{
+      text-align:center;
+      padding:60px 20px 40px;
+      background: linear-gradient(135deg, #1db954 0%, #ff7a2d 100%);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-dark);
+      color:#fff;
+      margin-bottom:30px;
+    }
+    .hero-search h1{
+      font-family:"Montserrat",sans-serif;
+      font-size:2.2rem;
+      margin-bottom:12px;
+    }
+    .hero-search p{
+      font-size:1rem;
+      margin-bottom:24px;
+      opacity:0.9;
+    }
+    .search-container{
+      display:flex;
+      justify-content:center;
+      max-width:600px;
+      margin:0 auto;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 20px rgba(0,0,0,0.3);
+      background:#fff;
+    }
+    .search-container input{
+      flex:1;
+      border:none;
+      padding:14px 18px;
+      font-size:1rem;
+      outline:none;
+      color:#111214;
+    }
+    .search-container input::placeholder{
+      color:#888;
+    }
+    .search-container button{
+      border:none;
+      background:var(--accent-2);
+      color:#fff;
+      padding:0 20px;
+      font-size:1.2rem;
+      cursor:pointer;
+      transition:background 0.3s, transform 0.2s;
+    }
+    .search-container button:hover{
+      background:#17a64c;
+      transform:scale(1.05);
+    }
+    body.light .hero-search{
+      color:#111214;
+      background: linear-gradient(135deg, #ff7a2d 0%, #1db954 100%);
+    }
+    body.light .search-container button{
+      background:var(--accent-2);
+    }
+  </style>
+
+  <script>
+    // Search now hides the entire .tutorial-item (image + title)
+    (function(){
+      const searchInput = document.getElementById('tutorial-search');
+      const items = Array.from(document.querySelectorAll('.tutorial-item'));
+
+      function filterTutorials(){
+        const term = (searchInput.value || '').trim().toLowerCase();
+        if(!term){
+          items.forEach(i => i.style.display = '');
+          return;
+        }
+        items.forEach(item => {
+          // choose title element specifically
+          const titleEl = item.querySelector('.tutorial-title') || item.querySelector('.tutorial-card');
+          const titleText = titleEl ? titleEl.textContent.trim().toLowerCase() : (item.textContent || '').toLowerCase();
+          const match = titleText.includes(term);
+          item.style.display = match ? '' : 'none';
+        });
+      }
+
+      searchInput.addEventListener('input', filterTutorials);
+
+      // optional: allow pressing Enter on input to focus first visible tutorial
+      searchInput.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter'){
+          const first = items.find(i => i.style.display !== 'none');
+          if(first) first.focus();
+        }
+      });
+
+      // ensure anchor elements are keyboard-focusable visually
+      items.forEach(it => it.setAttribute('tabindex', '0'));
+    })();
+  </script>
 
 </main>
 
-<!-- footer -->
 <footer class="footer" role="contentinfo">
   <div class="footer-inner">
-    <small>&copy; 2026 UzairTechGuide — All Rights Reserved.</small>
+    <small>&copy; 2025 UzairTechGuide</small>
     <p>
-      <a href="/privacy.html">Privacy Policy</a> |
-      <a href="/terms.html">Terms of Use</a> |
-      <a href="/contact.html">Contact</a>
+      <a href="https://uzair-902.github.io/privacy.html">Privacy Policy</a> |
+      <a href="https://uzair-902.github.io/terms.html">Terms of Use</a> |
+      <a href="https://uzair-902.github.io/contact.html">Contact</a>
     </p>
   </div>
 </footer>
+
+<style>
+.footer {
+  background: inherit; /* keep your page’s default background */
+  text-align: center;
+  padding: 20px 10px;
+  font-family: "Poppins", sans-serif;
+  color: #ccc;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  display: inline-block;
+  background: inherit;
+  padding: 12px 25px;
+  transition: transform 0.3s ease;
+}
+
+.footer-inner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+.footer a {
+  color: #00a8ff;
+  text-decoration: none;
+  margin: 0 8px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer small {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9em;
+  color: #aaa;
+}
+</style>
 
 <script>
 (function(){
@@ -495,7 +537,22 @@ body.light .tool-card[aria-disabled="true"]:hover{
   const nav = document.getElementById('side-nav');
   const overlay = document.getElementById('overlay');
   const closeBtn = document.getElementById('side-close');
+  const backToTop = document.getElementById('back-to-top');
 
+  // Reading progress bar logic
+  window.onscroll = function() {
+    let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+    
+    // Back to top visibility
+    if (winScroll > 300) { backToTop.style.display = "flex"; } else { backToTop.style.display = "none"; }
+  };
+
+  backToTop.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
+  // tiny inline SVGs for reliability
   const SVG = {
     moon: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
     sun:  '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
@@ -504,11 +561,13 @@ body.light .tool-card[aria-disabled="true"]:hover{
   function applyTheme(mode){
     if(mode === 'light'){
       bodyEl.classList.add('light');
+      bodyEl.classList.remove('dark');
       themeBtn.innerHTML = SVG.sun;
       themeBtn.title = 'Switch to dark';
       themeBtn.setAttribute('aria-pressed','true');
     } else {
       bodyEl.classList.remove('light');
+      bodyEl.classList.add('dark');
       themeBtn.innerHTML = SVG.moon;
       themeBtn.title = 'Switch to light';
       themeBtn.setAttribute('aria-pressed','false');
@@ -527,22 +586,30 @@ body.light .tool-card[aria-disabled="true"]:hover{
   })();
 
   themeBtn.addEventListener('click', () => {
-    applyTheme(bodyEl.classList.contains('light') ? 'dark' : 'light');
+    const current = bodyEl.classList.contains('light') ? 'light' : 'dark';
+    applyTheme(current === 'light' ? 'dark' : 'light');
   });
+
   themeBtn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); themeBtn.click(); }
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      themeBtn.click();
+    }
   });
 
   function openSide(){
-    burger.classList.add('open'); nav.classList.add('open');
-    overlay.classList.add('show'); overlay.hidden = false;
+    burger.classList.add('open');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    overlay.hidden = false;
     burger.setAttribute('aria-expanded','true');
     nav.setAttribute('aria-hidden','false');
     const first = nav.querySelector('.side-links a');
     if(first) first.focus();
   }
   function closeSide(){
-    burger.classList.remove('open'); nav.classList.remove('open');
+    burger.classList.remove('open');
+    nav.classList.remove('open');
     overlay.classList.remove('show');
     setTimeout(()=> overlay.hidden = true, 220);
     burger.setAttribute('aria-expanded','false');
@@ -551,66 +618,20 @@ body.light .tool-card[aria-disabled="true"]:hover{
   }
   burger.addEventListener('click', (ev) => {
     ev.stopPropagation();
-    nav.classList.contains('open') ? closeSide() : openSide();
+    if(nav.classList.contains('open')) closeSide(); else openSide();
   });
   closeBtn.addEventListener('click', closeSide);
   overlay.addEventListener('click', closeSide);
   document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && nav.classList.contains('open')) closeSide(); });
   document.addEventListener('click', (e)=> { if(!nav.contains(e.target) && !burger.contains(e.target) && nav.classList.contains('open')) closeSide(); });
-})();
 
-/* ============================================================
-   SEARCH + SORT for tools grid
-   ============================================================ */
-(function(){
-  const searchInput = document.getElementById('tool-search');
-  const sortSelect   = document.getElementById('tool-sort');
-  const grid         = document.getElementById('tools-grid');
-  const emptyState   = document.getElementById('empty-state');
-  const resultsMeta  = document.getElementById('results-meta');
-  const cards        = Array.from(grid.querySelectorAll('.tool-card'));
-  const totalCount   = cards.length;
-
-  function updateMeta(visibleCount){
-    if(visibleCount === totalCount){
-      resultsMeta.textContent = `${totalCount} tool${totalCount!==1?'s':''}`;
-    } else {
-      resultsMeta.textContent = `${visibleCount} of ${totalCount} tools`;
-    }
+  if (!document.getElementById('overlay')) {
+    const ov = document.createElement('div');
+    ov.id = 'overlay';
+    ov.className = 'overlay';
+    ov.hidden = true;
+    document.body.appendChild(ov);
   }
-
-  function filterAndSort(){
-    const query = searchInput.value.trim().toLowerCase();
-    const sortMode = sortSelect.value;
-
-    let visible = 0;
-    cards.forEach(card => {
-      const name = card.dataset.name.toLowerCase();
-      const desc = card.querySelector('p').textContent.toLowerCase();
-      const matches = name.includes(query) || desc.includes(query);
-      card.style.display = matches ? '' : 'none';
-      if(matches) visible++;
-    });
-
-    // sort visible + hidden together by re-appending in order
-    let sorted = [...cards];
-    if(sortMode === 'az'){
-      sorted.sort((a,b)=> a.dataset.name.localeCompare(b.dataset.name));
-    } else if(sortMode === 'za'){
-      sorted.sort((a,b)=> b.dataset.name.localeCompare(a.dataset.name));
-    } else if(sortMode === 'status'){
-      sorted.sort((a,b)=> (a.dataset.status === 'live' ? -1 : 1) - (b.dataset.status === 'live' ? -1 : 1));
-    }
-    sorted.forEach(card => grid.appendChild(card));
-
-    updateMeta(visible);
-    emptyState.classList.toggle('show', visible === 0);
-  }
-
-  searchInput.addEventListener('input', filterAndSort);
-  sortSelect.addEventListener('change', filterAndSort);
-
-  updateMeta(totalCount);
 })();
 </script>
 
