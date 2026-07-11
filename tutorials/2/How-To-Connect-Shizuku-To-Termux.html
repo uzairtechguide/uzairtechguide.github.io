@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Advanced Schema Markup: Changed to HowTo for better Google Rich Snippet Rankings -->
+    <!-- Advanced Schema Markup: HowTo for better Google Rich Snippet Rankings -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -212,6 +212,33 @@ body.light .overlay{background:rgba(0,0,0,0.25);}
 
 /* ===== main contents layout ===== */
 main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
+
+/* ===== fixed structured footer alignment ===== */
+.footer {
+  text-align: center;
+  padding: 35px 20px;
+  color: var(--muted-light);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 60px;
+  width: 100%;
+}
+body.light .footer {
+  color: var(--muted-dark);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+.footer-inner p {
+  margin-top: 10px;
+}
+.footer-inner a {
+  color: inherit;
+  text-decoration: none;
+  margin: 0 8px;
+  display: inline-block;
+}
+.footer-inner a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
 </style>
 </head>
 
@@ -377,21 +404,32 @@ main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
       margin: 18px 0; 
     }
 
-    .youtube-cta{
-      display:inline-flex;
-      gap:12px;
-      align-items:center;
-      margin-top:20px;
-      padding:12px 18px;
-      background:#ff0000;
-      color:#fff;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
+    /* Fixed Dark/Solid-Black Background Channel CTA Button */
+    .youtube-cta {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 12px 16px;
+      background: #000000 !important;
+      color: #ffffff !important;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.1);
       transition: transform 0.2s, background-color 0.2s;
     }
-    .youtube-cta:hover{ transform: translateY(-2px); background: #cc0000; text-decoration: none; }
-    .youtube-cta svg{ width:30px; height:24px; fill: currentColor; }
+    .youtube-cta:hover {
+      transform: translateY(-2px);
+      background: #1c1f22 !important;
+      text-decoration: none;
+    }
+    .youtube-cta svg {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 24px;
+    }
 
     @media(max-width:720px){
       .tutorial-container{ padding:16px; margin:10px auto; }
@@ -425,7 +463,7 @@ main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
     </figure>
 
     <h2 class="section-title" id="step3">Step 3: Export Internal Script Profiles</h2>
-    <p>Tap the <strong>"Export Files"</strong> button execution flag. Pick a local directory environment to write your framework packages. This process yields two separate core control files: <code>rish</code> and <code>rish_shizuku.dex</code>. It is highly recommended to host these assets safely inside a targeted folder named <code>/sh/</code> located directly inside your phone storage's standard <code>Documents</code> partition maps.</p>
+    <p>Tap the <strong>"Export Files"</strong> button execution flag. Pick a local directory environment to write your framework packages. This process yields two separate core control files: <code>rish</code> and <code>rish_shizuku.dex</code>. It is highly recommended to host these assets safely inside a designated folder named <code>/sh/</code> located directly inside your phone storage's standard <code>Documents</code> partition maps.</p>
     
     <figure>
       <img src="SAF-scrshot.jpg" alt="Files successfully extracted inside the Documents manager platform system directory">
@@ -473,11 +511,12 @@ main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
     
     <p style="margin-top:22px;">If you found value in this deep dive, subscribe for instant notifications on video releases:</p>
     
+    <!-- Cleaned up Solid Black Background YouTube CTA Structure -->
     <a class="youtube-cta" href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the official channel on YouTube">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.112C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.392.574a2.99 2.99 0 0 0-2.106 2.112A31.554 31.554 0 0 0 0 12a31.554 31.554 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.112C4.209 20.5 12 20.5 12 20.5s7.79 0 9.392-.574a2.99 2.99 0 0 0 2.106-2.112A31.554 31.554 0 0 0 24 12a31.554 31.554 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FF0000" d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.112C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.392.574a2.99 2.99 0 0 0-2.106 2.112A31.554 31.554 0 0 0 0 12a31.554 31.554 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.112C4.209 20.5 12 20.5 12 20.5s7.79 0 9.392-.574a2.99 2.99 0 0 0 2.106-2.112A31.554 31.554 0 0 0 24 12a31.554 31.554 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
       </svg>
-      <span>Subscribe on YouTube</span>
+      <span>YouTube Channel</span>
     </a>
 
   </article>
@@ -488,7 +527,7 @@ main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
     <small>&copy; 2026 UzairTechGuide</small>
     <p>
       <a href="/privacy.html">Privacy Policy</a> |
-      <a href="/terms.html">Terms of Use</a> |
+      <a href="/terms.html">Terms Of Use</a> |
       <a href="/contact.html">Contact</a>
     </p>
   </div>
