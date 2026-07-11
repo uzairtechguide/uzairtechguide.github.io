@@ -1,7 +1,7 @@
 /* ============================================================
    UzairTechGuide - script.js
    - Robust vanilla JS with defensive checks
-   - Handles hamburger + morphing + fallback to Unicode
+   - Works with injected nav.html via window.initNavigation()
    - Theme toggle with persistence (localStorage)
    - Overlay handling + accessibility (focus move)
    - Smooth scroll for same-page anchors
@@ -10,185 +10,58 @@
    ============================================================ */
 
 /* ---------- small utilities ---------- */
-/* $() and $$() are convenience helpers to find elements quickly.
-   $ returns the first match; $$ returns an array of matches. */
-const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+/* $() and $$() are convenience helpers to find elements quickly. */
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 /* ---------- Element references ---------- */
-const hamburger = $('#hamburger-btn');      // the top-right hamburger button
-const sideNav = $('#side-nav');             // side navigation panel (slides from right)
-const sideClose = $('#side-close');         // close (×) button inside side nav
-let overlay = $('#page-overlay');          // the dark overlay behind the panel
-const themeToggle = $('#theme-toggle');     // theme toggle button
-
-/* Defensive: ensure required elements exist. If not, we log and gracefully exit. */
-if (!hamburger || !sideNav || !overlay || !themeToggle) {
-  console.warn('One or more core UI elements are missing. Script will try to run partially.');
-}
-
-/* ---------- Overlay creation fallback ----------
-   In case overlay is missing or script runs before DOM finished loading,
-   we ensure an overlay element exists and is appended to <body>.
-*/
-(function ensureOverlay(){
-  try {
-    if (!overlay) {
-      const ov = document.createElement('div');
-      ov.id = 'page-overlay';
-      ov.className = 'overlay';
-      ov.hidden = true;
-      document.body.appendChild(ov);
-      overlay = ov;
-    }
-  } catch (e) {
-    console.warn('Failed to ensure overlay exists:', e);
-  }
-})();
-
-/* ---------- Side nav open/close logic ----------
-   Two functions: openSide() and closeSide().
-   They:
-   - add/remove CSS classes to show/hide elements
-   - manage aria attributes for accessibility
-   - move keyboard focus into the panel when opened
-   - restore focus when closed
-*/
-let lastFocusedBeforeNav = null;
-
-function openSide() {
-  try {
-    lastFocusedBeforeNav = document.activeElement;
-    sideNav.classList.add('open');
-    hamburger.classList.add('open'); // triggers CSS morph to X
-    overlay.classList.add('show');
-    overlay.hidden = false;
-    hamburger.setAttribute('aria-expanded', 'true');
-    sideNav.setAttribute('aria-hidden', 'false');
-
-    // Move keyboard focus to the first link inside the side nav for accessibility
-    const firstLink = sideNav.querySelector('.side-links a');
-    if (firstLink) firstLink.focus();
-  } catch (err) {
-    console.error('openSide error:', err);
-  }
-}
-
-function closeSide() {
-  try {
-    sideNav.classList.remove('open');
-    hamburger.classList.remove('open');
-    overlay.classList.remove('show');
-    setTimeout(() => { overlay.hidden = true; }, 220);
-    hamburger.setAttribute('aria-expanded', 'false');
-    sideNav.setAttribute('aria-hidden', 'true');
-
-    // restore focus to last focused element (usually hamburger)
-    if (lastFocusedBeforeNav) {
-      try { lastFocusedBeforeNav.focus(); } catch (e) {}
-      lastFocusedBeforeNav = null;
-    }
-  } catch (err) {
-    console.error('closeSide error:', err);
-  }
-}
-
-/* Attach click listeners safely */
-if (hamburger) {
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (sideNav.classList.contains('open')) closeSide();
-    else openSide();
-  });
-}
-if (sideClose) sideClose.addEventListener('click', closeSide);
-if (overlay) overlay.addEventListener('click', closeSide);
-
-/* Close side nav when clicking outside or pressing Escape */
-document.addEventListener('click', (e) => {
-  if (!sideNav.contains(e.target) && !hamburger.contains(e.target)) {
-    if (sideNav.classList.contains('open')) closeSide();
-  }
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && sideNav.classList.contains('open')) closeSide();
-});
-
-/* ---------- Hamburger fallback detection ----------
-   Some devices or mysterious CSS bugs render the 3 <span> bars incorrectly.
-   We detect whether the bars have a useful width; if not we hide the spans
-   and show the Unicode fallback "☰" inside the button.
-*/
-(function hamburgerFallbackCheck(){
-  try {
-    const spans = hamburger ? Array.from(hamburger.querySelectorAll('span')) : [];
-    const bars = spans.filter(s => !s.classList.contains('hamburger-fallback'));
-
-    // If no bars or bars have negligible width/height, show fallback
-    let needFallback = false;
-    if (!bars.length) needFallback = true;
-    else {
-      // compute a typical bar's computed width; if it's < 6px we consider it broken
-      const rect = bars[0].getBoundingClientRect();
-      if (rect.width < 6 || rect.height < 2) needFallback = true;
-    }
-
-    // toggle fallback visibility by adding class 'use-fallback' to the hamburger
-    if (needFallback) {
-      hamburger.classList.add('use-fallback');
-      // show the fallback element
-      const fb = hamburger.querySelector('.hamburger-fallback');
-      if (fb) { fb.style.display = 'block'; }
-      // hide the three empty spans visually (they may be garbage)
-      bars.forEach(s => { s.style.display = 'none'; });
-    } else {
-      // normal good path: ensure fallback hidden and spans visible
-      hamburger.classList.remove('use-fallback');
-      const fb = hamburger.querySelector('.hamburger-fallback');
-      if (fb) fb.style.display = 'none';
-      bars.forEach(s => { s.style.display = 'block'; });
-    }
-  } catch (e) {
-    // if something unusually fails, fallback to unicode
-    try {
-      const fb = hamburger.querySelector('.hamburger-fallback');
-      if (fb) { fb.style.display = 'block'; }
-      const spans = hamburger.querySelectorAll('span:not(.hamburger-fallback)');
-      spans.forEach(s => { s.style.display = 'none'; });
-      hamburger.classList.add('use-fallback');
-    } catch (err) {/* swallow */}
-  }
-})();
+const themeToggle = $('#theme-toggle'); // theme toggle button
+const THEME_KEY = 'utg_theme';
 
 /* ---------- Theme toggle (dark/light) ----------
    - We persist the user's selection in localStorage
    - We respect OS preference (prefers-color-scheme) if no saved choice
-   - We avoid encoding issues by setting button text via JS
+   - We use simple emoji labels for stable rendering
 */
-const THEME_KEY = 'utg_theme';
 function setTheme(mode) {
   if (mode === 'light') {
     document.body.classList.add('light');
     document.body.classList.remove('dark');
-    themeToggle.textContent = '☀️';
-    themeToggle.title = 'Switch to dark';
+    if (themeToggle) {
+      themeToggle.textContent = '☀️';
+      themeToggle.title = 'Switch to dark';
+      themeToggle.setAttribute('aria-pressed', 'true');
+    }
   } else {
     document.body.classList.remove('light');
     document.body.classList.add('dark');
-    themeToggle.textContent = '🌙';
-    themeToggle.title = 'Switch to light';
+    if (themeToggle) {
+      themeToggle.textContent = '🌙';
+      themeToggle.title = 'Switch to light';
+      themeToggle.setAttribute('aria-pressed', 'false');
+    }
   }
-  try { localStorage.setItem(THEME_KEY, mode); } catch (e) {}
+
+  try {
+    localStorage.setItem(THEME_KEY, mode);
+  } catch (e) {}
 }
 
 /* Initialize theme */
-(function initTheme(){
+(function initTheme() {
   let saved = null;
-  try { saved = localStorage.getItem(THEME_KEY); } catch (e) { saved = null; }
+  try {
+    saved = localStorage.getItem(THEME_KEY);
+  } catch (e) {
+    saved = null;
+  }
+
   if (!saved) {
-    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const prefersLight =
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
     saved = prefersLight ? 'light' : 'dark';
   }
+
   setTheme(saved);
 })();
 
@@ -197,53 +70,228 @@ if (themeToggle) {
     const current = document.body.classList.contains('light') ? 'light' : 'dark';
     setTheme(current === 'light' ? 'dark' : 'light');
   });
+
+  themeToggle.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      themeToggle.click();
+    }
+  });
 }
 
+/* ---------- Navigation state ----------
+   This is the important part for your injected nav.
+   The nav HTML loads later, so we expose initNavigation()
+   and call it again after fetch() inserts the menu.
+*/
+window.initNavigation = function initNavigation() {
+  const hamburger = $('#hamburger-btn');
+  const sideNav = $('#side-nav');
+  const sideClose = $('#side-close');
+  const overlay = $('#page-overlay') || $('#overlay');
+
+  if (!hamburger || !sideNav) {
+    console.warn('Navigation not ready yet: hamburger or sideNav missing.');
+    return false;
+  }
+
+  // Prevent double-binding if initNavigation() gets called more than once.
+  if (sideNav.dataset.utgNavBound === '1') {
+    return true;
+  }
+  sideNav.dataset.utgNavBound = '1';
+
+  let lastFocusedBeforeNav = null;
+
+  function openSide() {
+    try {
+      lastFocusedBeforeNav = document.activeElement;
+      sideNav.classList.add('open');
+      hamburger.classList.add('open');
+
+      if (overlay) {
+        overlay.classList.add('show');
+        overlay.hidden = false;
+      }
+
+      hamburger.setAttribute('aria-expanded', 'true');
+      sideNav.setAttribute('aria-hidden', 'false');
+
+      const firstLink = sideNav.querySelector('.side-links a');
+      if (firstLink) firstLink.focus();
+    } catch (err) {
+      console.error('openSide error:', err);
+    }
+  }
+
+  function closeSide() {
+    try {
+      sideNav.classList.remove('open');
+      hamburger.classList.remove('open');
+
+      if (overlay) {
+        overlay.classList.remove('show');
+        setTimeout(() => {
+          overlay.hidden = true;
+        }, 220);
+      }
+
+      hamburger.setAttribute('aria-expanded', 'false');
+      sideNav.setAttribute('aria-hidden', 'true');
+
+      if (lastFocusedBeforeNav) {
+        try {
+          lastFocusedBeforeNav.focus();
+        } catch (e) {}
+        lastFocusedBeforeNav = null;
+      }
+    } catch (err) {
+      console.error('closeSide error:', err);
+    }
+  }
+
+  // Expose closeSide in case other code wants to call it.
+  window.closeSideNav = closeSide;
+
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (sideNav.classList.contains('open')) closeSide();
+    else openSide();
+  });
+
+  if (sideClose) sideClose.addEventListener('click', closeSide);
+  if (overlay) overlay.addEventListener('click', closeSide);
+
+  document.addEventListener('click', (e) => {
+    if (!sideNav.contains(e.target) && !hamburger.contains(e.target)) {
+      if (sideNav.classList.contains('open')) closeSide();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sideNav.classList.contains('open')) {
+      closeSide();
+    }
+  });
+
+  return true;
+};
+
+/* Try to initialize navigation now too.
+   If nav.html is injected later, your fetch callback can call initNavigation()
+   again and it will bind safely only once. */
+window.initNavigation();
+
+/* ---------- Hamburger fallback detection ----------
+   Some devices or CSS glitches may render the 3 bars badly.
+   We detect whether the bars are usable; if not, show the Unicode fallback.
+*/
+(function hamburgerFallbackCheck() {
+  try {
+    const hamburger = $('#hamburger-btn');
+    if (!hamburger) return;
+
+    const spans = Array.from(hamburger.querySelectorAll('span'));
+    const bars = spans.filter((s) => !s.classList.contains('hamburger-fallback'));
+
+    let needFallback = false;
+
+    if (!bars.length) {
+      needFallback = true;
+    } else {
+      const rect = bars[0].getBoundingClientRect();
+      if (rect.width < 6 || rect.height < 2) needFallback = true;
+    }
+
+    const fb = hamburger.querySelector('.hamburger-fallback');
+
+    if (needFallback) {
+      hamburger.classList.add('use-fallback');
+      if (fb) {
+        fb.style.display = 'block';
+        fb.textContent = '☰';
+      }
+      bars.forEach((s) => {
+        s.style.display = 'none';
+      });
+    } else {
+      hamburger.classList.remove('use-fallback');
+      if (fb) fb.style.display = 'none';
+      bars.forEach((s) => {
+        s.style.display = 'block';
+      });
+    }
+  } catch (e) {
+    try {
+      const hamburger = $('#hamburger-btn');
+      if (!hamburger) return;
+      const fb = hamburger.querySelector('.hamburger-fallback');
+      if (fb) {
+        fb.style.display = 'block';
+        fb.textContent = '☰';
+      }
+      const spans = hamburger.querySelectorAll('span:not(.hamburger-fallback)');
+      spans.forEach((s) => {
+        s.style.display = 'none';
+      });
+      hamburger.classList.add('use-fallback');
+    } catch (err) {}
+  }
+})();
+
 /* ---------- Smooth scroll for internal anchors ----------
-   When clicking "#tutorials" etc. the page scrolls smoothly. Also close side nav.
+   Clicking "#tutorials" etc. scrolls smoothly. Also close side nav.
 */
 document.addEventListener('click', (e) => {
   const a = e.target.closest('a[href^="#"]');
   if (!a) return;
+
   const href = a.getAttribute('href');
   if (!href || href === '#') return;
+
   const target = document.querySelector(href);
   if (!target) return;
+
   e.preventDefault();
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  if (sideNav.classList.contains('open')) closeSide();
+
+  if (typeof window.closeSideNav === 'function') {
+    window.closeSideNav();
+  }
 });
 
 /* ---------- Reveal-on-scroll ----------
-   Items with classes .reveal, .tile, .card will fade in as they appear
-   on screen. We use IntersectionObserver for performant watching.
+   Items with classes .reveal, .tile, .card will fade in as they appear.
 */
-(function setupReveal(){
+(function setupReveal() {
   try {
     const selector = '.reveal, .tile, .card, .hero-inner';
     const elements = Array.from(document.querySelectorAll(selector));
     if (!elements.length) return;
-    // ensure each element has initial 'reveal' class so CSS hides it first
-    elements.forEach(el => { if (!el.classList.contains('reveal')) el.classList.add('reveal'); });
 
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show'); // CSS transitions handle the reveal
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    elements.forEach((el) => {
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+    });
 
-    elements.forEach(el => io.observe(el));
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    elements.forEach((el) => io.observe(el));
   } catch (e) {
     console.warn('Reveal setup failed:', e);
   }
 })();
 
-/* ---------- Keep hero height reasonable on tiny viewports ----------
-   If the viewport height is very small (on-screen keyboard), reduce hero min-height
-*/
+/* ---------- Keep hero height reasonable on tiny viewports ---------- */
 function adjustHeroForViewport() {
   try {
     const hero = document.querySelector('.hero');
@@ -252,22 +300,34 @@ function adjustHeroForViewport() {
     else hero.style.minHeight = '';
   } catch (e) {}
 }
-window.addEventListener('resize', debounce(adjustHeroForViewport, 120, 300));
+
 function debounce(fn, wait, maxWait) {
-  let t = null, last = null;
-  return function(...args){
+  let t = null;
+  let last = null;
+  return function (...args) {
     const now = Date.now();
     if (!last) last = now;
     clearTimeout(t);
-    t = setTimeout(() => { fn.apply(this, args); last = null; }, wait);
-    if (maxWait && now - last >= maxWait) { clearTimeout(t); fn.apply(this, args); last = null; }
+    t = setTimeout(() => {
+      fn.apply(this, args);
+      last = null;
+    }, wait);
+
+    if (maxWait && now - last >= maxWait) {
+      clearTimeout(t);
+      fn.apply(this, args);
+      last = null;
+    }
   };
 }
 
+window.addEventListener('resize', debounce(adjustHeroForViewport, 120, 300));
+adjustHeroForViewport();
+
 /* ---------- Small safety: ensure overlay exists if script loaded early ----------
-   (shouldn't happen with defer, but defensive code is helpful)
+   Your HTML uses page-overlay, so we make sure that element exists.
 */
-(function ensureOverlayAgain(){
+(function ensureOverlayAgain() {
   try {
     if (!document.getElementById('page-overlay')) {
       const ov = document.createElement('div');
@@ -279,6 +339,14 @@ function debounce(fn, wait, maxWait) {
   } catch (e) {}
 })();
 
+/* Optional: auto-hide menu after clicking any nav link */
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('.side-links a');
+  if (!link) return;
+
+  if (typeof window.closeSideNav === 'function') {
+    window.closeSideNav();
+  }
+});
+
 /* ========== End of script ========== */
-/* If you want extra features (keyboard-only menu navigation, focus trap inside side-nav,
-   or auto-closing after link click on mobile), tell me and I will add them carefully. */
