@@ -298,7 +298,7 @@
   <!-- Scripts -->
   <script src="script.js" defer></script>
   <script>
-fetch("/includes/nav.html")
+fetch("/components/nav.html")
 .then(r => r.text())
 .then(html => {
     document.getElementById("nav-placeholder").innerHTML = html;
