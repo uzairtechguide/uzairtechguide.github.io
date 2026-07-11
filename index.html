@@ -194,13 +194,10 @@
   </div>
 
   <!-- Side navigation -->
-<script>
-fetch("/includes/nav.html")
-  .then(r => r.text())
-  .then(html => document.currentScript.outerHTML = html);
-</script>
+<div id="nav-placeholder"></div>
 
-  <div id="page-overlay" class="overlay" hidden></div>
+
+
 
   <main>
 
@@ -300,6 +297,17 @@ fetch("/includes/nav.html")
 
   <!-- Scripts -->
   <script src="script.js" defer></script>
+  <script>
+fetch("/includes/nav.html")
+.then(r => r.text())
+.then(html => {
+    document.getElementById("nav-placeholder").innerHTML = html;
+
+    // Initialize menu AFTER nav exists
+    if (window.initNavigation)
+        window.initNavigation();
+});
+</script>
 
 </body>
 </html>
