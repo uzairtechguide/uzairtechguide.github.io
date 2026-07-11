@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Advanced Schema Markup: HowTo for better Google Rich Snippet Rankings -->
+    <!-- Schema Markup for Google Search Results -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -55,44 +55,44 @@
         {
           "@type": "HowToStep",
           "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step1",
-          "name": "Download Prerequisites",
-          "text": "Download the Termux App from F-droid and the Shizuku App from the Google Play Store on your Android device."
+          "name": "Install the Apps",
+          "text": "Download Termux from F-Droid and Shizuku from the Google Play Store."
         },
         {
           "@type": "HowToStep",
           "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step2",
-          "name": "Use Shizuku in Terminal Apps",
-          "text": "Open Shizuku, set it up, and tap on the option titled Use Shizuku in Terminal Apps."
+          "name": "Turn on Shizuku Terminal Mode",
+          "text": "Open Shizuku, set it up, and tap on 'Use Shizuku in terminal apps'."
         },
         {
           "@type": "HowToStep",
           "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step3",
-          "name": "Export rish Files",
-          "text": "Click the Export Files button and save the rish script files into a designated folder inside your storage."
+          "name": "Export the Files",
+          "text": "Tap Export Files and save the files into a folder named sh in your Documents storage folder."
         },
         {
           "@type": "HowToStep",
           "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step4",
-          "name": "Edit Package Profile Name",
-          "text": "Open the rish file with any text editor."
+          "name": "Open the Script File",
+          "text": "Open the rish file with any text editor app."
         },
         {
           "@type": "HowToStep",
           "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step5",
-          "name": "Replace PKG Configuration",
-          "text": "Find and replace the placeholder text PKG inside the script with com.termux."
+          "name": "Edit Package Name",
+          "text": "Find the text PKG inside the file and change it to com.termux."
         },
         {
           "@type": "HowToStep",
           "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step6",
-          "name": "Copy Files into Home Workspace",
-          "text": "Open Termux and copy the edited rish folder directly into your internal app terminal home directory."
+          "name": "Move Files to Termux Home",
+          "text": "Open Termux and copy the edited folder to your home directory."
         },
         {
           "@type": "HowToStep",
           "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step7",
-          "name": "Execute rish Shell Script",
-          "text": "Change directories into the sh folder and execute sh rish to link the environments."
+          "name": "Start the Connection",
+          "text": "Go into the sh folder and run the command sh rish to start the local ADB connection."
         }
       ]
     }
@@ -213,7 +213,7 @@ body.light .overlay{background:rgba(0,0,0,0.25);}
 /* ===== main contents layout ===== */
 main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
 
-/* ===== fixed structured footer alignment ===== */
+/* ===== footer styling ===== */
 .footer {
   text-align: center;
   padding: 35px 20px;
@@ -278,7 +278,7 @@ body.light .footer {
 
 <div id="overlay" class="overlay" hidden></div>
 
-<!-- Main Tutorial Document Article Space -->
+<!-- Main Content Area -->
 <main class="tutorial-container" aria-labelledby="tut-title">
 
   <style>
@@ -359,7 +359,6 @@ body.light .footer {
     }
     figcaption{ font-size:0.92rem; opacity:0.75; margin-top:6px; font-style: italic; }
 
-    /* Code block wrappers with interactive utility elements */
     .code-block{
       position:relative;
       margin:16px 0;
@@ -404,7 +403,7 @@ body.light .footer {
       margin: 18px 0; 
     }
 
-    /* Fixed Dark/Solid-Black Background Channel CTA Button */
+    /* YouTube Black Button Styles */
     .youtube-cta {
       display: inline-flex;
       gap: 10px;
@@ -441,7 +440,7 @@ body.light .footer {
 
     <h1 id="tut-title">How to Connect Shizuku App with Termux to Run ADB Commands</h1>
 
-    <p class="lead">In this tutorial, you will discover how to seamlessly pair the <a href="https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api" target="_blank" rel="noopener">Shizuku App</a> into your local <a href="https://f-droid.org/en/packages/com.termux/" target="_blank" rel="noopener">Termux Terminal</a> workspace. This setup enables you to run full ADB commands locally on Android completely standalone—no PC or root permissions required!</p>
+    <p class="lead">In this tutorial, you will learn how to connect the <a href="https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api" target="_blank" rel="noopener">Shizuku App</a> with <a href="https://f-droid.org/en/packages/com.termux/" target="_blank" rel="noopener">Termux</a>. This setup lets you run full ADB commands directly on your Android phone—no PC and no root access required!</p>
 
     <div class="video-wrap">
       <iframe
@@ -451,46 +450,46 @@ body.light .footer {
         allowfullscreen loading="lazy"></iframe>
     </div>
 
-    <h2 class="section-title" id="step1">Step 1: Get the Apps Installed</h2>
-    <p>Before beginning, download and install the latest versions of the <strong>Termux App (via F-Droid)</strong> and the official <strong>Shizuku App</strong> onto your mobile device.</p>
+    <h2 class="section-title" id="step1">Step 1: Install the Apps</h2>
+    <p>First, download and install the latest versions of the <strong>Termux App (from F-Droid)</strong> and the official <strong>Shizuku App</strong> on your phone.</p>
 
-    <h2 class="section-title" id="step2">Step 2: Activate Shizuku Mode</h2>
-    <p>Launch the Shizuku app and complete its base wireless debugging setup configuration. Once running, tap on the option titled <strong>"Use Shizuku in terminal apps"</strong>.</p>
+    <h2 class="section-title" id="step2">Step 2: Turn on Shizuku</h2>
+    <p>Open the Shizuku app and follow the setup to turn on wireless debugging. Once it is running, tap the option that says <strong>"Use Shizuku in terminal apps"</strong>.</p>
     
     <figure>
-      <img src="shizuku-scrshot.jpg" alt="Selecting Use Shizuku in terminal apps option configuration panel inside the app dashboard">
-      <figcaption>Navigate into the advanced Shizuku dashboard interface and opt into the internal app environment.</figcaption>
+      <img src="shizuku-scrshot.jpg" alt="Selecting Use Shizuku in terminal apps option inside the app">
+      <figcaption>Open the Shizuku app and select the terminal option.</figcaption>
     </figure>
 
-    <h2 class="section-title" id="step3">Step 3: Export Internal Script Profiles</h2>
-    <p>Tap the <strong>"Export Files"</strong> button execution flag. Pick a local directory environment to write your framework packages. This process yields two separate core control files: <code>rish</code> and <code>rish_shizuku.dex</code>. It is highly recommended to host these assets safely inside a designated folder named <code>/sh/</code> located directly inside your phone storage's standard <code>Documents</code> partition maps.</p>
+    <h2 class="section-title" id="step3">Step 3: Export the Script Files</h2>
+    <p>Tap the <strong>"Export Files"</strong> button. Choose a folder on your phone to save the files. This will save two files: <code>rish</code> and <code>rish_shizuku.dex</code>. We recommend creating a folder named <code>sh</code> inside your phone's <code>Documents</code> folder and saving them there.</p>
     
     <figure>
-      <img src="SAF-scrshot.jpg" alt="Files successfully extracted inside the Documents manager platform system directory">
-      <figcaption>Verify that your output directory actively lists both the <code>rish</code> and <code>rish_shizuku.dex</code> execution assets.</figcaption>
+      <img src="SAF-scrshot.jpg" alt="Files saved inside the Documents folder">
+      <figcaption>Make sure both the <code>rish</code> and <code>rish_shizuku.dex</code> files are in your folder.</figcaption>
     </figure>
 
-    <h2 class="section-title" id="step4">Step 4: Access File Architecture Paths</h2>
-    <p>Launch a secure plain-text manager profile tools suite on your handset and open the raw exported <code>rish</code> target script for runtime parameter updates.</p>
+    <h2 class="section-title" id="step4">Step 4: Open the Script File</h2>
+    <p>Open any text editor app on your phone and open the exported <code>rish</code> file.</p>
 
-    <h2 class="section-title" id="step5">Step 5: Adjust Dynamic Package Parameters</h2>
-    <p>Locate the specific target token placeholder values labeled as <code>PKG</code> string fields inside the execution scripts, and replace them completely with <code>com.termux</code>.</p>
+    <h2 class="section-title" id="step5">Step 5: Edit the Package Name</h2>
+    <p>Find the text that says <code>PKG</code> inside the file, and change it completely to <code>com.termux</code>.</p>
     
     <figure>
-      <img src="rish-scrshot.jpg" alt="Replacing placeholder configurations with com.termux values via localized text compiler profiles">
-      <figcaption>Replace the default <code>PKG</code> template labels configuration string explicitly with the targeted <code>com.termux</code> identifier tag value.</figcaption>
+      <img src="rish-scrshot.jpg" alt="Replacing PKG with com.termux using a text editor">
+      <figcaption>Change the default <code>PKG</code> text to <code>com.termux</code>.</figcaption>
     </figure>
 
-    <h2 class="section-title" id="step6">Step 6: Import Variables into Terminal Environments</h2>
-    <p>Launch your local Termux environment setup dashboard view, paste the command script string listed directly below into your console array inputs, and press Enter:</p>
+    <h2 class="section-title" id="step6">Step 6: Move Files into Termux</h2>
+    <p>Open the Termux app, paste the command below, and press Enter to copy the folder into Termux:</p>
 
     <div class="code-block">
       <button class="copy-btn">Copy</button>
       <pre><code>cp -r "/sdcard/documents/sh" "/data/data/com.termux/files/home/"</code></pre>
     </div>
 
-    <h2 class="section-title" id="step7">Step 7: Launch Local ADB Session Hooks</h2>
-    <p>Point your current terminal scope paths target maps straight into your newly mapped workspace subfolder by inputting a standard change directory declaration command string, then boot your active connection:</p>
+    <h2 class="section-title" id="step7">Step 7: Start the ADB Connection</h2>
+    <p>Go into your new folder and run the script by typing this command and hitting Enter:</p>
 
     <div class="code-block">
       <button class="copy-btn">Copy</button>
@@ -498,20 +497,20 @@ body.light .footer {
     </div>
 
     <figure>
-      <img src="tmux-scrshot.jpg" alt="Active shell interaction maps output displays operating seamlessly within structural parameters">
-      <figcaption>This transfers the working binary libraries context layers smoothly, providing terminal root privileges directly.</figcaption>
+      <img src="tmux-scrshot.jpg" alt="Termux connected to Shizuku">
+      <figcaption>Termux will now connect to Shizuku, giving you full ADB access directly on your phone.</figcaption>
     </figure>
 
     <div class="note">
-      <strong>Important Operations Notice:</strong> The parent standalone background Shizuku operational process service threads environment must remain paired, active, and fully configured in the background to ensure terminal sessions function correctly.
+      <strong>Important Note:</strong> The Shizuku app must keep running in the background for your Termux ADB session to work.
     </div>
 
-    <p>We hope this technical connection configuration roadmap guide helped optimize your development process workflows!</p>
-    <p>Be sure to browse through our official <a href="/tutorials/tutorials.html">Android Tutorials Index</a> for deeper architecture modification strategies.</p>
+    <p>We hope this step-by-step guide helped you set everything up easily!</p>
+    <p>Check out our <a href="/tutorials/tutorials.html">Android Tutorials Index</a> for more helpful guides.</p>
     
-    <p style="margin-top:22px;">If you found value in this deep dive, subscribe for instant notifications on video releases:</p>
+    <p style="margin-top:22px;">If this tutorial helped you, subscribe to get notified about new videos:</p>
     
-    <!-- Cleaned up Solid Black Background YouTube CTA Structure -->
+    <!-- YouTube Black CTA Button -->
     <a class="youtube-cta" href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the official channel on YouTube">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
         <path fill="#FF0000" d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.112C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.392.574a2.99 2.99 0 0 0-2.106 2.112A31.554 31.554 0 0 0 0 12a31.554 31.554 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.112C4.209 20.5 12 20.5 12 20.5s7.79 0 9.392-.574a2.99 2.99 0 0 0 2.106-2.112A31.554 31.554 0 0 0 24 12a31.554 31.554 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -534,7 +533,7 @@ body.light .footer {
 </footer>
 
 <script>
-// Theme management engine logic blocks
+// Theme Toggle Logic
 (function(){
   const THEME_KEY = 'utg_theme';
   const bodyEl = document.body;
@@ -601,7 +600,7 @@ body.light .footer {
   overlay.addEventListener('click', closeSide);
 })();
 
-// Modern, robust Clipboard engine copy-utility script integration logic
+// Clipboard Copy Button Logic
 document.querySelectorAll('.code-block').forEach(block => {
   const btn = block.querySelector('.copy-btn');
   const code = block.querySelector('code');
@@ -612,7 +611,7 @@ document.querySelectorAll('.code-block').forEach(block => {
         btn.textContent = 'Copied!';
         setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
       }).catch(() => {
-        // Fallback execution logic pathway for older tracking systems browsers
+        // Textarea fallback for older browsers
         const area = document.createElement('textarea');
         area.value = textToCopy;
         document.body.appendChild(area);
@@ -627,18 +626,18 @@ document.querySelectorAll('.code-block').forEach(block => {
 });
 </script>
 
-<!-- Asynchronous Global Header Nav-Link Injection Engine Architecture -->
+<!-- Sidebar Nav Link Injection Logic -->
 <script>
 fetch('/components/nav.html')
   .then(response => {
-    if (!response.ok) throw new Error('Network structure failure event handled.');
+    if (!response.ok) throw new Error('Failed to load navigation links.');
     return response.text();
   })
   .then(html => {
     const sideLinksContainer = document.querySelector('.side-links');
     if (sideLinksContainer) sideLinksContainer.innerHTML = html;
   })
-  .catch(err => console.warn('Nav template fallback used instead of async injection component:', err));
+  .catch(err => console.warn('Sidebar injection fallback:', err));
 </script>
 
 </body>
