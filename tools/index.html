@@ -427,9 +427,9 @@ body.light .tool-card[aria-disabled="true"]:hover{
   <!-- tools grid -->
   <div class="tools-grid" id="tools-grid">
 
-    <a class="tool-card" data-name="AI Subtitle Generator" data-status="live" href="/tools/autocaptions/index.html">
+    <a class="tool-card" data-name="AI Subtitle Generator" data-status="live" href="/tools/ai-subtitles-generator.html">
       <div class="tool-thumb">
-        <img src="/assets/tools/autocaptions-thumb.jpg" alt="AI Subtitle Generator preview" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.remove();">
+        <img src="/tools/ai-subtitles.png" alt="AI Subtitle Generator preview" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.remove();">
       </div>
       <div class="tool-body">
         <h3>AI Subtitle Generator</h3>
@@ -611,6 +611,21 @@ body.light .tool-card[aria-disabled="true"]:hover{
 
   updateMeta(totalCount);
 })();
+</script>
+
+<!-- Load side nav from external file -->
+<script>
+fetch('/components/nav.html')
+  .then(r => r.text())
+  .then(html => {
+    // Find the .side-links div and replace its content
+    const sideLinks = document.querySelector('.side-links');
+    if (sideLinks) sideLinks.innerHTML = html;
+    
+    // Re-initialize nav after content loads
+    if (window.initNavigation) window.initNavigation();
+  })
+  .catch(err => console.warn('Failed to load nav:', err));
 </script>
 
 </body>
