@@ -1,67 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="description" content="Learn how to connect Shizuku with Termux to run ADB commands on Android without root or PC. Step-by-step tutorial with screenshots and video guide.">
-<meta name="keywords" content="Shizuku Termux ADB, Android without root, run ADB on Android, Shizuku tutorial, Termux setup">
-<meta name="author" content="Uzair Shah">
-<meta property="og:title" content="How to Connect Shizuku to Termux to Run ADB Commands">
-<meta property="og:description" content="Complete tutorial to connect Shizuku App with Termux and run ADB commands locally — no PC, no root.">
-<meta property="og:image" content="https://uzair-902.github.io/tutorials/2/shizuku-scrshot.jpg">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>How to Connect Shizuku to Termux to Run ADB Commands - UzairTechGuide</title>
+    <meta name="description" content="Learn how to connect the Shizuku app with Termux to run ADB commands locally on Android without a PC or root access. Complete step-by-step terminal tutorial.">
+    <meta name="keywords" content="Shizuku Termux ADB, Android without root, run ADB on Android, Shizuku tutorial, Termux setup, local adb commands android">
+    <meta name="author" content="Muhammad Uzair Shah">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="canonical" href="https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html">
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How to Connect Shizuku to Termux to Run ADB Commands">
+    <meta property="og:description" content="Complete tutorial to connect Shizuku App with Termux and run ADB commands locally — no PC, no root.">
+    <meta property="og:image" content="https://uzair-902.github.io/tutorials/2/shizuku-scrshot.jpg">
+    <meta property="og:url" content="https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html">
+    <meta property="og:site_name" content="UzairTechGuide">
 
-<!-- SEO -->
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Connect Shizuku to Termux to Run ADB Commands">
+    <meta name="twitter:description" content="Unlock local ADB debugging capabilities on Android. Step-by-step Shizuku tool configuration for Termux.">
+    <meta name="twitter:image" content="https://uzair-902.github.io/tutorials/2/shizuku-scrshot.jpg">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "How to Connect Shizuku App with Termux To Run ADB Commands",
-  "author": {
-    "@type": "Person",
-    "name": "Uzair Shah"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "UzairTechGuide"
-  },
-  "image": "https://uzair-902.github.io/tutorials/2/shizuku-scrshot.jpg",
-  "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html",
-  "description": "Step-by-step tutorial to connect Shizuku with Termux and run ADB commands locally without root or PC."
-}
-</script>
+    <!-- Advanced Schema Markup: Changed to HowTo for better Google Rich Snippet Rankings -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Connect Shizuku App with Termux To Run ADB Commands",
+      "description": "Step-by-step tutorial to connect Shizuku with Termux and run ADB commands locally without root or a PC.",
+      "image": "https://uzair-902.github.io/tutorials/2/shizuku-scrshot.jpg",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Muhammad Uzair Shah"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "UzairTechGuide",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://uzair-902.github.io/favicon.ico"
+        }
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step1",
+          "name": "Download Prerequisites",
+          "text": "Download the Termux App from F-droid and the Shizuku App from the Google Play Store on your Android device."
+        },
+        {
+          "@type": "HowToStep",
+          "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step2",
+          "name": "Use Shizuku in Terminal Apps",
+          "text": "Open Shizuku, set it up, and tap on the option titled Use Shizuku in Terminal Apps."
+        },
+        {
+          "@type": "HowToStep",
+          "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step3",
+          "name": "Export rish Files",
+          "text": "Click the Export Files button and save the rish script files into a designated folder inside your storage."
+        },
+        {
+          "@type": "HowToStep",
+          "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step4",
+          "name": "Edit Package Profile Name",
+          "text": "Open the rish file with any text editor."
+        },
+        {
+          "@type": "HowToStep",
+          "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step5",
+          "name": "Replace PKG Configuration",
+          "text": "Find and replace the placeholder text PKG inside the script with com.termux."
+        },
+        {
+          "@type": "HowToStep",
+          "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step6",
+          "name": "Copy Files into Home Workspace",
+          "text": "Open Termux and copy the edited rish folder directly into your internal app terminal home directory."
+        },
+        {
+          "@type": "HowToStep",
+          "url": "https://uzair-902.github.io/tutorials/2/How-To-Connect-Shizuku-To-Termux.html#step7",
+          "name": "Execute rish Shell Script",
+          "text": "Change directories into the sh folder and execute sh rish to link the environments."
+        }
+      ]
+    }
+    </script>
 
-
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UzairTechGuide — How to Connect Shizuku To Termux on Android </title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   UzairTechGuide - How To Connect Shizuku App to Ternux 
+   UzairTechGuide Core Global Stylesheet
    ============================================================ */
-:root{
-  --bg-dark:#0f1113;
-  --panel-dark:#15181a;
-  --text-light:#eef1f3;
-  --muted-light:#bfc7cb;
-  --accent:#ff7a2d;
-  --accent-2:#1db954;
-  --bg-light:#f6f7f8;
-  --panel-light:#ffffff;
-  --text-dark:#111214;
-  --muted-dark:#6b6f73;
-  --radius-md:14px;
-  --shadow-dark:0 8px 24px rgba(3,6,8,0.1);
-  --shadow-light:0 8px 24px rgba(16,24,32,0.06);
-  --transition:220ms cubic-bezier(.2,.9,.3,1);
-  --max-width:1100px;
+:root {
+  --bg-dark: #0f1113;
+  --panel-dark: #15181a;
+  --text-light: #ffffff;
+  --muted-light: #bfc7cb;
+  --accent: #ff7a2d;
+  --accent-2: #1db954;
+
+  --bg-light: #f6f7f8;
+  --panel-light: #ffffff;
+  --text-dark: #000000;
+  --muted-dark: #6b6f73;
+
+  --radius-md: 14px;
+  --shadow-dark: 0 8px 24px rgba(3,6,8,0.2);
+  --shadow-light: 0 8px 24px rgba(16,24,32,0.06);
+  --transition: 220ms cubic-bezier(.2,.9,.3,1);
+  --max-width: 1100px;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:"Roboto",system-ui,Arial;
@@ -121,7 +181,7 @@ body.light .hamburger span{background:var(--accent-2);}
 
 /* ===== side nav ===== */
 .side-nav{
-  position:fixed;top:0;right:-320px;
+  position:fixed;top:0;right:-325px;
   width:300px;height:100vh;
   background:var(--panel-dark);
   padding:70px 20px;transition:right .3s;
@@ -150,26 +210,12 @@ body.light .side-links a:hover{background:rgba(0,0,0,0.05);color:var(--accent-2)
 .overlay.show{opacity:1;pointer-events:auto;}
 body.light .overlay{background:rgba(0,0,0,0.25);}
 
-/* ===== main ===== */
+/* ===== main contents layout ===== */
 main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
-.content-placeholder{
-  background:rgba(255,255,255,0.03);
-  border-radius:12px;padding:30px;
-  min-height:60vh;
-  box-shadow:0 4px 20px rgba(0,0,0,0.25);
-  color:var(--muted-light);
-}
-body.light .content-placeholder{background:#fff;color:var(--muted-dark);}
-
-/* ===== footer ===== */
-.footer{text-align:center;padding:25px;color:var(--muted-light);}
-body.light .footer{color:var(--muted-dark);}
 </style>
 </head>
 
-
-
-<!-- Google tag (gtag.js) -->
+<!-- Google Analytics Tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4XLYPLRZ2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -178,12 +224,8 @@ body.light .footer{color:var(--muted-dark);}
   gtag('config', 'G-H4XLYPLRZ2');
 </script>
 
-
-
-
 <body>
 
-<!-- controls -->
 <div class="top-controls">
   <button id="theme-toggle" class="control-btn" title="Toggle theme" aria-pressed="false" aria-label="Toggle color theme"></button>
   <button id="hamburger-btn" class="hamburger" title="Menu" aria-label="Open menu" aria-expanded="false">
@@ -192,10 +234,8 @@ body.light .footer{color:var(--muted-dark);}
   </button>
 </div>
 
-<!-- header -->
 <header class="header">UzairTechGuide</header>
 
-<!-- side nav -->
 <aside id="side-nav" class="side-nav" aria-hidden="true">
   <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
   <nav class="side-links" role="navigation">
@@ -205,32 +245,16 @@ body.light .footer{color:var(--muted-dark);}
     <a href="/contact.html">Contact</a>
     <a href="/privacy.html">Privacy Policy</a>
     <a href="/terms.html">Terms Of Use</a>
-     <a href="https://youtube.com/@muhammduzairshah23">YouTube Channel</a>
+    <a href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener">YouTube Channel</a>
   </nav>
 </aside>
 
 <div id="overlay" class="overlay" hidden></div>
 
-
-
-
-
-
-
-<!-- ================================================= -->
-
-
-
-
-
-
-
-
-
+<!-- Main Tutorial Document Article Space -->
 <main class="tutorial-container" aria-labelledby="tut-title">
 
   <style>
-    /* --- tutorial: local scoped styles --- */
     :root{
       --card-bg-dark: rgba(255,255,255,0.03);
       --card-bg-light: #ffffff;
@@ -238,31 +262,27 @@ body.light .footer{color:var(--muted-dark);}
       --text-light: #eef1f3;
       --muted-dark: #6b6f73;
       --muted-light: #bfc7cb;
-      --accent: #1db954;
-      --yt-red: #FF0000;
+      --accent: #ff7a2d;
+      --accent-green: #1db954;
       --radius: 12px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
     }
 
-    /* container adapts to site theme (dark by default) */
     .tutorial-container{
       max-width:980px;
       margin:36px auto;
       padding:28px;
-      font-family: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: "Roboto", system-ui, -apple-system, sans-serif;
       color: var(--text-light);
       -webkit-font-smoothing:antialiased;
-      line-height:1.6;
+      line-height:1.65;
     }
-    /* light theme overrides if site toggles body.light */
-    body.light .tutorial-container{
-      color: var(--text-dark);
-    }
+    body.light .tutorial-container{ color: var(--text-dark); }
 
     .card{
       background: var(--card-bg-dark);
       border-radius: var(--radius);
-      padding:20px;
+      padding:24px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.18);
       color: inherit;
     }
@@ -273,250 +293,196 @@ body.light .footer{color:var(--muted-dark);}
 
     h1#tut-title{
       font-family: "Montserrat", sans-serif;
-      font-size: clamp(1.4rem, 2.4vw, 1.9rem);
-      margin:0 0 12px;
-      letter-spacing:-0.01em;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      margin: 0 0 14px;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
     }
 
-    p.lead{ margin:12px 0 18px; color: rgba(255,255,255,0.85); }
-    body.light p.lead{ color: rgba(0,0,0,0.75); }
+    p.lead{ margin:12px 0 18px; font-size: 1.05rem; color: rgba(255,255,255,0.9); }
+    body.light p.lead{ color: rgba(0,0,0,0.8); }
 
     .video-wrap{
       position:relative;
       width:100%;
       padding-bottom:56.25%;
-      margin:18px 0;
+      margin:22px 0;
       border-radius:10px;
       overflow:hidden;
-      background:rgba(0,0,0,0.06);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
-    .video-wrap iframe{
-      position:absolute;inset:0;width:100%;height:100%;border:0;
-    }
+    .video-wrap iframe{ position:absolute;inset:0;width:100%;height:100%;border:0; }
 
-    h2.section-title{ font-size:1.05rem; margin:18px 0 8px; font-weight:700; }
-    ol, ul{ margin:8px 0 14px 1.25rem; }
+    h2.section-title{ font-size:1.15rem; margin:24px 0 10px; font-weight:700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--accent); }
+    body.light h2.section-title{ color: var(--accent); }
+    
+    ol, ul{ margin:10px 0 16px 1.25rem; }
     li{ margin:8px 0; }
+    a{ color: #33aaff; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
 
-    figure{ margin:12px 0; text-align:center; }
+    figure{ margin:18px 0; text-align:center; }
     figure img{
       width:100%;
       max-width:820px;
       border-radius:10px;
       display:block;
       margin:8px auto;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
-    figcaption{ font-size:0.92rem; opacity:0.75; margin-top:6px; }
+    figcaption{ font-size:0.92rem; opacity:0.75; margin-top:6px; font-style: italic; }
 
-    /* code blocks */
+    /* Code block wrappers with interactive utility elements */
     .code-block{
       position:relative;
-      margin:14px 0;
+      margin:16px 0;
       border-radius:10px;
-      overflow:auto;
-      padding:12px 14px;
-      background: rgba(0,0,0,0.06);
+      overflow:hidden;
+      padding:14px 16px;
+      background: #090a0c;
+      border: 1px solid rgba(255,255,255,0.05);
     }
-    body.light .code-block{ background: linear-gradient(180deg,#f6f8fb,#ffffff); box-shadow: 0 6px 18px rgba(16,24,32,0.04); }
-    .code-block pre{ margin:0; font-family: var(--mono); font-size:0.95rem; white-space:pre-wrap; word-break:break-word; color: inherit; }
-    .code-block code{ font-family: var(--mono); }
+    body.light .code-block{ 
+      background: #f4f6f9; 
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .code-block pre{ margin:0; font-family: var(--mono); font-size:0.95rem; white-space:pre-wrap; word-break:break-all; color: #eef1f3; }
+    body.light .code-block pre{ color: #111214; }
 
-
-
-    body.light .copy-btn{ background: rgba(0,0,0,0.06); color: #111; box-shadow: 0 4px 12px rgba(16,24,32,0.06); }
-    .copy-btn:active{ transform: translateY(1px); }
-    .copy-btn.copied{ background: #1db954; color:#fff; }
-
-    .copy-status{
+    .copy-btn{
       position:absolute;
-      top:12px;
-      right:60px;
-      padding:6px 8px;
-      border-radius:8px;
-      font-size:0.84rem;
-      background: rgba(0,0,0,0.6);
-      color:#fff;
-      opacity:0;
-      transform: translateY(-6px);
-      transition: opacity .18s, transform .18s;
-      pointer-events:none;
-      white-space:nowrap;
+      top:10px;
+      right:10px;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius:6px;
+      cursor:pointer;
+      transition: background .15s, transform .1s;
     }
-    body.light .copy-status{ background: rgba(0,0,0,0.06); color:var(--text-dark); }
-    .copy-status.show{ opacity:1; transform: translateY(0); }
+    body.light .copy-btn{ background: rgba(0,0,0,0.06); color: #111; }
+    .copy-btn:hover{ background: var(--accent-green); color: #fff; }
+    .copy-btn:active{ transform: translateY(1px); }
 
-    /* YouTube CTA (solid black bg) */
+    .note{ 
+      font-size:0.96rem; 
+      padding: 12px;
+      background: rgba(255,122,45,0.1); 
+      border-left: 4px solid var(--accent);
+      border-radius: 4px;
+      margin: 18px 0; 
+    }
+
     .youtube-cta{
       display:inline-flex;
-      gap:10px;
+      gap:12px;
       align-items:center;
-      margin-top:18px;
-      padding:12px 14px;
-      background:#000;
+      margin-top:20px;
+      padding:12px 18px;
+      background:#ff0000;
       color:#fff;
       border-radius:10px;
       text-decoration:none;
       font-weight:700;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      transition: transform 0.2s, background-color 0.2s;
     }
-    .youtube-cta svg{ flex:0 0 auto; width:40px;height:24px; }
+    .youtube-cta:hover{ transform: translateY(-2px); background: #cc0000; text-decoration: none; }
+    .youtube-cta svg{ width:30px; height:24px; fill: currentColor; }
 
-    /* small */
-    .note{ font-size:0.96rem; opacity:0.9; margin-top:10px; }
-    a { color: #33aaff; }
     @media(max-width:720px){
-      .tutorial-container{ padding:18px; margin:18px auto; }
-      .copy-btn{ width:36px;height:32px; top:8px; right:8px; }
-      .copy-status{ top:10px; right:46px; font-size:.78rem; }
+      .tutorial-container{ padding:16px; margin:10px auto; }
+      h1#tut-title{ font-size: 1.4rem; }
     }
   </style>
 
   <article class="card" role="article">
 
-    <h1 id="tut-title">How to Connect Shizuku App with Termux To Run Adb commands</h1>
+    <h1 id="tut-title">How to Connect Shizuku App with Termux to Run ADB Commands</h1>
 
-    <p class="lead">In this Tutorial, you will Be told how you can connect the <a href="https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api" target="_blank" rel="noopener">Shizuku App</a> to The Termux Terminal App On Your Android Phone so that you can Run Adb commands on your phone Locally all without a PC or Root. Let's Go!</p>
+    <p class="lead">In this tutorial, you will discover how to seamlessly pair the <a href="https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api" target="_blank" rel="noopener">Shizuku App</a> into your local <a href="https://f-droid.org/en/packages/com.termux/" target="_blank" rel="noopener">Termux Terminal</a> workspace. This setup enables you to run full ADB commands locally on Android completely standalone—no PC or root permissions required!</p>
 
-    <!-- responsive YouTube embed: replace `example_video_id` with the real id -->
-    <div class="video-wrap" aria-hidden="false">
+    <div class="video-wrap">
       <iframe
         src="https://www.youtube.com/embed/e9yYP_5pFy0"
-        title="YouTube Tutorial"
+        title="Shizuku and Termux ADB Connection Video Walkthrough Tutorial Guide"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen loading="lazy"></iframe>
     </div>
 
+    <h2 class="section-title" id="step1">Step 1: Get the Apps Installed</h2>
+    <p>Before beginning, download and install the latest versions of the <strong>Termux App (via F-Droid)</strong> and the official <strong>Shizuku App</strong> onto your mobile device.</p>
 
-    <h2 class="section-title">STEP 1:</h2>
-    <p>Before Starting, Make sure you have Downloaded <a href="https://f-droid.org/en/packages/com.termux/" target="_blank" rel="noopener"> Termux App From F-droid</a> and <a href="https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api" target="_blank" rel="noopener">Shizuku App</a> On your Android Phone.</p>
-
-
-    <h2 class="section-title">STEP 2:</h2>
-    <p>Open the Shizuku App, And Setup it if you haven't (<a href="unavailable" target="_blank" rel="noopener">Shizuku Setup Tutorial</a>). Then Click on the third Option "Use Shizuku in Terminal Apps".</p>
+    <h2 class="section-title" id="step2">Step 2: Activate Shizuku Mode</h2>
+    <p>Launch the Shizuku app and complete its base wireless debugging setup configuration. Once running, tap on the option titled <strong>"Use Shizuku in terminal apps"</strong>.</p>
+    
     <figure>
-      <img src="shizuku-scrshot.jpg" alt="Shizuku: Use in Terminal Apps">
-      <figcaption>Shizuku: select "Use Shizuku in terminal apps".</figcaption>
+      <img src="shizuku-scrshot.jpg" alt="Selecting Use Shizuku in terminal apps option configuration panel inside the app dashboard">
+      <figcaption>Navigate into the advanced Shizuku dashboard interface and opt into the internal app environment.</figcaption>
     </figure>
 
-
-    <h2 class="section-title">STEP 3:</h2>
-    <p>First, Click the "Export Files" Button, Export files to any where you want. You will find two files, <code>rish</code> and <code>rish_shizuku.dex</code>. I recommend you to save these files in a "sh" folder in the "Documents" folder in main storage of your phone.</p>
+    <h2 class="section-title" id="step3">Step 3: Export Internal Script Profiles</h2>
+    <p>Tap the <strong>"Export Files"</strong> button execution flag. Pick a local directory environment to write your framework packages. This process yields two separate core control files: <code>rish</code> and <code>rish_shizuku.dex</code>. It is highly recommended to host these assets safely inside a targeted folder named <code>/sh/</code> located directly inside your phone storage's standard <code>Documents</code> partition maps.</p>
+    
     <figure>
-      <img src="SAF-scrshot.jpg" alt="Exported files in Documents folder">
-      <figcaption>Files exported: <code>rish</code> + <code>rish_shizuku.dex</code></figcaption>
+      <img src="SAF-scrshot.jpg" alt="Files successfully extracted inside the Documents manager platform system directory">
+      <figcaption>Verify that your output directory actively lists both the <code>rish</code> and <code>rish_shizuku.dex</code> execution assets.</figcaption>
     </figure>
 
-    <h2 class="section-title">STEP 4:</h2>
-    <p>Then, use any text editor to open and edit rish.</p>
+    <h2 class="section-title" id="step4">Step 4: Access File Architecture Paths</h2>
+    <p>Launch a secure plain-text manager profile tools suite on your handset and open the raw exported <code>rish</code> target script for runtime parameter updates.</p>
 
-    <h2 class="section-title">STEP 5:</h2>
-    <p>Now you should find and replace PKG with <code>com.termux</code> (com.termux is the package name of Termux).</p>
+    <h2 class="section-title" id="step5">Step 5: Adjust Dynamic Package Parameters</h2>
+    <p>Locate the specific target token placeholder values labeled as <code>PKG</code> string fields inside the execution scripts, and replace them completely with <code>com.termux</code>.</p>
+    
     <figure>
-      <img src="rish-scrshot.jpg" alt="Editing rish: replace PKG with com.termux">
-      <figcaption>Replace <code>PKG</code> with <code>com.termux</code> inside <code>rish</code>.</figcaption>
+      <img src="rish-scrshot.jpg" alt="Replacing placeholder configurations with com.termux values via localized text compiler profiles">
+      <figcaption>Replace the default <code>PKG</code> template labels configuration string explicitly with the targeted <code>com.termux</code> identifier tag value.</figcaption>
     </figure>
 
-    <h2 class="section-title">STEP 5:</h2>
-    <p>Now Remember the path of Files That you exported from Shizuku and Open termux app. Type the following command:</p>
+    <h2 class="section-title" id="step6">Step 6: Import Variables into Terminal Environments</h2>
+    <p>Launch your local Termux environment setup dashboard view, paste the command script string listed directly below into your console array inputs, and press Enter:</p>
 
-    <div class="code-block" data-copy>
-      <pre><code> cp -r "/sdcard/documents/sh" "/data/data/com.termux/files/home/" </code></pre>
+    <div class="code-block">
+      <button class="copy-btn">Copy</button>
+      <pre><code>cp -r "/sdcard/documents/sh" "/data/data/com.termux/files/home/"</code></pre>
     </div>
 
+    <h2 class="section-title" id="step7">Step 7: Launch Local ADB Session Hooks</h2>
+    <p>Point your current terminal scope paths target maps straight into your newly mapped workspace subfolder by inputting a standard change directory declaration command string, then boot your active connection:</p>
 
-    <h2 class="section-title">STEP 6:</h2>
-    <p>Now First move to Sh Directory by <code> cd /sh </code>, then Finally Type this Command in termux to start the Adb via Shizuku:</p>
-
-    <div class="code-block" data-copy>
-      <pre><code>sh rish
-</code></pre>
+    <div class="code-block">
+      <button class="copy-btn">Copy</button>
+      <pre><code>cd ~/sh && sh rish</code></pre>
     </div>
 
     <figure>
-      <img src="tmux-scrshot.jpg" alt="Termux running sh rish">
-      <figcaption>This will copy the Shizuku Files from the Documents folder to Your Termux App. Then Run <code>sh rish</code> - Shizuku service must be paired and running.</figcaption>
+      <img src="tmux-scrshot.jpg" alt="Active shell interaction maps output displays operating seamlessly within structural parameters">
+      <figcaption>This transfers the working binary libraries context layers smoothly, providing terminal root privileges directly.</figcaption>
     </figure>
 
-    <p class="note"><strong>Note:</strong> Shizuku Service must be Paired and Running Properly in Order to Run the Above Command Successfully.</p>
+    <div class="note">
+      <strong>Important Operations Notice:</strong> The parent standalone background Shizuku operational process service threads environment must remain paired, active, and fully configured in the background to ensure terminal sessions function correctly.
+    </div>
 
-
-    <p>Hope This Tutorial Was Helpful For You! </p>
-    <p>Check our <a href="/tutorials/tutorials.html" style="color:#1E90FF;">other tutorials</a> for more guides.</p>
-    <p style="margin-top:18px;">If the tutorial helped you, support the channel:</p>
-    <a class="youtube-cta" href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener noreferrer" aria-label="Open YouTube channel">
-      <!-- big YouTube SVG -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#FF0000" d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.112C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.392.574a2.99 2.99 0 0 0-2.106 2.112A31.554 31.554 0 0 0 0 12a31.554 31.554 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.112C4.209 20.5 12 20.5 12 20.5s7.79 0 9.392-.574a2.99 2.99 0 0 0 2.106-2.112A31.554 31.554 0 0 0 24 12a31.554 31.554 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    <p>We hope this technical connection configuration roadmap guide helped optimize your development process workflows!</p>
+    <p>Be sure to browse through our official <a href="/tutorials/tutorials.html">Android Tutorials Index</a> for deeper architecture modification strategies.</p>
+    
+    <p style="margin-top:22px;">If you found value in this deep dive, subscribe for instant notifications on video releases:</p>
+    
+    <a class="youtube-cta" href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the official channel on YouTube">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.112C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.392.574a2.99 2.99 0 0 0-2.106 2.112A31.554 31.554 0 0 0 0 12a31.554 31.554 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.112C4.209 20.5 12 20.5 12 20.5s7.79 0 9.392-.574a2.99 2.99 0 0 0 2.106-2.112A31.554 31.554 0 0 0 24 12a31.554 31.554 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
       </svg>
-      <span style="font-size:1rem;">YouTube Channel</span>
+      <span>Subscribe on YouTube</span>
     </a>
 
   </article>
-
-
-
-  <script>
-    (function(){
-      // helper: safe text copy with fallback
-      function safeCopy(text){
-        if (!text) return Promise.reject('no text');
-        if (navigator.clipboard && navigator.clipboard.writeText){
-          return navigator.clipboard.writeText(text);
-        }
-        // fallback for older browsers: textarea + execCommand
-        return new Promise((resolve, reject) => {
-          try {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            // avoid zoom on mobile
-            ta.style.position = 'fixed';
-            ta.style.left = '-9999px';
-            ta.style.top = '0';
-            document.body.appendChild(ta);
-            ta.focus();
-            ta.select();
-            const ok = document.execCommand('copy');
-            document.body.removeChild(ta);
-            if (ok) resolve();
-            else reject('execCommand failed');
-          } catch (e){
-            reject(e);
-          }
-        });
-      }
-
-
-
-
-      // make sure embedded iframe respects reduced motion settings
-      try {
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          document.querySelectorAll('.video-wrap iframe').forEach(f => {
-            f.setAttribute('loading','lazy');
-          });
-        }
-      } catch(e){}
-    })();
-  </script>
-
 </main>
 
-
-
-
-
-
-
-
-<!-- ============================================ -->
-
-
-
-
-
-
-<!-- footer -->
 <footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <small>&copy; 2026 UzairTechGuide</small>
@@ -529,8 +495,7 @@ body.light .footer{color:var(--muted-dark);}
 </footer>
 
 <script>
-
-
+// Theme management engine logic blocks
 (function(){
   const THEME_KEY = 'utg_theme';
   const bodyEl = document.body;
@@ -540,23 +505,19 @@ body.light .footer{color:var(--muted-dark);}
   const overlay = document.getElementById('overlay');
   const closeBtn = document.getElementById('side-close');
 
-  // tiny inline SVGs for reliability
   const SVG = {
-    moon: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
-    sun:  '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
+    moon: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+    sun:  '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
   };
 
-  // safe setter for theme: 'dark' | 'light'
   function applyTheme(mode){
     if(mode === 'light'){
       bodyEl.classList.add('light');
-      bodyEl.classList.remove('dark');
       themeBtn.innerHTML = SVG.sun;
       themeBtn.title = 'Switch to dark';
       themeBtn.setAttribute('aria-pressed','true');
     } else {
       bodyEl.classList.remove('light');
-      bodyEl.classList.add('dark');
       themeBtn.innerHTML = SVG.moon;
       themeBtn.title = 'Switch to light';
       themeBtn.setAttribute('aria-pressed','false');
@@ -564,32 +525,19 @@ body.light .footer{color:var(--muted-dark);}
     try { localStorage.setItem(THEME_KEY, mode); } catch(e){}
   }
 
-  // initialize theme (saved -> prefers -> default dark)
   (function initTheme(){
     let saved = null;
-    try { saved = localStorage.getItem(THEME_KEY); } catch(e) { saved = null; }
+    try { saved = localStorage.getItem(THEME_KEY); } catch(e) {}
     if (!saved) {
-      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-      saved = prefersLight ? 'light' : 'dark';
+      saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
     }
     applyTheme(saved);
   })();
 
-  // toggle handler
   themeBtn.addEventListener('click', () => {
-    const current = bodyEl.classList.contains('light') ? 'light' : 'dark';
-    applyTheme(current === 'light' ? 'dark' : 'light');
+    applyTheme(bodyEl.classList.contains('light') ? 'dark' : 'light');
   });
 
-  // keyboard support: Enter/Space also toggles (button already does, but keep explicit)
-  themeBtn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      themeBtn.click();
-    }
-  });
-
-  // hamburger / side nav behavior (untouched logic, just robust)
   function openSide(){
     burger.classList.add('open');
     nav.classList.add('open');
@@ -597,8 +545,6 @@ body.light .footer{color:var(--muted-dark);}
     overlay.hidden = false;
     burger.setAttribute('aria-expanded','true');
     nav.setAttribute('aria-hidden','false');
-    const first = nav.querySelector('.side-links a');
-    if(first) first.focus();
   }
   function closeSide(){
     burger.classList.remove('open');
@@ -607,7 +553,6 @@ body.light .footer{color:var(--muted-dark);}
     setTimeout(()=> overlay.hidden = true, 220);
     burger.setAttribute('aria-expanded','false');
     nav.setAttribute('aria-hidden','true');
-    try { burger.focus(); } catch(e){}
   }
   burger.addEventListener('click', (ev) => {
     ev.stopPropagation();
@@ -615,37 +560,47 @@ body.light .footer{color:var(--muted-dark);}
   });
   closeBtn.addEventListener('click', closeSide);
   overlay.addEventListener('click', closeSide);
-  document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && nav.classList.contains('open')) closeSide(); });
-  document.addEventListener('click', (e)=> { if(!nav.contains(e.target) && !burger.contains(e.target) && nav.classList.contains('open')) closeSide(); });
-
-  // defensive: ensure overlay exists (if someone removed it)
-  if (!document.getElementById('overlay')) {
-    const ov = document.createElement('div');
-    ov.id = 'overlay';
-    ov.className = 'overlay';
-    ov.hidden = true;
-    document.body.appendChild(ov);
-  }
 })();
+
+// Modern, robust Clipboard engine copy-utility script integration logic
+document.querySelectorAll('.code-block').forEach(block => {
+  const btn = block.querySelector('.copy-btn');
+  const code = block.querySelector('code');
+  if(btn && code) {
+    btn.addEventListener('click', () => {
+      const textToCopy = code.innerText.trim();
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      }).catch(() => {
+        // Fallback execution logic pathway for older tracking systems browsers
+        const area = document.createElement('textarea');
+        area.value = textToCopy;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');
+        document.body.removeChild(area);
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    });
+  }
+});
 </script>
 
-
-
-<!-- Load side nav from external file -->
+<!-- Asynchronous Global Header Nav-Link Injection Engine Architecture -->
 <script>
 fetch('/components/nav.html')
-  .then(r => r.text())
-  .then(html => {
-    // Find the .side-links div and replace its content
-    const sideLinks = document.querySelector('.side-links');
-    if (sideLinks) sideLinks.innerHTML = html;
-    
-    // Re-initialize nav after content loads
-    if (window.initNavigation) window.initNavigation();
+  .then(response => {
+    if (!response.ok) throw new Error('Network structure failure event handled.');
+    return response.text();
   })
-  .catch(err => console.warn('Failed to load nav:', err));
+  .then(html => {
+    const sideLinksContainer = document.querySelector('.side-links');
+    if (sideLinksContainer) sideLinksContainer.innerHTML = html;
+  })
+  .catch(err => console.warn('Nav template fallback used instead of async injection component:', err));
 </script>
-
 
 </body>
 </html>
