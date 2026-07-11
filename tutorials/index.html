@@ -298,12 +298,6 @@ body.light .tutorial-meta{ color:var(--muted-dark); }
 <aside id="side-nav" class="side-nav" aria-hidden="true">
   <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
   <nav class="side-links" role="navigation">
-    <a href="/">Home</a>
-    <a href="/tutorials/tutorials.html">Tutorials</a>
-    <a href="/tools/">Tools</a>
-    <a href="/about.html">About</a>
-    <a href="/contact.html">Contact</a>
-    <a href="https://youtube.com/@muhammduzairshah23">YouTube Channel</a>
   </nav>
 </aside>
 
@@ -641,6 +635,21 @@ body.light .tutorial-meta{ color:var(--muted-dark); }
     document.body.appendChild(ov);
   }
 })();
+</script>
+
+<!-- Load side nav from external file -->
+<script>
+fetch('/components/nav.html')
+  .then(r => r.text())
+  .then(html => {
+    // Find the .side-links div and replace its content
+    const sideLinks = document.querySelector('.side-links');
+    if (sideLinks) sideLinks.innerHTML = html;
+    
+    // Re-initialize nav after content loads
+    if (window.initNavigation) window.initNavigation();
+  })
+  .catch(err => console.warn('Failed to load nav:', err));
 </script>
 
 </body>
