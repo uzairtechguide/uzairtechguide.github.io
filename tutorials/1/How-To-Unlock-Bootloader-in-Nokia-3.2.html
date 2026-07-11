@@ -602,5 +602,22 @@ fastboot flashing lock</pre>
 })();
 </script>
 
+
+<!-- Load side nav from external file -->
+<script>
+fetch('/components/nav.html')
+  .then(r => r.text())
+  .then(html => {
+    // Find the .side-links div and replace its content
+    const sideLinks = document.querySelector('.side-links');
+    if (sideLinks) sideLinks.innerHTML = html;
+    
+    // Re-initialize nav after content loads
+    if (window.initNavigation) window.initNavigation();
+  })
+  .catch(err => console.warn('Failed to load nav:', err));
+</script>
+
+
 </body>
 </html>
