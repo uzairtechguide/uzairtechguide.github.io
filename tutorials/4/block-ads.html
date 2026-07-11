@@ -180,15 +180,25 @@ body.light .footer{color:var(--muted-dark);}
 <aside id="side-nav" class="side-nav" aria-hidden="true" role="navigation">
   <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
   <nav class="side-links" role="menu">
-    <a href="/index.html" role="menuitem">Home</a>
-    <a href="/tutorials/tutorials.html" role="menuitem">Tutorials</a>
-    <a href="/about.html" role="menuitem">About</a>
-    <a href="/contact.html" role="menuitem">Contact</a>
-    <a href="/privacy.html">Privacy Policy</a>
-    <a href="/terms.html">Terms Of Use</a>
-    <a href="https://m.youtube.com/@MuhammdUzairShah23" role="menuitem" target="_blank" rel="noopener">YouTube Channel</a>
+   <!-- Will be Imported from /components/nav.html -->
   </nav>
 </aside>
+
+<!-- Load side nav from external file -->
+<script>
+fetch('/components/nav.html')
+  .then(r => r.text())
+  .then(html => {
+    // Find the .side-links div and replace its content
+    const sideLinks = document.querySelector('.side-links');
+    if (sideLinks) sideLinks.innerHTML = html;
+    
+    // Re-initialize nav after content loads
+    if (window.initNavigation) window.initNavigation();
+  })
+  .catch(err => console.warn('Failed to load nav:', err));
+</script>
+
 
 <div id="overlay" class="overlay" hidden></div>
 
