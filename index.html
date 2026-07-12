@@ -34,8 +34,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
   <!-- ═══════════════════════════════════════════════
-       ALL STYLES — styles.css pasted verbatim below,
-       followed by page-specific additions only
+       styles.css 
   ════════════════════════════════════════════════ -->
   <style>
 /* ============================================================
@@ -407,17 +406,44 @@ body.light .card p{ color:var(--muted-dark); }
   padding:28px 20px;
   text-align:center;
   color:var(--muted-light);
+  border-top: 2px solid rgba(255,255,255,0.1);
+  margin-top: 20px;
 }
 .footer-inner{
   max-width:var(--max-width);
   margin:0 auto;
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  align-items:center;
-  flex-wrap:wrap;
+  display:inline-block;
+  background: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
-body.light .footer{ color:var(--muted-dark); }
+body.light .footer{
+  color:var(--muted-dark);
+  border-top-color: rgba(16,24,32,0.1);
+}
+body.light .footer-inner{
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(16,24,32,0.08);
+  box-shadow: 0 4px 12px rgba(16,24,32,0.06);
+}
+.footer a {
+  color: #00a8ff;
+  text-decoration: none;
+  margin: 0 8px;
+  font-weight: 500;
+  transition: color .18s;
+}
+body.light .footer a {
+  color: var(--accent-2);
+}
+.footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+body.light .footer a:hover {
+  color: var(--accent);
+}
 
 /* -------------------------
    Reveal animation
@@ -494,33 +520,7 @@ main {
   gap: 15px;
 }
 
-.footer {
-  background: inherit;
-  border-top: 2px solid rgba(255,255,255,0.1);
-  text-align: center;
-  padding: 20px 10px;
-  font-family: "Poppins", sans-serif;
-  color: #ccc;
-  margin-top: 20px;
-  backdrop-filter: blur(6px);
-}
-.footer-inner {
-  display: inline-block;
-  background: rgba(0,0,0,0.4);
-  border-radius: 12px;
-  padding: 10px 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
-.footer a {
-  color: #00a8ff;
-  text-decoration: none;
-  margin: 0 8px;
-  font-weight: 500;
-}
-.footer a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
+
 
 /* A-ADS sticky bottom bar */
 #aads-sticky-wrap {
@@ -593,11 +593,11 @@ main {
   <nav id="side-nav" class="side-nav" aria-hidden="true" aria-label="Site navigation">
     <button id="side-close" class="side-close" aria-label="Close navigation">✕</button>
     <div class="side-links">
-      <a href="/">Home</a>
+      <a href="#home">Home</a>
       <a href="/tutorials/">Tutorials</a>
       <a href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener">YouTube</a>
-      <a href="contact.html">Contact</a>
-      <a href="about.html">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/about/">About</a>
     </div>
     <p class="side-note">UzairTechGuide &copy; 2026</p>
   </nav>
@@ -1057,6 +1057,7 @@ document.addEventListener('click', (e) => {
 
 /* ========== End of script ========== */
   </script>
+
 <!-- Load side nav from external file -->
 <script>
 fetch('/components/nav.html')
@@ -1065,11 +1066,22 @@ fetch('/components/nav.html')
     // Find the .side-links div and replace its content
     const sideLinks = document.querySelector('.side-links');
     if (sideLinks) sideLinks.innerHTML = html;
-    
+
     // Re-initialize nav after content loads
     if (window.initNavigation) window.initNavigation();
   })
   .catch(err => console.warn('Failed to load nav:', err));
+</script>
+
+<!-- Load footer from external file -->
+<script>
+fetch('/components/footer.html')
+  .then(r => r.text())
+  .then(html => {
+    const footerInner = document.querySelector('.footer-inner');
+    if (footerInner) footerInner.innerHTML = html;
+  })
+  .catch(err => console.warn('Failed to load footer:', err));
 </script>
 
 </body>
