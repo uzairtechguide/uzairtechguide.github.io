@@ -126,8 +126,8 @@ main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
 body.light .content-placeholder{background:#fff;color:var(--muted-dark);}
 
 /* ===== footer ===== */
-.footer{text-align:center;padding:25px;color:var(--muted-light);}
-body.light .footer{color:var(--muted-dark);}
+.footer{text-align:center;padding:25px;color:#0ea5e9;}
+body.light .footer{color:var(--accent-2);}
 </style>
 </head>
 
@@ -162,7 +162,11 @@ body.light .footer{color:var(--muted-dark);}
 <aside id="side-nav" class="side-nav" aria-hidden="true">
   <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
   <nav class="side-links" role="navigation">
-<!-- will be automatically added -->
+    <a href="#home">Home</a>
+    <a href="tutorials/tutorials.html">Tutorials</a>
+    <a href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener">YouTube</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
   </nav>
 </aside>
 
@@ -172,7 +176,7 @@ body.light .footer{color:var(--muted-dark);}
 <main>
   <div class="content-placeholder">
     <h1>About Me</h1>
-    <p>Hey, I’m <span class="highlight">Uzair Shah</span>, a tech nerd from Pakistan. Ever since I got my first phone, I’ve been obsessed with figuring out how gadgets work, from fixing phones and PCs to building small electronics and coding in Python. On this website and my YouTube Channel, I share everything I explore: tutorials, DIY experiments, and tips to make tech less intimidating and more fun. I want to show that anyone can dive into tech, tinker, and actually create things, no matter your age or experience.</p>
+    <p>Hey, I'm <span class="highlight">Uzair Shah</span>, a tech nerd from Pakistan. Ever since I got my first phone, I've been obsessed with figuring out how gadgets work, from fixing phones and PCs to building small electronics and coding in Python. On this website and my YouTube Channel, I share everything I explore: tutorials, DIY experiments, and tips to make tech less intimidating and more fun. I want to show that anyone can dive into tech, tinker, and actually create things, no matter your age or experience.</p>
   </div>
 </main>
 
@@ -186,7 +190,9 @@ body.light .footer{color:var(--muted-dark);}
 
 <!-- footer -->
 <footer class="footer">
-  <small>&copy; 2026 UzairTechGuide</small>
+  <div class="footer-inner">
+    <small>&copy; 2026 UzairTechGuide</small>
+  </div>
 </footer>
 
 <script>
@@ -294,21 +300,28 @@ body.light .footer{color:var(--muted-dark);}
   }
 })();
 </script>
+
 <!-- Load side nav from external file -->
 <script>
 fetch('/components/nav.html')
   .then(r => r.text())
   .then(html => {
-    // Find the .side-links div and replace its content
     const sideLinks = document.querySelector('.side-links');
     if (sideLinks) sideLinks.innerHTML = html;
-    
-    // Re-initialize nav after content loads
-    if (window.initNavigation) window.initNavigation();
   })
   .catch(err => console.warn('Failed to load nav:', err));
 </script>
 
+<!-- Load footer from external file -->
+<script>
+fetch('/components/footer.html')
+  .then(r => r.text())
+  .then(html => {
+    const footerInner = document.querySelector('.footer-inner');
+    if (footerInner) footerInner.innerHTML = html;
+  })
+  .catch(err => console.warn('Failed to load footer:', err));
+</script>
 
 </body>
 </html>
