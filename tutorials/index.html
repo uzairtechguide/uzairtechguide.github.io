@@ -267,6 +267,7 @@ body.light .tutorial-item{
   box-shadow: 0 6px 18px rgba(16,24,32,0.06);
 }
 body.light .tutorial-card{ color:var(--text-dark); }
+body.light .tutorial-item .badge{ color:#000000; background:transparent; border:1px solid #111214; }
 body.light .tutorial-meta{ color:var(--muted-dark); }
 
 /* responsive */
@@ -282,7 +283,6 @@ body.light .tutorial-meta{ color:var(--muted-dark); }
 </head>
 
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4XLYPLRZ2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -659,7 +659,6 @@ body.light .footer a:hover {
 })();
 </script>
 
-<!-- Load side nav from external file -->
 <script>
 fetch('/components/nav.html')
   .then(r => r.text())
@@ -674,7 +673,6 @@ fetch('/components/nav.html')
   .catch(err => console.warn('Failed to load nav:', err));
 </script>
 
-<!-- Load footer from external file -->
 <script>
 fetch('/components/footer.html')
   .then(r => r.text())
