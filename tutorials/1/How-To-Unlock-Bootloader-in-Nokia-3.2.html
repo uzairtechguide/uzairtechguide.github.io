@@ -29,13 +29,6 @@
   --max-width: 1100px;
 }
 
-  --radius-md: 14px;
-  --shadow-dark: 0 9px 24px rgba(3,6,8,0.2);
-  --shadow-light: 0 8px 24px rgba(16,24,32,0.06);
-  --transition: 240ms cubic-bezier(.2,.9,.3,1);
-  --max-width: 1100px;
-}
-
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:"Roboto",system-ui,Arial;
@@ -136,15 +129,26 @@ main{max-width:var(--max-width);margin:80px auto;padding:0 20px;}
 body.light .content-placeholder{background:#fff;color:var(--muted-dark);}
 
 /* ===== footer ===== */
-.footer{text-align:center;padding:25px;color:var(--muted-light);}
-body.light .footer{color:var(--muted-dark);}
+.footer {
+  background: inherit; 
+  text-align: center;
+  padding: 25px;
+  color: var(--muted-light);
+}
+.footer a {
+  color: #00a8ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+body.light .footer {
+  color: var(--muted-dark);
+}
+body.light .footer a {
+  color: var(--accent-2);
+}
 </style>
 </head>
 
-
-
-
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4XLYPLRZ2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -153,12 +157,8 @@ body.light .footer{color:var(--muted-dark);}
   gtag('config', 'G-H4XLYPLRZ2');
 </script>
 
-
-
-
 <body>
 
-<!-- controls -->
 <div class="top-controls">
   <button id="theme-toggle" class="control-btn" title="Toggle theme" aria-pressed="false" aria-label="Toggle color theme"></button>
   <button id="hamburger-btn" class="hamburger" title="Menu" aria-label="Open menu" aria-expanded="false">
@@ -167,10 +167,8 @@ body.light .footer{color:var(--muted-dark);}
   </button>
 </div>
 
-<!-- header -->
 <header class="header">UzairTechGuide</header>
 
-<!-- side nav -->
 <aside id="side-nav" class="side-nav" aria-hidden="true">
   <button class="side-close" id="side-close" aria-label="Close menu">&times;</button>
   <nav class="side-links" role="navigation">
@@ -186,12 +184,7 @@ body.light .footer{color:var(--muted-dark);}
 
 <div id="overlay" class="overlay" hidden></div>
 
-
-
-
-
 <main class="tutorial-main" aria-label="Nokia 3.2 bootloader tutorial">
-
   <style>
   /* Scoped styles for the tutorial */
   .tutorial-main{
@@ -348,9 +341,7 @@ body.light .footer{color:var(--muted-dark);}
   </style>
 
   <article class="content-card">
-
     <h1>How to Unlock The Bootloader of Nokia 3.2 (All Variants)</h1>
-
     <p>Unlocking the bootloader on your Nokia 3.2 allows you to install custom ROMs, root your device, and modify system files. Back up your important files before proceeding.</p>
 
     <h2>WARNINGS AND RISKS:</h2>
@@ -485,25 +476,9 @@ fastboot flashing lock</pre>
       </svg>
       <span style="font-size:1rem;">YouTube Channel</span>
     </a>
-
   </article>
 </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- footer -->
 <footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <small>&copy; 2026 UzairTechGuide</small>
@@ -515,11 +490,7 @@ fastboot flashing lock</pre>
   </div>
 </footer>
 
-
 <script>
-
-
-
 (function(){
   const THEME_KEY = 'utg_theme';
   const bodyEl = document.body;
@@ -529,13 +500,11 @@ fastboot flashing lock</pre>
   const overlay = document.getElementById('overlay');
   const closeBtn = document.getElementById('side-close');
 
-  // tiny inline SVGs for reliability
   const SVG = {
     moon: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
     sun:  '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
   };
 
-  // safe setter for theme: 'dark' | 'light'
   function applyTheme(mode){
     if(mode === 'light'){
       bodyEl.classList.add('light');
@@ -553,7 +522,6 @@ fastboot flashing lock</pre>
     try { localStorage.setItem(THEME_KEY, mode); } catch(e){}
   }
 
-  // initialize theme (saved -> prefers -> default dark)
   (function initTheme(){
     let saved = null;
     try { saved = localStorage.getItem(THEME_KEY); } catch(e) { saved = null; }
@@ -564,13 +532,11 @@ fastboot flashing lock</pre>
     applyTheme(saved);
   })();
 
-  // toggle handler
   themeBtn.addEventListener('click', () => {
     const current = bodyEl.classList.contains('light') ? 'light' : 'dark';
     applyTheme(current === 'light' ? 'dark' : 'light');
   });
 
-  // keyboard support: Enter/Space also toggles (button already does, but keep explicit)
   themeBtn.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -578,7 +544,6 @@ fastboot flashing lock</pre>
     }
   });
 
-  // hamburger / side nav behavior (untouched logic, just robust)
   function openSide(){
     burger.classList.add('open');
     nav.classList.add('open');
@@ -607,7 +572,6 @@ fastboot flashing lock</pre>
   document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && nav.classList.contains('open')) closeSide(); });
   document.addEventListener('click', (e)=> { if(!nav.contains(e.target) && !burger.contains(e.target) && nav.classList.contains('open')) closeSide(); });
 
-  // defensive: ensure overlay exists (if someone removed it)
   if (!document.getElementById('overlay')) {
     const ov = document.createElement('div');
     ov.id = 'overlay';
@@ -618,22 +582,25 @@ fastboot flashing lock</pre>
 })();
 </script>
 
-
-<!-- Load side nav from external file -->
 <script>
 fetch('/components/nav.html')
   .then(r => r.text())
   .then(html => {
-    // Find the .side-links div and replace its content
     const sideLinks = document.querySelector('.side-links');
     if (sideLinks) sideLinks.innerHTML = html;
-    
-    // Re-initialize nav after content loads
-    if (window.initNavigation) window.initNavigation();
   })
   .catch(err => console.warn('Failed to load nav:', err));
 </script>
 
+<script>
+fetch('/components/footer.html')
+  .then(r => r.text())
+  .then(html => {
+    const footerEl = document.querySelector('.footer');
+    if (footerEl) footerEl.innerHTML = html;
+  })
+  .catch(err => console.warn('Failed to load footer:', err));
+</script>
 
 </body>
 </html>
