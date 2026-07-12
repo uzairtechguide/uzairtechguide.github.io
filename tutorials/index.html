@@ -169,7 +169,7 @@ body.light .content-placeholder{background:#fff;color:var(--muted-dark);}
 body.light .footer{color:var(--muted-dark);}
 
 /* =========================
-   Tutorial cards design
+   Tutorial cards redesign
    ========================= */
 .tutorials-grid{
   display:grid;
@@ -233,16 +233,18 @@ body.light .footer{color:var(--muted-dark);}
 }
 .tutorial-info{
   display:flex;
-  gap:8px;
+  gap:6px 8px; /* row-gap column-gap to prevent touching if wrapped */
+  flex-wrap:wrap;
   align-items:center;
 }
 .badge{
   font-size:0.78rem;
-  padding:3px 6px;
-  border-radius:500px;
+  padding:4px 8px;
+  border-radius:999px;
   background:rgba(255,255,255,0.03);
   color:var(--muted-light);
   font-weight:700;
+  display:inline-block;
 }
 
 /* small meta row (optional space for future) */
@@ -360,8 +362,8 @@ body.light .tutorial-meta{ color:var(--muted-dark); }
         <div class="tutorial-info">
           <span class="badge">Video</span>
           <span class="badge">Tutorial</span>
-        </div>
           <span class="badge">Download</span>
+        </div>
       </div>
       <div class="tutorial-meta"></div>
     </a>
@@ -373,8 +375,8 @@ body.light .tutorial-meta{ color:var(--muted-dark); }
         <div class="tutorial-info">
           <span class="badge">Video</span>
           <span class="badge">Tutorial</span>
-        </div>
           <span class="badge">2026</span>
+        </div>
       </div>
       <div class="tutorial-meta"></div>
     </a>
