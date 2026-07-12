@@ -540,6 +540,14 @@ body.light .tutorial-meta{ color:var(--muted-dark); }
   font-size: 0.9em;
   color: #aaa;
 }
+
+body.light .footer a {
+  color: #1db954;
+}
+
+body.light .footer a:hover {
+  color: #17a64c;
+}
 </style>
 
 
@@ -561,7 +569,7 @@ body.light .tutorial-meta{ color:var(--muted-dark); }
     let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     let scrolled = (winScroll / height) * 100;
     document.getElementById("myBar").style.width = scrolled + "%";
-    
+
     // Back to top visibility
     if (winScroll > 300) { backToTop.style.display = "flex"; } else { backToTop.style.display = "none"; }
   };
@@ -659,11 +667,22 @@ fetch('/components/nav.html')
     // Find the .side-links div and replace its content
     const sideLinks = document.querySelector('.side-links');
     if (sideLinks) sideLinks.innerHTML = html;
-    
+
     // Re-initialize nav after content loads
     if (window.initNavigation) window.initNavigation();
   })
   .catch(err => console.warn('Failed to load nav:', err));
+</script>
+
+<!-- Load footer from external file -->
+<script>
+fetch('/components/footer.html')
+  .then(r => r.text())
+  .then(html => {
+    const footerEl = document.querySelector('.footer');
+    if (footerEl) footerEl.innerHTML = html;
+  })
+  .catch(err => console.warn('Failed to load footer:', err));
 </script>
 
 </body>
