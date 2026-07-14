@@ -38,7 +38,6 @@ body{
 }
 body.light{background:var(--bg-light);color:var(--text-dark);}
 
-
 /* ===== top controls ===== */
 .top-controls{
   position:fixed;top:10px;right:10px;
@@ -68,7 +67,6 @@ body.light .control-btn{background:#fff;box-shadow:var(--shadow-dark);}
   z-index:1000;
 }
 body.light .header{background:#fff;box-shadow:var(--shadow-light);}
-
 
 /* ===== hamburger ===== */
 .hamburger{
@@ -229,7 +227,9 @@ body.light .input::placeholder{color:rgba(107,111,115,0.4);}
 }
 body.light .eye-btn{color:var(--muted-dark);}
 
-select.input{cursor:pointer;appearance:none;
+select.input{
+  cursor:pointer;
+  appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23bfc7cb' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 14px center;
   padding-right:36px;
@@ -465,7 +465,7 @@ body.light .status-text{color:var(--muted-dark);}
 }
 .btn-download:hover{filter:brightness(1.1);transform:translateY(-1px);}
 
-/* ===== info note ===== */
+/* ===== note ===== */
 .note{
   font-size:.77rem;
   color:rgba(191,199,203,0.5);
@@ -487,7 +487,123 @@ body.light .note{color:rgba(107,111,115,0.6);}
   flex-shrink:0;
 }
 
-/* ===== footer ===== */
+/* ===== long bottom content ===== */
+.long-content{
+  margin-top:18px;
+  display:grid;
+  gap:16px;
+}
+.section-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--text-light);
+  margin-bottom:12px;
+  letter-spacing:-.01em;
+}
+body.light .section-title{color:var(--text-dark);}
+.section-subtitle{
+  color:var(--muted-light);
+  line-height:1.7;
+  font-size:.92rem;
+  margin-bottom:12px;
+}
+body.light .section-subtitle{color:var(--muted-dark);}
+.pill-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+.pill{
+  padding:8px 12px;
+  border-radius:100px;
+  font-size:.78rem;
+  font-family:"JetBrains Mono",monospace;
+  border:1px solid rgba(255,255,255,0.08);
+  color:var(--muted-light);
+  background:rgba(255,255,255,0.03);
+}
+body.light .pill{
+  border-color:rgba(0,0,0,0.08);
+  color:var(--muted-dark);
+  background:rgba(0,0,0,0.03);
+}
+.qa{
+  display:grid;
+  gap:10px;
+}
+.qa-item{
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+}
+body.light .qa-item{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+.qa-item h3{
+  font-size:.92rem;
+  font-family:"Montserrat",sans-serif;
+  margin-bottom:8px;
+  color:var(--text-light);
+}
+body.light .qa-item h3{color:var(--text-dark);}
+.qa-item p{
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--muted-light);
+}
+body.light .qa-item p{color:var(--muted-dark);}
+.steps{
+  display:grid;
+  gap:12px;
+}
+.step-card{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+}
+body.light .step-card{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+.step-card strong{
+  display:block;
+  font-family:"Montserrat",sans-serif;
+  margin-bottom:4px;
+  color:var(--text-light);
+}
+body.light .step-card strong{color:var(--text-dark);}
+.step-card p{
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--muted-light);
+}
+body.light .step-card p{color:var(--muted-dark);}
+.mini-note{
+  font-size:.8rem;
+  color:var(--muted-light);
+  line-height:1.65;
+  margin-top:10px;
+}
+body.light .mini-note{color:var(--muted-dark);}
+.privacy-box{
+  border-left:3px solid var(--accent-2);
+  padding-left:14px;
+}
+.privacy-box p{
+  font-size:.9rem;
+  line-height:1.8;
+  color:var(--muted-light);
+  margin-bottom:10px;
+}
+body.light .privacy-box p{color:var(--muted-dark);}
 .footer{
   text-align:center;
   padding:30px 20px;
@@ -555,7 +671,6 @@ body.light .footer a:hover{
   gtag('config', 'G-H4XLYPLRZ2');
 </script>
 
-
 <body>
 
 <!-- controls -->
@@ -572,18 +687,18 @@ body.light .footer a:hover{
 </header>
 
 <!-- Side navigation -->
-  <aside id="side-nav" class="side-nav" aria-hidden="true">
-    <button id="side-close" class="side-close" aria-label="Close menu">&times;</button>
-    <nav class="side-links" role="navigation" aria-label="Main navigation">
-      <a href="/index.html">Home</a>
-      <a href="/tutorials/tutorials.html">Tutorials</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/about.html">About</a>
-      <a href="/privacy.html">Privacy Policy</a>
-      <a href="/terms.html">Terms Of Use</a>
-      <a href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener">YouTube Channel</a>
-    </nav>
-  </aside>
+<aside id="side-nav" class="side-nav" aria-hidden="true">
+  <button id="side-close" class="side-close" aria-label="Close menu">&times;</button>
+  <nav class="side-links" role="navigation" aria-label="Main navigation">
+    <a href="/index.html">Home</a>
+    <a href="/tutorials/tutorials.html">Tutorials</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms Of Use</a>
+    <a href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener">YouTube Channel</a>
+  </nav>
+</aside>
 
 <div id="overlay" class="overlay" hidden></div>
 
@@ -604,7 +719,6 @@ body.light .footer a:hover{
       Your Groq API Key
     </div>
 
-    <!-- shown only when a key is already saved on this device -->
     <div class="saved-key-chip" id="saved-key-chip">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
       <span id="saved-key-preview">Key loaded from this device</span>
@@ -716,6 +830,137 @@ body.light .footer a:hover{
     </a>
   </div>
 
+  <!-- Long useful content -->
+  <div class="long-content">
+
+    <div class="card">
+      <div class="section-title">How to use it</div>
+      <div class="steps">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <div>
+            <strong>Add your API key</strong>
+            <p>Paste your Groq key into the top field. You can keep it on this device only if you want faster repeat use. If you skip saving, nothing is remembered after you leave the page.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <div>
+            <strong>Choose a media file</strong>
+            <p>Select an audio or video file from your phone or PC. MP3, MP4, WAV, M4A, OGG, FLAC, WEBM, MKV, AAC, and OPUS are supported here.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <div>
+            <strong>Pick the language</strong>
+            <p>Use auto-detect for mixed or unknown speech, or pick a language manually when the audio is clearly in one language. Manual selection can improve accuracy on clean recordings.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">4</span>
+          <div>
+            <strong>Generate and download</strong>
+            <p>Tap Generate SRT, wait for the upload and transcription step, then download the subtitle file. The browser will save the final <code>.srt</code> file automatically.</p>
+          </div>
+        </div>
+      </div>
+      <p class="mini-note">Best results usually come from clear speech, low background noise, and audio that is not too clipped or distorted. Longer files are fine as long as they stay within the size limit and your connection is stable.</p>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Frequently Asked Questions</div>
+      <div class="qa">
+        <div class="qa-item">
+          <h3>Does this tool store my audio or API key on a server?</h3>
+          <p>No. The file is uploaded directly from your browser to the transcription endpoint, and the key is only sent in the request needed to run the transcription. If you choose to remember the key, it stays in this browser’s local storage on this device.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Why do I need my own Groq API key?</h3>
+          <p>Because the transcription service is being called through your own API access. That keeps the tool flexible, simple, and fast, while letting you control your usage through your own account.</p>
+        </div>
+        <div class="qa-item">
+          <h3>What file size works best?</h3>
+          <p>This page is set up for files up to 25MB. Smaller files usually finish faster, especially on mobile data. If the file is huge, trim it or compress it first for a smoother experience.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Why did the download not start automatically?</h3>
+          <p>Some browsers block automatic downloads or ask for permission first. In that case, just tap the download button that appears after processing completes.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Can I use Urdu subtitles?</h3>
+          <p>Yes. You can choose Urdu from the language list, or use auto-detect if the speech switches between languages. That is useful for mixed-content videos and casual recordings.</p>
+        </div>
+        <div class="qa-item">
+          <h3>What if the transcription is empty or weak?</h3>
+          <p>Usually that means the file has very low speech content, heavy music, noise, or a broken upload. Try a cleaner source, a better mic recording, or a smaller clip with clearer talking.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Privacy and security</div>
+      <div class="privacy-box">
+        <p>This page is built to stay lightweight. The file goes from your browser to the transcription service, and the interface is mainly there to collect your inputs and show progress. That keeps the workflow simple and avoids unnecessary storage on this site.</p>
+        <p>If you enable key remembering, the key is saved only in local storage on this device and this browser profile. That means it is convenient for repeat use, but it is still under your control. You can remove it any time with the Forget button.</p>
+        <p>For extra safety, avoid using public devices for saved keys. On shared phones or shared computers, always clear the key after use. Also make sure the site is opened from the correct domain before you paste anything sensitive.</p>
+        <p>The page does not need account creation, passwords, or profile setup. That reduces friction and also reduces the amount of personal data involved. Less data collected usually means less data exposed.</p>
+        <p>In simple terms: your content is handled for one job only — generating subtitles — and the page is designed to stay out of the way while doing that job well.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Why this kind of page looks long</div>
+      <p class="section-subtitle">A lot of modern websites include helpful bottom sections so users can understand the tool quickly, trust the workflow, and find answers without leaving the page. That is not just cosmetic. It makes the page easier to use, easier to scan, and more helpful for first-time visitors.</p>
+      <p class="section-subtitle">Long-form support content can also be useful when someone is in a hurry and just wants one clear place to check how the tool works, what the limits are, and how the data is handled. That is why this page includes the practical details without changing the generator itself.</p>
+      <div class="pill-list">
+        <span class="pill">How-to guidance</span>
+        <span class="pill">Trust signals</span>
+        <span class="pill">FAQ support</span>
+        <span class="pill">Privacy clarity</span>
+        <span class="pill">User-friendly layout</span>
+        <span class="pill">Content depth</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Extra tips for better subtitles</div>
+      <div class="qa">
+        <div class="qa-item">
+          <h3>Use clean speech when possible</h3>
+          <p>Clear voice recordings, interviews, podcasts, lectures, and tutorial narrations usually produce much better subtitles than noisy background audio or overlapping speakers.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Trim out dead space before upload</h3>
+          <p>If your file contains long silent parts, intros, or outro music, trimming those sections can make the final subtitle file cleaner and faster to process.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Keep the output filename simple</h3>
+          <p>Short filenames like <code>lesson1</code>, <code>podcast-clip</code>, or <code>lecture-urdu</code> are easier to manage later when you are saving several subtitle files.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Troubleshooting</div>
+      <div class="qa">
+        <div class="qa-item">
+          <h3>The Generate button is disabled</h3>
+          <p>That usually means one of the required inputs is missing. Add a valid Groq key and select a file. Once both are in place, the button should become active.</p>
+        </div>
+        <div class="qa-item">
+          <h3>The upload is slow</h3>
+          <p>Large files, poor connection, or mobile data can slow things down. Try a smaller file, a stronger network, or a shorter clip if you need quicker results.</p>
+        </div>
+        <div class="qa-item">
+          <h3>The subtitles look off</h3>
+          <p>That can happen when the audio is unclear or when the wrong language is selected. Try auto-detect first, then test the most likely language for the content.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- Privacy note -->
   <p class="note" style="margin-top:28px;">
     🔒 Your API key and file(s) are never sent to Our servers. The request goes directly from your browser to Groq via a CloudFlare proxy. Nothing is logged or stored. If you choose "Remember this key," it stays only in this browser's local storage on this device — clear it anytime with the Forget button.
@@ -808,11 +1053,7 @@ body.light .footer a:hover{
    SRT GENERATOR LOGIC
    ============================================================ */
 (function(){
-  // ── CLOUDFLARE WORKER URL ─────────────────────────────────
   const PROXY_URL = 'https://uzairtechguide01.uzairshah4270.workers.dev';
-  // ──────────────────────────────────────────────────────────
-
-  // ── REMEMBER-KEY storage settings ─────────────────────────
   const STORAGE_KEY = 'utg_groq_api_key';
 
   const apiKeyInput     = document.getElementById('api-key');
@@ -838,7 +1079,6 @@ body.light .footer a:hover{
 
   let selectedFile = null;
 
-  // ── load saved key on page load ───────────────────────────
   function maskKey(key){
     if(key.length <= 10) return key;
     return key.slice(0,7) + '••••••••' + key.slice(-4);
@@ -867,7 +1107,6 @@ body.light .footer a:hover{
 
   forgetKeyBtn.addEventListener('click', forgetKey);
 
-  // save / unsave whenever the checkbox or key changes
   function syncKeyStorage(){
     if(rememberCb.checked && apiKeyInput.value.trim().length > 10){
       try { localStorage.setItem(STORAGE_KEY, apiKeyInput.value.trim()); } catch(e){}
@@ -883,7 +1122,6 @@ body.light .footer a:hover{
 
   loadSavedKey();
 
-  // ── eye toggle ─────────────────────────────────────────────
   const EYE_OPEN  = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
   const EYE_SLASH = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
 
@@ -893,7 +1131,6 @@ body.light .footer a:hover{
     eyeIcon.innerHTML = isPass ? EYE_SLASH : EYE_OPEN;
   });
 
-  // ── enable/disable run button ──────────────────────────────
   function checkReady(){
     const ready = apiKeyInput.value.trim().length > 10 && selectedFile !== null;
     btnRun.disabled = !ready;
@@ -903,7 +1140,6 @@ body.light .footer a:hover{
     syncKeyStorage();
   });
 
-  // ── drag and drop ──────────────────────────────────────────
   dropZone.addEventListener('dragover', e => {
     e.preventDefault();
     dropZone.classList.add('dragging');
@@ -929,7 +1165,6 @@ body.light .footer a:hover{
     checkReady();
   }
 
-  // ── progress helpers ───────────────────────────────────────
   function showProgress(stage, pct, indeterminate=false){
     progressArea.classList.add('active');
     resultArea.classList.remove('active');
@@ -958,7 +1193,6 @@ body.light .footer a:hover{
     setStatus('');
   }
 
-  // ── SRT conversion ─────────────────────────────────────────
   function secondsToSrt(s){
     const h=Math.floor(s/3600);
     const m=Math.floor((s%3600)/60);
@@ -981,7 +1215,6 @@ body.light .footer a:hover{
     }).join('\n\n') + '\n';
   }
 
-  // ── main generate ──────────────────────────────────────────
   btnRun.addEventListener('click', async () => {
     if(!selectedFile || !apiKeyInput.value.trim()) return;
 
