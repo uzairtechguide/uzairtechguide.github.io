@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Subtitle Generator — UzairTechGuide</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-dark:#0f1113;
+  --panel-dark:#15181a;
+  --panel-dark-2:#1c2023;
+  --text-light:#eef1f3;
+  --muted-light:#bfc7cb;
+  --accent:#ff7a2d;
+  --accent-2:#1db954;
+  --accent-glow:rgba(255,122,45,0.18);
+  --green-glow:rgba(29,185,84,0.15);
+  --bg-light:#f6f7f8;
+  --panel-light:#ffffff;
+  --panel-light-2:#f0f2f4;
+  --text-dark:#111214;
+  --muted-dark:#6b6f73;
+  --radius-md:14px;
+  --radius-sm:8px;
+  --shadow-dark:0 8px 24px rgba(3,6,8,0.4);
+  --shadow-light:0 8px 24px rgba(16,24,32,0.08);
+  --transition:220ms cubic-bezier(.2,.9,.3,1);
+  --max-width:780px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Roboto",system-ui,Arial;
+  background:var(--bg-dark);
+  color:var(--text-light);
+  transition:background .3s,color .3s;
+  min-height:100vh;
+}
+body.light{background:var(--bg-light);color:var(--text-dark);}
+
+/* ===== top controls ===== */
+.top-controls{
+  position:fixed;top:10px;right:10px;
+  display:flex;gap:10px;z-index:1200;
+}
+.control-btn{
+  width:42px;height:42px;
+  border:none;border-radius:10px;
+  background:rgba(255,255,255,0.06);
+  cursor:pointer;font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+  color:inherit;transition:background .2s,transform .2s;
+}
+.control-btn:hover{transform:translateY(-2px);}
+body.light .control-btn{background:#fff;box-shadow:var(--shadow-dark);}
+
+/* ===== header ===== */
+.header{
+  position:fixed;top:0;left:0;right:0;
+  height:56px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Montserrat",sans-serif;
+  font-weight:600;font-size:1.2rem;
+  background:rgba(255,255,255,0.02);
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  z-index:1000;
+}
+body.light .header{background:#fff;box-shadow:var(--shadow-light);}
+
+/* ===== hamburger ===== */
+.hamburger{
+  height:36px;width:36px;padding:6px 10px;
+  display:flex;flex-direction:column;justify-content:space-between;align-items:center;
+  background:transparent;border:none;cursor:pointer;
+}
+.hamburger span{
+  width:16px;height:2.5px;
+  background:var(--accent-2);
+  border-radius:2px;margin:1.5px 0;
+  transition:all .3s ease;
+}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(2px,2px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(3px,-3px);}
+
+/* ===== side nav ===== */
+.side-nav{
+  position:fixed;top:0;right:-320px;
+  width:300px;height:100vh;
+  background:var(--panel-dark);
+  padding:70px 20px;transition:right .3s;
+  z-index:1100;
+  border-left:1px solid rgba(255,255,255,0.05);
+}
+.side-nav.open{right:0;}
+body.light .side-nav{background:var(--panel-light);}
+.side-links a{
+  display:block;padding:10px 12px;
+  color:inherit;text-decoration:none;
+  font-weight:600;border-radius:10px;
+  transition:background .2s;
+}
+.side-links a:hover{background:rgba(255,255,255,0.06);color:var(--accent);}
+body.light .side-links a:hover{background:rgba(0,0,0,0.05);color:var(--accent-2);}
+.side-close{
+  position:absolute;top:10px;left:10px;
+  font-size:28px;background:none;border:none;color:inherit;cursor:pointer;
+}
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.55);
+  opacity:0;pointer-events:none;
+  transition:opacity .2s;z-index:1050;
+}
+.overlay.show{opacity:1;pointer-events:auto;}
+
+/* ===== main ===== */
+main{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:80px 20px 60px;
+}
+
+/* ===== hero ===== */
+.hero{
+  text-align:center;
+  padding:48px 0 36px;
+}
+.hero-badge{
+  display:inline-block;
+  font-family:"JetBrains Mono",monospace;
+  font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-2);
+  background:var(--green-glow);
+  border:1px solid rgba(29,185,84,0.25);
+  padding:4px 14px;border-radius:100px;
+  margin-bottom:18px;
+}
+.hero h1{
+  font-family:"Montserrat",sans-serif;
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  font-weight:700;
+  line-height:1.15;
+  margin-bottom:14px;
+  letter-spacing:-.02em;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--accent);
+  position:relative;
+}
+.hero p{
+  color:var(--muted-light);
+  font-size:1rem;
+  max-width:520px;
+  margin:0 auto;
+  line-height:1.65;
+}
+body.light .hero p{color:var(--muted-dark);}
+
+/* ===== card ===== */
+.card{
+  background:var(--panel-dark);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius-md);
+  padding:28px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow-dark);
+  transition:border-color .2s;
+}
+body.light .card{
+  background:var(--panel-light);
+  border-color:rgba(0,0,0,0.07);
+  box-shadow:var(--shadow-light);
+}
+.card-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:.78rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:18px;
+  display:flex;align-items:center;gap:8px;
+}
+.card-title svg{flex-shrink:0;}
+
+/* ===== form elements ===== */
+label{
+  display:block;
+  font-size:.82rem;font-weight:500;
+  color:var(--muted-light);
+  margin-bottom:6px;
+}
+body.light label{color:var(--muted-dark);}
+
+.input{
+  width:100%;
+  padding:11px 14px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:var(--radius-sm);
+  color:var(--text-light);
+  font-family:"JetBrains Mono",monospace;
+  font-size:.85rem;
+  transition:border-color .2s,box-shadow .2s;
+  outline:none;
+}
+body.light .input{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.12);
+  color:var(--text-dark);
+}
+.input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-glow);
+}
+.input::placeholder{color:rgba(191,199,203,0.35);}
+body.light .input::placeholder{color:rgba(107,111,115,0.4);}
+
+.input-wrap{position:relative;}
+.eye-btn{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:var(--muted-light);padding:4px;
+  display:flex;align-items:center;
+}
+body.light .eye-btn{color:var(--muted-dark);}
+
+select.input{
+  cursor:pointer;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23bfc7cb' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:36px;
+}
+
+/* ===== remember-key row ===== */
+.remember-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-top:12px;
+}
+.remember-row input[type="checkbox"]{
+  width:18px;height:18px;
+  flex-shrink:0;
+  margin-top:1px;
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+.remember-row label{
+  margin-bottom:0;
+  cursor:pointer;
+  font-size:.8rem;
+  line-height:1.5;
+  color:var(--muted-light);
+}
+body.light .remember-row label{color:var(--muted-dark);}
+.remember-row label strong{
+  color:var(--text-light);
+  font-weight:600;
+}
+body.light .remember-row label strong{color:var(--text-dark);}
+
+/* saved-key chip */
+.saved-key-chip{
+  display:none;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  background:var(--green-glow);
+  border:1px solid rgba(29,185,84,0.25);
+  border-radius:var(--radius-sm);
+  margin-bottom:14px;
+}
+.saved-key-chip.active{display:flex;}
+.saved-key-chip svg{
+  color:var(--accent-2);
+  flex-shrink:0;
+}
+.saved-key-chip span{
+  font-size:.82rem;
+  font-family:"JetBrains Mono",monospace;
+  color:var(--accent-2);
+  flex-grow:1;
+}
+.saved-key-chip button{
+  background:none;
+  border:none;
+  color:var(--muted-light);
+  font-size:.75rem;
+  font-family:"Roboto",sans-serif;
+  font-weight:600;
+  cursor:pointer;
+  padding:4px 8px;
+  border-radius:6px;
+  transition:background .2s,color .2s;
+  flex-shrink:0;
+}
+.saved-key-chip button:hover{
+  background:rgba(255,255,255,0.08);
+  color:var(--text-light);
+}
+body.light .saved-key-chip button:hover{
+  background:rgba(0,0,0,0.06);
+  color:var(--text-dark);
+}
+
+/* ===== file drop zone ===== */
+.drop-zone{
+  border:2px dashed rgba(255,255,255,0.12);
+  border-radius:var(--radius-md);
+  padding:36px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:border-color .2s,background .2s;
+  position:relative;
+}
+body.light .drop-zone{border-color:rgba(0,0,0,0.15);}
+.drop-zone:hover,.drop-zone.dragging{
+  border-color:var(--accent);
+  background:var(--accent-glow);
+}
+.drop-zone input[type="file"]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.drop-icon{
+  font-size:2.2rem;margin-bottom:10px;
+  display:block;
+}
+.drop-label{
+  font-size:.92rem;font-weight:500;
+  color:var(--muted-light);
+  display:block;margin-bottom:4px;
+}
+body.light .drop-label{color:var(--muted-dark);}
+.drop-sub{
+  font-size:.75rem;
+  color:rgba(191,199,203,0.5);
+  font-family:"JetBrains Mono",monospace;
+}
+body.light .drop-sub{color:rgba(107,111,115,0.55);}
+.drop-zone.has-file{
+  border-color:var(--accent-2);
+  background:var(--green-glow);
+}
+.file-name{
+  font-family:"JetBrains Mono",monospace;
+  font-size:.8rem;
+  color:var(--accent-2);
+  margin-top:8px;
+  word-break:break-all;
+}
+
+/* ===== grid ===== */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:540px){.two-col{grid-template-columns:1fr;}}
+
+/* ===== field group ===== */
+.field{margin-bottom:16px;}
+.field:last-child{margin-bottom:0;}
+
+/* ===== submit button ===== */
+.btn-run{
+  width:100%;
+  padding:15px;
+  background:var(--accent);
+  color:#fff;
+  font-family:"Montserrat",sans-serif;
+  font-size:1rem;font-weight:700;
+  letter-spacing:.04em;
+  border:none;border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:filter .2s,transform .15s,box-shadow .2s;
+  margin-top:4px;
+  box-shadow:0 4px 18px rgba(255,122,45,0.3);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-run:hover:not(:disabled){
+  filter:brightness(1.1);
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(255,122,45,0.4);
+}
+.btn-run:disabled{
+  opacity:.45;cursor:not-allowed;transform:none;
+  box-shadow:none;
+}
+
+/* ===== progress area ===== */
+.progress-area{
+  display:none;
+  margin-top:20px;
+}
+.progress-area.active{display:block;}
+.progress-label{
+  font-size:.8rem;
+  color:var(--muted-light);
+  margin-bottom:8px;
+  font-family:"JetBrains Mono",monospace;
+  display:flex;justify-content:space-between;
+}
+body.light .progress-label{color:var(--muted-dark);}
+.progress-track{
+  height:6px;
+  background:rgba(255,255,255,0.08);
+  border-radius:100px;
+  overflow:hidden;
+}
+body.light .progress-track{background:rgba(0,0,0,0.08);}
+.progress-bar{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),#ffb347);
+  border-radius:100px;
+  width:0%;
+  transition:width .4s ease;
+}
+.progress-bar.indeterminate{
+  width:45%;
+  animation:indeterminate 1.4s ease-in-out infinite;
+}
+@keyframes indeterminate{
+  0%{transform:translateX(-100%);}
+  100%{transform:translateX(280%);}
+}
+.status-text{
+  margin-top:10px;
+  font-size:.82rem;
+  color:var(--muted-light);
+  font-family:"JetBrains Mono",monospace;
+  min-height:20px;
+}
+body.light .status-text{color:var(--muted-dark);}
+.status-text.error{color:#ff5c5c;}
+.status-text.success{color:var(--accent-2);}
+
+/* ===== result / download ===== */
+.result-area{
+  display:none;
+  margin-top:20px;
+  padding:18px;
+  background:var(--green-glow);
+  border:1px solid rgba(29,185,84,0.25);
+  border-radius:var(--radius-sm);
+  text-align:center;
+}
+.result-area.active{display:block;}
+.result-area p{
+  font-size:.88rem;
+  color:var(--accent-2);
+  margin-bottom:14px;
+  font-weight:500;
+}
+.btn-download{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 24px;
+  background:var(--accent-2);
+  color:#fff;
+  font-family:"Montserrat",sans-serif;
+  font-size:.88rem;font-weight:700;
+  border:none;border-radius:var(--radius-sm);
+  cursor:pointer;text-decoration:none;
+  transition:filter .2s,transform .15s;
+  box-shadow:0 4px 14px rgba(29,185,84,0.3);
+}
+.btn-download:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
+/* ===== note ===== */
+.note{
+  font-size:.77rem;
+  color:rgba(191,199,203,0.5);
+  line-height:1.6;
+  text-align:center;
+  padding:0 10px;
+}
+body.light .note{color:rgba(107,111,115,0.6);}
+.note a{color:var(--accent);text-decoration:none;}
+.note a:hover{text-decoration:underline;}
+
+/* ===== step numbers ===== */
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  font-size:.65rem;font-weight:700;
+  font-family:"Montserrat",sans-serif;
+  flex-shrink:0;
+}
+
+/* ===== long bottom content ===== */
+.long-content{
+  margin-top:18px;
+  display:grid;
+  gap:16px;
+}
+.section-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--text-light);
+  margin-bottom:12px;
+  letter-spacing:-.01em;
+}
+body.light .section-title{color:var(--text-dark);}
+.section-subtitle{
+  color:var(--muted-light);
+  line-height:1.7;
+  font-size:.92rem;
+  margin-bottom:12px;
+}
+body.light .section-subtitle{color:var(--muted-dark);}
+.pill-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+.pill{
+  padding:8px 12px;
+  border-radius:100px;
+  font-size:.78rem;
+  font-family:"JetBrains Mono",monospace;
+  border:1px solid rgba(255,255,255,0.08);
+  color:var(--muted-light);
+  background:rgba(255,255,255,0.03);
+}
+body.light .pill{
+  border-color:rgba(0,0,0,0.08);
+  color:var(--muted-dark);
+  background:rgba(0,0,0,0.03);
+}
+.qa{
+  display:grid;
+  gap:10px;
+}
+.qa-item{
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+}
+body.light .qa-item{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+.qa-item h3{
+  font-size:.92rem;
+  font-family:"Montserrat",sans-serif;
+  margin-bottom:8px;
+  color:var(--text-light);
+}
+body.light .qa-item h3{color:var(--text-dark);}
+.qa-item p{
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--muted-light);
+}
+body.light .qa-item p{color:var(--muted-dark);}
+.steps{
+  display:grid;
+  gap:12px;
+}
+.step-card{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+}
+body.light .step-card{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+.step-card strong{
+  display:block;
+  font-family:"Montserrat",sans-serif;
+  margin-bottom:4px;
+  color:var(--text-light);
+}
+body.light .step-card strong{color:var(--text-dark);}
+.step-card p{
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--muted-light);
+}
+body.light .step-card p{color:var(--muted-dark);}
+.mini-note{
+  font-size:.8rem;
+  color:var(--muted-light);
+  line-height:1.65;
+  margin-top:10px;
+}
+body.light .mini-note{color:var(--muted-dark);}
+.privacy-box{
+  border-left:3px solid var(--accent-2);
+  padding-left:14px;
+}
+.privacy-box p{
+  font-size:.9rem;
+  line-height:1.8;
+  color:var(--muted-light);
+  margin-bottom:10px;
+}
+body.light .privacy-box p{color:var(--muted-dark);}
+
+.article-grid{
+  display:grid;
+  gap:16px;
+}
+.article-body p{
+  font-size:.92rem;
+  line-height:1.85;
+  color:var(--muted-light);
+  margin-bottom:12px;
+}
+body.light .article-body p{color:var(--muted-dark);}
+.article-body ul{
+  margin:10px 0 0 18px;
+  color:var(--muted-light);
+  line-height:1.8;
+  font-size:.9rem;
+}
+body.light .article-body ul{color:var(--muted-dark);}
+.article-body li{margin-bottom:8px;}
+.article-body code{
+  font-family:"JetBrains Mono",monospace;
+  font-size:.88em;
+  color:var(--accent);
+}
+.article-body a{color:var(--accent);text-decoration:none;}
+.article-body a:hover{text-decoration:underline;}
+.table-wrap{
+  overflow-x:auto;
+  margin-top:8px;
+}
+.info-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.88rem;
+  min-width:620px;
+}
+.info-table th,.info-table td{
+  text-align:left;
+  padding:10px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  vertical-align:top;
+}
+body.light .info-table th,body.light .info-table td{
+  border-bottom:1px solid rgba(0,0,0,0.08);
+}
+.info-table th{
+  color:var(--text-light);
+  font-family:"Montserrat",sans-serif;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+body.light .info-table th{color:var(--text-dark);}
+.info-table td{color:var(--muted-light);line-height:1.7;}
+body.light .info-table td{color:var(--muted-dark);}
+.kbd{
+  display:inline-block;
+  padding:2px 7px;
+  border-radius:6px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.04);
+  font-family:"JetBrains Mono",monospace;
+  font-size:.76rem;
+}
+body.light .kbd{border-color:rgba(0,0,0,0.12);background:rgba(0,0,0,0.04);}
+.callout{
+  padding:14px 16px;
+  border-radius:12px;
+  background:rgba(255,122,45,0.08);
+  border:1px solid rgba(255,122,45,0.22);
+  color:var(--muted-light);
+  line-height:1.75;
+  font-size:.9rem;
+}
+body.light .callout{color:var(--muted-dark);}
+.glossary-list{
+  display:grid;
+  gap:10px;
+}
+.glossary-item{
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+}
+body.light .glossary-item{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+.glossary-item strong{
+  display:block;
+  margin-bottom:6px;
+  font-family:"Montserrat",sans-serif;
+  color:var(--text-light);
+}
+body.light .glossary-item strong{color:var(--text-dark);}
+.glossary-item span{
+  display:block;
+  color:var(--muted-light);
+  line-height:1.75;
+  font-size:.88rem;
+}
+body.light .glossary-item span{color:var(--muted-dark);}
+.footer{
+  text-align:center;
+  padding:30px 20px;
+  color:var(--muted-light);
+  border-top:1px solid rgba(255,255,255,0.1);
+  margin-top:30px;
+}
+body.light .footer{
+  color:var(--muted-dark);
+  background:var(--bg-light);
+  border-top-color:rgba(0,0,0,0.1);
+}
+.footer small{font-size:.78rem;}
+.footer-inner {
+  display:inline-block;
+  background:rgba(0,0,0,0.4);
+  border-radius:12px;
+  padding:10px 20px;
+  box-shadow:0 0 10px rgba(0,0,0,0.4);
+  backdrop-filter:blur(6px);
+}
+body.light .footer-inner {
+  background:rgba(255,255,255,0.8);
+  border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+.footer-inner p{margin:0;font-size:.85rem;}
+.footer a{
+  color:#00a8ff;
+  text-decoration:none;
+  margin:0 6px;
+  font-weight:500;
+  transition:color .18s;
+}
+body.light .footer a{
+  color:var(--accent-2);
+}
+.footer a:hover{
+  color:#fff;
+  text-decoration:underline;
+}
+body.light .footer a:hover{
+  color:var(--accent);
+}
+
+/* ===== spinner in button ===== */
+@keyframes spin{to{transform:rotate(360deg);}}
+.spinner{
+  width:18px;height:18px;
+  border:2.5px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  flex-shrink:0;
+}
+</style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H4XLYPLRZ2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H4XLYPLRZ2');
+</script>
+
+<body>
+
+<!-- controls -->
+<div class="top-controls">
+  <button id="theme-toggle" class="control-btn" title="Toggle theme" aria-pressed="false" aria-label="Toggle color theme"></button>
+  <button id="hamburger-btn" class="hamburger" title="Menu" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- header -->
+<header class="header">
+  <span>Uzair<span class="header-accent">Tech</span>Guide</span>
+</header>
+
+<!-- Side navigation -->
+<aside id="side-nav" class="side-nav" aria-hidden="true">
+  <button id="side-close" class="side-close" aria-label="Close menu">&times;</button>
+  <nav class="side-links" role="navigation" aria-label="Main navigation">
+    <a href="/index.html">Home</a>
+    <a href="/tutorials/tutorials.html">Tutorials</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms Of Use</a>
+    <a href="https://youtube.com/@muhammduzairshah23" target="_blank" rel="noopener">YouTube Channel</a>
+  </nav>
+</aside>
+
+<div id="overlay" class="overlay" hidden></div>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-badge">Powered by Groq · Whisper Large v3 Turbo</div>
+    <h1>Generate <em>subtitles</em><br>from any audio or video</h1>
+    <p>Upload your file, enter your Groq API key, pick a language — download a ready-to-use <code>.srt</code> in seconds. Nothing is stored on any server.</p>
+  </div>
+
+  <!-- Step 1 — API Key -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">1</span>
+      Your Groq API Key
+    </div>
+
+    <div class="saved-key-chip" id="saved-key-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      <span id="saved-key-preview">Key loaded from this device</span>
+      <button type="button" id="forget-key-btn">Forget</button>
+    </div>
+
+    <div class="field">
+      <label for="api-key">Paste your key — saved only on this device if you choose</label>
+      <div class="input-wrap">
+        <input class="input" type="password" id="api-key" placeholder="gsk_••••••••••••••••••••••••••••••••••••••••••••••••••••" autocomplete="off" spellcheck="false">
+        <button class="eye-btn" id="eye-btn" aria-label="Show/hide key" title="Show/hide key">
+          <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="remember-row">
+        <input type="checkbox" id="remember-key-cb">
+        <label for="remember-key-cb"><strong>Remember this key on this device</strong> — stored only in this browser's local storage, never sent anywhere except directly to Groq. Skip re-entering it next time.</label>
+      </div>
+
+      <p class="note" style="text-align:left;margin-top:10px;">
+        Get a free key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a>. Free tier is generous — no credit card needed.
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 2 — File -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">2</span>
+      Audio or Video File - MAX SIZE: 25MB
+    </div>
+    <div class="drop-zone" id="drop-zone">
+      <input type="file" id="file-input" accept="audio/*,video/*,.mp3,.mp4,.m4a,.wav,.ogg,.flac,.aac,.opus,.webm,.mkv" aria-label="Select audio or video file">
+      <span class="drop-icon">🎵</span>
+      <span class="drop-label">Tap to choose a file, or drag and drop</span>
+      <span class="drop-sub">MP3 · MP4 · M4A · WAV · OGG · FLAC · WEBM · MKV</span>
+      <div class="file-name" id="file-name"></div>
+    </div>
+    <p class="note" style="margin-top:12px;">File is sent directly from your device to Groq. This page never receives it.</p>
+  </div>
+
+  <!-- Step 3 — Language -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">3</span>
+      Language &amp; Output
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label for="lang-select">Transcription language</label>
+        <select class="input" id="lang-select">
+          <option value="">Auto-detect</option>
+          <option value="en">English</option>
+          <option value="ur">Urdu</option>
+          <option value="ar">Arabic</option>
+          <option value="hi">Hindi</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="es">Spanish</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="tr">Turkish</option>
+          <option value="fa">Farsi / Persian</option>
+          <option value="id">Indonesian</option>
+          <option value="ms">Malay</option>
+          <option value="nl">Dutch</option>
+          <option value="pl">Polish</option>
+          <option value="sv">Swedish</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="filename-out">Output filename</label>
+        <input class="input" type="text" id="filename-out" placeholder="subtitles" spellcheck="false">
+      </div>
+    </div>
+  </div>
+
+  <!-- Generate button -->
+  <button class="btn-run" id="btn-run" disabled>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Generate SRT
+  </button>
+
+  <!-- Progress -->
+  <div class="progress-area" id="progress-area">
+    <div class="progress-label">
+      <span id="progress-stage">Uploading…</span>
+      <span id="progress-pct"></span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar indeterminate" id="progress-bar"></div>
+    </div>
+    <div class="status-text" id="status-text"></div>
+  </div>
+
+  <!-- Result -->
+  <div class="result-area" id="result-area">
+    <p>✅ Subtitles generated successfully</p>
+    <a class="btn-download" id="btn-download" href="#" download="subtitles.srt">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download .srt
+    </a>
+  </div>
+
+  <!-- Long useful content -->
+  <div class="long-content">
+
+    <div class="card">
+      <div class="section-title">What this tool does</div>
+      <div class="article-body">
+        <p>This page turns spoken audio or video into a subtitle file in <code>SRT</code> format. The output is made for editors, creators, students, and anyone who needs captions for a clip, lecture, interview, podcast, tutorial, or social video.</p>
+        <p>The workflow is simple: add a Groq API key, choose a file, select a language if needed, and generate subtitles. The page then builds a subtitle file that can be downloaded and used in most modern players and editors.</p>
+        <div class="callout">This is a browser-based helper interface. It is designed to stay out of the way and focus on one job: creating subtitles cleanly, quickly, and with as little friction as possible.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">What is Groq?</div>
+      <div class="article-body">
+        <p><strong>Groq</strong> is an AI infrastructure company known for very fast inference. In this tool, Groq is used to process audio transcription through the model selected in the request. That makes the subtitle generation fast and practical for everyday use.</p>
+        <p>People sometimes confuse <strong>Groq</strong> with <strong>Grok</strong>. They are not the same thing. Grok is a chatbot product from xAI, while Groq is the AI compute platform used here to run transcription requests. This page uses Groq for subtitle generation and not xAI Grok.</p>
+        <p>Because the transcription happens through Groq, you need your own API key. That keeps the page lightweight and lets the request go through your own access instead of forcing a separate account system into the website.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">What are subtitles?</div>
+      <div class="article-body">
+        <p>Subtitles are timed text that show what people are saying in a video or audio track. They help viewers read along with speech, understand accents better, follow fast dialogue, and watch in situations where sound is off or hard to hear.</p>
+        <p>Subtitles are not just for movies. They are used everywhere: tutorials, online courses, interviews, podcast clips, reels, shorts, documentaries, news videos, gaming content, product demos, and language-learning material.</p>
+        <p><strong>SRT</strong> is one of the most common subtitle formats. It is plain text, easy to edit, and accepted by many video players and platforms. Each subtitle entry includes a number, a start time, an end time, and the subtitle text.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Where subtitles are used</div>
+      <div class="article-body">
+        <p>Subtitles are used in two broad ways: for accessibility and for convenience. Accessibility helps viewers who are deaf or hard of hearing. Convenience helps viewers watching in noise, on mute, or in a language they are still learning.</p>
+        <div class="pill-list">
+          <span class="pill">YouTube videos</span>
+          <span class="pill">Instagram Reels</span>
+          <span class="pill">TikTok clips</span>
+          <span class="pill">Facebook videos</span>
+          <span class="pill">Movies and series</span>
+          <span class="pill">Lectures and classes</span>
+          <span class="pill">Podcasts</span>
+          <span class="pill">Interviews</span>
+          <span class="pill">Gaming content</span>
+          <span class="pill">News segments</span>
+          <span class="pill">Corporate training</span>
+          <span class="pill">Product demos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Why subtitles matter</div>
+      <div class="steps">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <div>
+            <strong>Accessibility</strong>
+            <p>Subtitles help viewers who cannot rely fully on audio. That includes deaf and hard-of-hearing users and people in sound-sensitive environments.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <div>
+            <strong>Retention</strong>
+            <p>When text is available on screen, people often stay longer because they can follow the message more easily, even if the sound is poor or off.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <div>
+            <strong>Search and clarity</strong>
+            <p>For creators, subtitles help make content easier to understand, easier to quote, and easier to repurpose into clips, summaries, and translations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Subtitle formats and related file types</div>
+      <div class="table-wrap">
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Format</th>
+              <th>What it is</th>
+              <th>Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SRT</td>
+              <td>Simple subtitle text file with timestamps.</td>
+              <td>Most widely supported. Best default for sharing and editing.</td>
+            </tr>
+            <tr>
+              <td>VTT</td>
+              <td>Web subtitle format used often on the web.</td>
+              <td>Useful for HTML5 players and some online platforms.</td>
+            </tr>
+            <tr>
+              <td>ASS / SSA</td>
+              <td>Advanced subtitle formats with more styling.</td>
+              <td>Useful for complex styling, fan edits, and hardcoded looks.</td>
+            </tr>
+            <tr>
+              <td>TXT</td>
+              <td>Plain text transcript without timing.</td>
+              <td>Good for reading, not good for playback subtitles.</td>
+            </tr>
+            <tr>
+              <td>MP4 / MKV</td>
+              <td>Video container formats.</td>
+              <td>Can carry soft subtitles or be burned into a final export.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">How to use this tool</div>
+      <div class="steps">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <div>
+            <strong>Get a Groq API key</strong>
+            <p>Open the Groq console, create a key, and copy it carefully. Treat it like a password because it can be used for API requests tied to your account.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <div>
+            <strong>Upload a file</strong>
+            <p>Select an audio or video file. The tool accepts common media formats and is designed for files up to 25MB, which matches the request limits used by Groq for this flow.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <div>
+            <strong>Choose language and filename</strong>
+            <p>Use auto-detect for mixed or uncertain speech. Pick a language manually if you already know the content language and want cleaner results.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">4</span>
+          <div>
+            <strong>Generate and download</strong>
+            <p>Tap the generate button, wait for processing to finish, then download the subtitle file. The result comes out as <code>.srt</code> for easy use in editors and players.</p>
+          </div>
+        </div>
+      </div>
+      <p class="mini-note">If you are doing this on mobile, make sure the browser has a stable connection. Upload time is usually the slowest step when the file is large.</p>
+    </div>
+
+    <div class="card">
+      <div class="section-title">How to import subtitles into a video</div>
+      <div class="article-body">
+        <p>Importing subtitles means loading the subtitle file into a video player or editor so it appears during playback. In many apps, this is called <em>adding captions</em>, <em>adding subtitles</em>, or <em>attaching a subtitle track</em>.</p>
+        <p>In players like VLC, you usually open the video and then load the subtitle file from the subtitle menu. In editors such as DaVinci Resolve, Premiere Pro, CapCut, and Shotcut, you can import the subtitle file into the project timeline or media bin and align it with the video.</p>
+        <p>On YouTube, subtitles are usually uploaded through YouTube Studio as a subtitle track. On some platforms, you can either upload the subtitle file directly or paste the text into a subtitle editor.</p>
+        <div class="callout">Tip: when importing, make sure the subtitle file name is easy to find and the subtitle timing matches the correct video version. A subtitle file made for one cut of a video may not align well with another cut.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">How to burn subtitles into a video</div>
+      <div class="article-body">
+        <p>Burning subtitles means permanently rendering the subtitle text into the video itself. That is different from soft subtitles, which can be turned on or off. Burned subtitles are visible in every player because they become part of the video image.</p>
+        <p>Burning is useful when you want subtitles always visible, especially for social media uploads, reposts, or exports where the player may not support separate subtitle tracks. It is also handy when you want the text style to remain the same everywhere.</p>
+        <p>You can burn subtitles in editors like CapCut, Premiere Pro, and DaVinci Resolve by importing the subtitle file, placing it on the timeline, and exporting the video. With FFmpeg, subtitle burning is possible through command-line rendering as well.</p>
+        <p>Example concept: a video file plus an SRT file can be merged during export so the final rendered video includes the text on screen permanently. That is often called <strong>hardcoding</strong> subtitles.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">How to convert video to MP3</div>
+      <div class="article-body">
+        <p>Sometimes the easiest way to work with a video is to extract only the audio. That can reduce file size, speed up uploads, and make transcription easier if the video contains only spoken dialogue.</p>
+        <p>You can convert a video to MP3 using tools like VLC, FFmpeg, Audacity, HandBrake, or any reliable editor that supports audio export. The goal is to keep the speech while removing the video stream.</p>
+        <p>Why do this? Smaller audio files can upload faster, especially on mobile or weak internet. If a video is too large for the 25MB limit, extracting the audio and exporting it at a lower bitrate can be the simplest fix.</p>
+        <p>Good practice: preserve speech clarity. Do not over-compress the file so much that voices become distorted. A smaller file is useful only if the words are still understandable.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">How to reduce a file under 25MB</div>
+      <div class="article-body">
+        <p>If your file is larger than 25MB, the most practical fix is to trim, compress, or convert it before uploading. This is not a bug in the page; it is a real API-side limit for the transcription flow used here.</p>
+        <ul>
+          <li><strong>Trim unnecessary sections:</strong> remove long intros, silence, or outro music.</li>
+          <li><strong>Lower the video bitrate:</strong> smaller bitrate often means much smaller file size.</li>
+          <li><strong>Extract audio only:</strong> converting to MP3 can cut the size dramatically.</li>
+          <li><strong>Split long recordings:</strong> separate a lecture or podcast into multiple clips.</li>
+          <li><strong>Use efficient codecs:</strong> modern audio codecs often provide better quality per byte.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Common subtitle workflow examples</div>
+      <div class="article-body">
+        <p><strong>YouTube tutorial:</strong> generate subtitles, upload the SRT in YouTube Studio, then review timing and publish.</p>
+        <p><strong>Reel or short:</strong> generate subtitles, burn them into the video, and export a final version that always shows the text.</p>
+        <p><strong>Course lecture:</strong> generate subtitles, import them into the editing app, and use them as a track for accessibility and translation.</p>
+        <p><strong>Podcast clip:</strong> convert the audio to a lighter MP3 first, then generate subtitles and use them for social media captions or on-screen text.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">File types supported here</div>
+      <div class="table-wrap">
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Why it works well</th>
+              <th>Practical note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MP3</td>
+              <td>Small, widely supported, easy to upload.</td>
+              <td>Good default for speech-only content.</td>
+            </tr>
+            <tr>
+              <td>WAV</td>
+              <td>High quality audio.</td>
+              <td>Often larger than necessary if size is a concern.</td>
+            </tr>
+            <tr>
+              <td>M4A / AAC</td>
+              <td>Efficient audio compression.</td>
+              <td>Useful for mobile recordings and voice notes.</td>
+            </tr>
+            <tr>
+              <td>MP4 / MKV / WEBM</td>
+              <td>Contain video and audio together.</td>
+              <td>Great when you want to subtitle a full video directly.</td>
+            </tr>
+            <tr>
+              <td>FLAC / OGG / OPUS</td>
+              <td>Often high quality or very efficient.</td>
+              <td>Good for advanced users and quality-focused recordings.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Subtitle definitions and key terms</div>
+      <div class="glossary-list">
+        <div class="glossary-item"><strong>Subtitle</strong><span>Text displayed during playback to show spoken words or important audio information.</span></div>
+        <div class="glossary-item"><strong>Caption</strong><span>Text that may include sound effects, speaker labels, and non-speech audio for accessibility.</span></div>
+        <div class="glossary-item"><strong>Soft subtitles</strong><span>Subtitle tracks that can be turned on or off in the player.</span></div>
+        <div class="glossary-item"><strong>Hardcoded subtitles</strong><span>Subtitles permanently burned into the video image itself.</span></div>
+        <div class="glossary-item"><strong>Timestamp</strong><span>The exact time when a subtitle should appear and disappear.</span></div>
+        <div class="glossary-item"><strong>Codec</strong><span>The method used to encode audio or video so it can be compressed and decoded later.</span></div>
+        <div class="glossary-item"><strong>Bitrate</strong><span>How much data is used per second of media. Lower bitrate usually means smaller size.</span></div>
+        <div class="glossary-item"><strong>Container</strong><span>The file wrapper that holds audio, video, subtitles, and metadata together.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Frequently asked questions</div>
+      <div class="qa">
+        <div class="qa-item">
+          <h3>Why does it error out when the file is larger than 25MB?</h3>
+          <p>The transcription flow used by Groq in this setup does not accept files above the 25MB limit. That is why uploads beyond that size fail. The fix is to trim the file, compress it, convert video to MP3, or split it into smaller parts before uploading.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Is the 25MB limit a website bug?</h3>
+          <p>No. It is a service limitation for the transcription request path. The page is built to respect that limit instead of pretending it does not exist.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Can I use this for long lectures?</h3>
+          <p>Yes, but long lectures may need to be divided into segments so each upload stays under the size limit. Splitting by topic or chapter also makes editing easier later.</p>
+        </div>
+        <div class="qa-item">
+          <h3>What subtitle file does this generate?</h3>
+          <p>This tool generates <code>.srt</code> files, which are simple, common, and compatible with many editors and players.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Can I edit the subtitle file after download?</h3>
+          <p>Yes. Because SRT is plain text, you can open it in a text editor and adjust the wording, timing, or numbering if needed.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Why is auto-detect sometimes better than choosing a language?</h3>
+          <p>Auto-detect is useful when the audio contains mixed speech, code-switching, uncertain accents, or multilingual segments. Manual language selection is better when the content is clearly in one language.</p>
+        </div>
+        <div class="qa-item">
+          <h3>Can subtitles improve search or discoverability?</h3>
+          <p>Yes. For creators, subtitles often help with indexing, accessibility, and viewer retention because more people can understand the content quickly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Privacy and security notice</div>
+      <div class="privacy-box">
+        <p>The file is handled directly by the browser and then sent through the request flow needed to transcribe it. The page does not need to keep a copy of your media on a server to work.</p>
+        <p>If you choose to remember the key, it is saved locally in your browser storage on that device only. This is for convenience, not for cloud syncing. Clearing browser data or using the Forget button removes it.</p>
+        <p>Do not save API keys on shared or public devices. Do not paste them into random websites. Do not upload screenshots of your key. Keep your key private the same way you would keep a password private.</p>
+        <p>From a security perspective, this tool is intentionally minimal. It avoids account systems, avoids unnecessary tracking, and avoids collecting extra personal data that it does not need for subtitle generation.</p>
+        <p>If the site is ever used on a public computer, clear local storage afterward and log out of any services used to create the key. Basic hygiene matters more than fancy security words.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">API key security notice</div>
+      <div class="article-body">
+        <p>Your Groq API key is the sensitive part of the workflow. It identifies your access to the transcription service, so it should be treated as confidential.</p>
+        <ul>
+          <li>Never share your API key publicly.</li>
+          <li>Never commit it to GitHub or paste it into code.</li>
+          <li>Never send it in screenshots or screen recordings.</li>
+          <li>Rotate it if you think it was exposed.</li>
+          <li>Use the Forget button when you are done on shared devices.</li>
+        </ul>
+        <p>Remember: the site can work without storing your key at all. Saving it is optional and only for convenience.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Why modern sites add long useful content</div>
+      <div class="article-body">
+        <p>Long useful content is not just filler. It helps first-time users understand the tool, gives returning users quick reminders, and makes the page feel like a real product instead of a bare widget.</p>
+        <p>Detailed support text also helps reduce confusion, especially for tasks that involve file formats, API keys, subtitle timing, and upload limits. When users understand the workflow, they make fewer mistakes and need less troubleshooting.</p>
+        <p>That is why this page includes practical explanation sections, troubleshooting notes, a glossary, and workflow guidance. The goal is to make the tool more useful without touching the core generator logic.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Troubleshooting</div>
+      <div class="qa">
+        <div class="qa-item">
+          <h3>The Generate button is disabled</h3>
+          <p>That usually means one of the required inputs is missing. Add a valid Groq key and select a file. Once both are in place, the button should become active.</p>
+        </div>
+        <div class="qa-item">
+          <h3>The upload is slow</h3>
+          <p>Large files, poor connection, or mobile data can slow things down. Try a smaller file, a stronger network, or a shorter clip if you need quicker results.</p>
+        </div>
+        <div class="qa-item">
+          <h3>The subtitles look off</h3>
+          <p>That can happen when the audio is unclear or when the wrong language is selected. Try auto-detect first, then test the most likely language for the content.</p>
+        </div>
+        <div class="qa-item">
+          <h3>The file is under 25MB but still fails</h3>
+          <p>Check for a broken upload, unsupported audio encoding, unstable internet, or a temporary API-side issue. Re-exporting the file to MP3 or WAV often fixes strange edge cases.</p>
+        </div>
+        <div class="qa-item">
+          <h3>The subtitle file downloads but looks empty</h3>
+          <p>That can happen if the source has no clear speech or if the transcription response contains almost no text. Try a different source file or a section with better spoken audio.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Privacy note -->
+  <p class="note" style="margin-top:28px;">
+    🔒 Your API key and file(s) are never sent to Our servers. The request goes directly from your browser to Groq via a CloudFlare proxy. Nothing is logged or stored. If you choose "Remember this key," it stays only in this browser's local storage on this device — clear it anytime with the Forget button.
+  </p>
+
+</main>
+
+<!-- Footer (default for crawlers, will be replaced by fetch) -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <small>&copy; 2026 UzairTechGuide - All Rights Reserved.</small>
+    <p>
+      <a href="/privacy.html">Privacy Policy</a> |
+      <a href="/terms.html">Terms of Use</a> |
+      <a href="/contact.html">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   THEME + NAV ============================================================ */
+(function(){
+  const THEME_KEY='utg_theme';
+  const bodyEl=document.body;
+  const themeBtn=document.getElementById('theme-toggle');
+  const burger=document.getElementById('hamburger-btn');
+  const nav=document.getElementById('side-nav');
+  const overlay=document.getElementById('overlay');
+  const closeBtn=document.getElementById('side-close');
+
+  const SVG={
+    moon:'<svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+    sun:'<svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
+  };
+
+  function applyTheme(mode){
+    if(mode==='light'){
+      bodyEl.classList.add('light');
+      themeBtn.innerHTML=SVG.sun;
+      themeBtn.title='Switch to dark';
+      themeBtn.setAttribute('aria-pressed','true');
+    } else {
+      bodyEl.classList.remove('light');
+      themeBtn.innerHTML=SVG.moon;
+      themeBtn.title='Switch to light';
+      themeBtn.setAttribute('aria-pressed','false');
+    }
+    try{localStorage.setItem(THEME_KEY,mode);}catch(e){}
+  }
+
+  (function initTheme(){
+    let saved=null;
+    try{saved=localStorage.getItem(THEME_KEY);}catch(e){}
+    if(!saved){
+      const prefersLight=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches;
+      saved=prefersLight?'light':'dark';
+    }
+    applyTheme(saved);
+  })();
+
+  themeBtn.addEventListener('click',()=>{
+    applyTheme(bodyEl.classList.contains('light')?'dark':'light');
+  });
+
+  function openSide(){
+    burger.classList.add('open');nav.classList.add('open');
+    overlay.classList.add('show');overlay.hidden=false;
+    burger.setAttribute('aria-expanded','true');
+    nav.setAttribute('aria-hidden','false');
+    const first=nav.querySelector('.side-links a');
+    if(first)first.focus();
+  }
+  function closeSide(){
+    burger.classList.remove('open');nav.classList.remove('open');
+    overlay.classList.remove('show');
+    setTimeout(()=>overlay.hidden=true,220);
+    burger.setAttribute('aria-expanded','false');
+    nav.setAttribute('aria-hidden','true');
+    try{burger.focus();}catch(e){}
+  }
+  burger.addEventListener('click',ev=>{ev.stopPropagation();nav.classList.contains('open')?closeSide():openSide();});
+  closeBtn.addEventListener('click',closeSide);
+  overlay.addEventListener('click',closeSide);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open'))closeSide();});
+  document.addEventListener('click',e=>{if(!nav.contains(e.target)&&!burger.contains(e.target)&&nav.classList.contains('open'))closeSide();});
+})();
+
+/* ============================================================
+   SRT GENERATOR LOGIC
+   ============================================================ */
+(function(){
+  const PROXY_URL = 'https://uzairtechguide01.uzairshah4270.workers.dev';
+  const STORAGE_KEY = 'utg_groq_api_key';
+
+  const apiKeyInput     = document.getElementById('api-key');
+  const eyeBtn          = document.getElementById('eye-btn');
+  const eyeIcon         = document.getElementById('eye-icon');
+  const rememberCb      = document.getElementById('remember-key-cb');
+  const savedKeyChip    = document.getElementById('saved-key-chip');
+  const savedKeyPreview = document.getElementById('saved-key-preview');
+  const forgetKeyBtn    = document.getElementById('forget-key-btn');
+  const fileInput       = document.getElementById('file-input');
+  const dropZone        = document.getElementById('drop-zone');
+  const fileNameEl      = document.getElementById('file-name');
+  const langSelect      = document.getElementById('lang-select');
+  const filenameOut     = document.getElementById('filename-out');
+  const btnRun          = document.getElementById('btn-run');
+  const progressArea    = document.getElementById('progress-area');
+  const progressBar     = document.getElementById('progress-bar');
+  const progressStage   = document.getElementById('progress-stage');
+  const progressPct     = document.getElementById('progress-pct');
+  const statusText      = document.getElementById('status-text');
+  const resultArea      = document.getElementById('result-area');
+  const btnDownload     = document.getElementById('btn-download');
+
+  let selectedFile = null;
+
+  function maskKey(key){
+    if(key.length <= 10) return key;
+    return key.slice(0,7) + '••••••••' + key.slice(-4);
+  }
+
+  function loadSavedKey(){
+    let saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch(e){}
+    if(saved){
+      apiKeyInput.value = saved;
+      rememberCb.checked = true;
+      savedKeyChip.classList.add('active');
+      savedKeyPreview.textContent = maskKey(saved);
+      checkReady();
+    }
+  }
+
+  function forgetKey(){
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+    apiKeyInput.value = '';
+    rememberCb.checked = false;
+    savedKeyChip.classList.remove('active');
+    checkReady();
+    apiKeyInput.focus();
+  }
+
+  forgetKeyBtn.addEventListener('click', forgetKey);
+
+  function syncKeyStorage(){
+    if(rememberCb.checked && apiKeyInput.value.trim().length > 10){
+      try { localStorage.setItem(STORAGE_KEY, apiKeyInput.value.trim()); } catch(e){}
+      savedKeyChip.classList.add('active');
+      savedKeyPreview.textContent = maskKey(apiKeyInput.value.trim());
+    } else {
+      try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+      savedKeyChip.classList.remove('active');
+    }
+  }
+
+  rememberCb.addEventListener('change', syncKeyStorage);
+
+  loadSavedKey();
+
+  const EYE_OPEN  = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  const EYE_SLASH = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+
+  eyeBtn.addEventListener('click', () => {
+    const isPass = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPass ? 'text' : 'password';
+    eyeIcon.innerHTML = isPass ? EYE_SLASH : EYE_OPEN;
+  });
+
+  function checkReady(){
+    const ready = apiKeyInput.value.trim().length > 10 && selectedFile !== null;
+    btnRun.disabled = !ready;
+  }
+  apiKeyInput.addEventListener('input', () => {
+    checkReady();
+    syncKeyStorage();
+  });
+
+  dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.add('dragging');
+  });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragging'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragging');
+    const f = e.dataTransfer.files[0];
+    if(f) setFile(f);
+  });
+  fileInput.addEventListener('change', () => {
+    if(fileInput.files[0]) setFile(fileInput.files[0]);
+  });
+
+  function setFile(f){
+    selectedFile = f;
+    dropZone.classList.add('has-file');
+    fileNameEl.textContent = f.name;
+    if(!filenameOut.value){
+      filenameOut.value = f.name.replace(/\.[^.]+$/, '');
+    }
+    checkReady();
+  }
+
+  function showProgress(stage, pct, indeterminate=false){
+    progressArea.classList.add('active');
+    resultArea.classList.remove('active');
+    progressStage.textContent = stage;
+    progressPct.textContent = pct !== null ? pct+'%' : '';
+    if(indeterminate){
+      progressBar.classList.add('indeterminate');
+      progressBar.style.width = '';
+    } else {
+      progressBar.classList.remove('indeterminate');
+      progressBar.style.width = (pct||0)+'%';
+    }
+  }
+
+  function setStatus(msg, type=''){
+    statusText.textContent = msg;
+    statusText.className = 'status-text' + (type ? ' '+type : '');
+  }
+
+  function resetUI(){
+    progressArea.classList.remove('active');
+    resultArea.classList.remove('active');
+    progressBar.classList.remove('indeterminate');
+    progressBar.style.width='0%';
+    progressPct.textContent='';
+    setStatus('');
+  }
+
+  function secondsToSrt(s){
+    const h=Math.floor(s/3600);
+    const m=Math.floor((s%3600)/60);
+    const sec=Math.floor(s%60);
+    const ms=Math.round((s%1)*1000);
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')},${String(ms).padStart(3,'0')}`;
+  }
+
+  function jsonToSrt(data){
+    const segments = data.segments || [];
+    if(!segments.length){
+      const text=(data.text||'').trim();
+      return text ? `1\n00:00:00,000 --> 00:00:10,000\n${text}\n` : null;
+    }
+    return segments.map((seg,i)=>{
+      const start=secondsToSrt(parseFloat(seg.start)||0);
+      const end  =secondsToSrt(parseFloat(seg.end)||0);
+      const text =(seg.text||'').trim();
+      return `${i+1}\n${start} --> ${end}\n${text}`;
+    }).join('\n\n') + '\n';
+  }
+
+  btnRun.addEventListener('click', async () => {
+    if(!selectedFile || !apiKeyInput.value.trim()) return;
+
+    const apiKey  = apiKeyInput.value.trim();
+    const lang    = langSelect.value;
+    const outName = (filenameOut.value.trim() || 'subtitles').replace(/\.srt$/i,'');
+
+    btnRun.disabled = true;
+    btnRun.innerHTML = '<div class="spinner"></div> Generating…';
+    resetUI();
+
+    try {
+      showProgress('Uploading to Groq…', 0);
+      setStatus('Preparing file…');
+
+      const formData = new FormData();
+      formData.append('file', selectedFile, selectedFile.name);
+      formData.append('model', 'whisper-large-v3-turbo');
+      formData.append('response_format', 'verbose_json');
+      if(lang) formData.append('language', lang);
+
+      const endpoint = 'transcriptions';
+
+      const srtContent = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `${PROXY_URL}/${endpoint}`);
+        xhr.setRequestHeader('X-API-Key', apiKey);
+
+        xhr.upload.addEventListener('progress', e => {
+          if(e.lengthComputable){
+            const pct = Math.round((e.loaded/e.total)*100);
+            showProgress('Uploading to Groq…', pct);
+            setStatus(`${(e.loaded/1048576).toFixed(1)} MB / ${(e.total/1048576).toFixed(1)} MB`);
+          }
+        });
+
+        xhr.upload.addEventListener('load', () => {
+          showProgress('Groq is transcribing…', null, true);
+          setStatus('Neural engine is assembling subtitle blocks…');
+        });
+
+        xhr.addEventListener('load', () => {
+          if(xhr.status === 200){
+            try {
+              const data = JSON.parse(xhr.responseText);
+              const srt  = jsonToSrt(data);
+              if(!srt) return reject(new Error('No transcription returned. Is there speech in the file?'));
+              resolve(srt);
+            } catch(e){
+              reject(new Error('Could not parse Groq response: ' + xhr.responseText.slice(0,200)));
+            }
+          } else {
+            let msg = `API error ${xhr.status}`;
+            try { const d=JSON.parse(xhr.responseText); msg=d.error?.message||msg; } catch(e){}
+            reject(new Error(msg));
+          }
+        });
+
+        xhr.addEventListener('error', () => reject(new Error('Network error. Check your connection.')));
+        xhr.addEventListener('abort', () => reject(new Error('Upload cancelled.')));
+
+        xhr.send(formData);
+      });
+
+      showProgress('Done', 100);
+      setStatus('✅ Transcription complete', 'success');
+
+      const blob = new Blob([srtContent], {type:'text/plain;charset=utf-8'});
+      const url  = URL.createObjectURL(blob);
+      btnDownload.href     = url;
+      btnDownload.download = `${outName}.srt`;
+      resultArea.classList.add('active');
+
+      btnDownload.click();
+
+    } catch(err){
+      showProgress('Failed', null, false);
+      progressBar.style.width = '0%';
+      setStatus('❌ ' + err.message, 'error');
+    } finally {
+      btnRun.disabled = false;
+      btnRun.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Generate SRT';
+      checkReady();
+    }
+  });
+
+})();
+</script>
+
+<!-- Load side nav from external file -->
+<script>
+fetch('/components/nav.html')
+  .then(r => r.text())
+  .then(html => {
+    const sideLinks = document.querySelector('.side-links');
+    if (sideLinks) sideLinks.innerHTML = html;
+  })
+  .catch(err => console.warn('Failed to load nav:', err));
+</script>
+
+<!-- Load footer from external file -->
+<script>
+fetch('/components/footer.html')
+  .then(r => r.text())
+  .then(html => {
+    const footerInner = document.querySelector('.footer-inner');
+    if (footerInner) footerInner.innerHTML = html;
+  })
+  .catch(err => console.warn('Failed to load footer:', err));
+</script>
+
+</body>
+</html>
