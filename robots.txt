@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Link to your sitemap for faster discovery
-Sitemap: https://uzair-902.github.io/sitemap.xml
+Sitemap: https://uzairtechguide.github.io/sitemap.xml
