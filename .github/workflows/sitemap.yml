@@ -21,6 +21,11 @@ jobs:
         with:
           base-url-path: https://uzairtechguide.github.io/
           sitemap-path: sitemap.xml
+        # Add this line to hide internal files
+          exclude: |
+            **/components/**
+            **/ind2.html
+            **/aisgtest.html
 
       - name: Commit and push sitemap
         uses: stefanzweifel/git-auto-commit-action@v4
