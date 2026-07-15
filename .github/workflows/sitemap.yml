@@ -31,6 +31,7 @@ jobs:
           sed -i '/components\//d' sitemap.xml
           sed -i '/ind2.html/d' sitemap.xml
           sed -i '/aisgtest.html/d' sitemap.xml
+          sed -i '/googlebcc723c3e0ed51a2.html' sitemap.xml
         shell: bash
 
       - name: Commit and push sitemap
