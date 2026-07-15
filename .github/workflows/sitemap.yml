@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write  # This is the crucial missing piece
+  contents: write
 
 jobs:
   sitemap:
@@ -21,9 +21,8 @@ jobs:
         with:
           base-url-path: https://uzairtechguide.github.io/
           sitemap-path: sitemap.xml
-        # Add this line to hide internal files
           exclude: |
-            **/components/**
+            **/components/*
             **/ind2.html
             **/aisgtest.html
 
