@@ -12,6 +12,7 @@ permissions:
 jobs:
   sitemap:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -25,17 +26,23 @@ jobs:
           sitemap-path: sitemap.xml
           add-lastmod: true
 
-      - name: Cleanup sitemap (Manual Filter)
-  run: |
-    # Remove unwanted URLs from sitemap
-    sed -i '/components\//d' sitemap.xml
-    sed -i '/ind2.html/d' sitemap.xml
-    sed -i '/aisgtest.html/d' sitemap.xml
-    sed -i '/googlebcc723c3e0ed51a2.html/d' sitemap.xml
-  shell: bash
+      - name: Cleanup sitemap
+        shell: bash
+        run: |
+          # Remove every URL inside the /components/ directory
+          perl -0777 -i -pe 's|<url>\s*<loc>https://uzairtechguide\.github\.io/components/.*?</url>\s*||gs' sitemap.xml
+
+          # Remove specific pages
+          for page in \
+            "ind2.html" \
+            "aisgtest.html" \
+            "googlebcc723c3e0ed51a2.html"
+          do
+            perl -0777 -i -pe "s|<url>\s*<loc>https://uzairtechguide\.github\.io/${page}</loc>.*?</url>\s*||gs" sitemap.xml
+          done
 
       - name: Commit and push sitemap
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Automated: Cleaned sitemap.xml"
+          commit_message: "Automated: Generated and cleaned sitemap.xml"
           file_pattern: sitemap.xml
