@@ -21,13 +21,16 @@ jobs:
         with:
           base-url-path: https://uzairtechguide.github.io/
           sitemap-path: sitemap.xml
+          # Ensures only meaningful content is indexed
           exclude: |
-            **/components/*
+            **/components/**
             **/ind2.html
             **/aisgtest.html
+          # Includes the last modification date for SEO signals
+          add-lastmod: true
 
       - name: Commit and push sitemap
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Automated: Update sitemap.xml"
+          commit_message: "Automated: Update sitemap.xml with accurate lastmod dates"
           file_pattern: sitemap.xml
