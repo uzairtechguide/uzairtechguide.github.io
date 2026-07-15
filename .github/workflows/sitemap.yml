@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Allows you to manually trigger it for testing
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -23,20 +23,18 @@ jobs:
         with:
           base-url-path: https://uzairtechguide.github.io/
           sitemap-path: sitemap.xml
-          # Explicit relative paths to ensure accurate exclusion
-          exclude: |
-            components/*
-            ind2.html
-            tools/ai-subtitles-generator/aisgtest.html
           add-lastmod: true
+
+      - name: Cleanup sitemap (Manual Filter)
+        run: |
+          # Use sed to delete lines containing unwanted files
+          sed -i '/components\//d' sitemap.xml
+          sed -i '/ind2.html/d' sitemap.xml
+          sed -i '/aisgtest.html/d' sitemap.xml
+        shell: bash
 
       - name: Commit and push sitemap
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Automated: Optimized sitemap.xml"
+          commit_message: "Automated: Cleaned sitemap.xml"
           file_pattern: sitemap.xml
-          # Ensures the commit happens even if only metadata changed
-          skip_dirty_check: false
-          # Sets a default user for the automated commit
-          commit_user_name: "GitHub Action"
-          commit_user_email: "actions@github.com"
