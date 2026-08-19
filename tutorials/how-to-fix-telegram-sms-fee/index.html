@@ -205,6 +205,7 @@ body.light .control-btn:hover{
   box-shadow:0 10px 24px rgba(16,24,32,0.10);
 }
 
+
 /* ===== header ===== */
 .header{
   position:fixed;
@@ -998,6 +999,32 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
+<!-- added manually  -->
+
+<script>
+fetch('/components/nav.html')
+  .then(r => r.text())
+  .then(html => {
+    // Find the .side-links div and replace its content
+    const sideLinks = document.querySelector('.side-links');
+    if (sideLinks) sideLinks.innerHTML = html;
+
+    // Re-initialize nav after content loads
+    if (window.initNavigation) window.initNavigation();
+  })
+  .catch(err => console.warn('Failed to load nav:', err));
+</script>
+
+<script>
+fetch('/components/footer.html')
+  .then(r => r.text())
+  .then(html => {
+    const footerEl = document.querySelector('.footer');
+    if (footerEl) footerEl.innerHTML = html;
+  })
+  .catch(err => console.warn('Failed to load footer:', err));
+</script>
+     
 
 </body>
 </html>
