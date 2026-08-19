@@ -1,0 +1,67 @@
+<!-- Global Configuration & Auto-Replacements -->
+<script>
+(function() {
+  // ============================================================
+  // SITE CONFIGURATION
+  // ============================================================
+  window.SiteConfig = {
+    // Channel information
+    youtube: {
+      old: {
+        handle: '@MumammdUzairShah23',
+        url: 'https://youtube.com/@MumammdUzairShah23'
+      },
+      new: {
+        handle: '@UzairTechGuide',
+        url: 'https://youtube.com/@UzairTechGuide'
+      }
+    },
+
+    // Add more configs here as needed
+    social: {
+      twitter: 'https://twitter.com/UzairTechGuide',
+      github: 'https://github.com/UzairTechGuide'
+    },
+
+    site: {
+      name: 'UzairTechGuide',
+      url: 'https://uzairtechguide.github.io',
+      year: new Date().getFullYear()
+    }
+  };
+
+  // ============================================================
+  // AUTO-REPLACEMENT FUNCTION
+  // ============================================================
+  function applyGlobalReplacements() {
+    const config = window.SiteConfig.youtube;
+
+    // Replace all YouTube channel links in href attributes
+    document.querySelectorAll(`a[href*="${config.old.handle}"], a[href*="${config.old.url}"]`).forEach(link => {
+      link.href = link.href.replace(config.old.url, config.new.url);
+      link.textContent = link.textContent.replace(config.old.handle, config.new.handle);
+    });
+
+    // Replace text content containing old channel name
+    document.querySelectorAll('*').forEach(el => {
+      if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
+        el.textContent = el.textContent.replace(
+          new RegExp(config.old.handle.replace('@', '\\@'), 'g'),
+          config.new.handle
+        );
+      }
+    });
+  }
+
+  // Run replacements when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyGlobalReplacements);
+  } else {
+    applyGlobalReplacements();
+  }
+
+  // Also run after dynamic content loads (for fetched components)
+  const observer = new MutationObserver(applyGlobalReplacements);
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
