@@ -957,26 +957,34 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Hamburger menu toggles
-  function openNav() {
-    sideNav.classList.add("open");
-    overlay.classList.add("show");
-    overlay.hidden = false;
-    hamburgerBtn.classList.add("open");
-    hamburgerBtn.setAttribute("aria-expanded", "true");
-  }
+ // Hamburger menu toggles
+function openNav() {
+  sideNav.classList.add("open");
+  overlay.classList.add("show");
+  overlay.hidden = false;
+  hamburgerBtn.classList.add("open");
+  hamburgerBtn.setAttribute("aria-expanded", "true");
+}
 
-  function closeNav() {
-    sideNav.classList.remove("open");
-    overlay.classList.remove("show");
-    overlay.hidden = true;
-    hamburgerBtn.classList.remove("open");
-    hamburgerBtn.setAttribute("aria-expanded", "false");
-  }
+function closeNav() {
+  sideNav.classList.remove("open");
+  overlay.classList.remove("show");
+  overlay.hidden = true;
+  hamburgerBtn.classList.remove("open");
+  hamburgerBtn.setAttribute("aria-expanded", "false");
+}
 
-  if(hamburgerBtn) hamburgerBtn.addEventListener("click", openNav);
-  if(sideClose) sideClose.addEventListener("click", closeNav);
-  if(overlay) overlay.addEventListener("click", closeNav);
+function toggleNav() {
+  if (sideNav.classList.contains("open")) {
+    closeNav();
+  } else {
+    openNav();
+  }
+}
+
+if(hamburgerBtn) hamburgerBtn.addEventListener("click", toggleNav);
+if(sideClose) sideClose.addEventListener("click", closeNav);
+if(overlay) overlay.addEventListener("click", closeNav);
 
   // Copy button handler for code blocks
   document.querySelectorAll(".code-block[data-copy]").forEach(block => {
