@@ -942,20 +942,44 @@ document.addEventListener("DOMContentLoaded", function() {
   const overlay = document.getElementById("overlay");
   const sideClose = document.getElementById("side-close");
 
-  // Load theme preference
-  if (localStorage.getItem("theme") === "light") {
-    document.body.classList.add("light");
-    if(themeToggle) themeToggle.setAttribute("aria-pressed", "true");
-  }
+// SVG icons for theme toggle
+const SVG = {
+  moon: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+  sun:  '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg>'
+};
 
-  if(themeToggle) {
-    themeToggle.addEventListener("click", function() {
-      document.body.classList.toggle("light");
-      const isLight = document.body.classList.contains("light");
-      localStorage.setItem("theme", isLight ? "light" : "dark");
-      themeToggle.setAttribute("aria-pressed", isLight ? "true" : "false");
-    });
+function applyTheme(mode){
+  if(mode === 'light'){
+    document.body.classList.add("light");
+    if(themeToggle) {
+      themeToggle.innerHTML = SVG.sun;
+      themeToggle.setAttribute("aria-pressed", "true");
+    }
+  } else {
+    document.body.classList.remove("light");
+    if(themeToggle) {
+      themeToggle.innerHTML = SVG.moon;
+      themeToggle.setAttribute("aria-pressed", "false");
+    }
   }
+  try { localStorage.setItem("theme", mode); } catch(e){}
+}
+
+// Load theme preference
+let saved = null;
+try { saved = localStorage.getItem("theme"); } catch(e) { saved = null; }
+if (!saved) {
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  saved = prefersLight ? 'light' : 'dark';
+}
+applyTheme(saved);
+
+if(themeToggle) {
+  themeToggle.addEventListener("click", function() {
+    const current = document.body.classList.contains("light") ? "light" : "dark";
+    applyTheme(current === "light" ? "dark" : "light");
+  });
+}
 
  // Hamburger menu toggles
 function openNav() {
