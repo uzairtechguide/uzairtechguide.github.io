@@ -1092,15 +1092,6 @@ fetch('/components/footer.html')
     if (footerInner) footerInner.innerHTML = html;
   })
   .catch(err => console.warn('Failed to load footer:', err));
-
-fetch('/components/config.html')
-  .then(r => r.text())
-  .then(html => {
-    const script = document.createElement('div');
-    script.innerHTML = html;
-    document.head.appendChild(script.querySelector('script'));
-  })
-  .catch(err => console.warn('Failed to load config:', err));
 </script>
 
 
