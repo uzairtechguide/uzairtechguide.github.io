@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- ==========================================
+     ADVANCED ON-PAGE SEO & META TAGS (2026)
+     ========================================== -->
+    <title>
+      Unofficial LineageOS 15.1 for Samsung Galaxy Grand Prime VE — UzairTechGuide 
+    </title>
+
+    <meta name="description" content="Download and install the unofficial LineageOS 15.1 Android 8.1 Oreo ROM for the Samsung Galaxy Grand Prime VE. Includes installation guidance, recovery preparation, GApps notes, original XDA thread and preserved ROM download mirrors." />
+
+    <meta name="keywords" content="LineageOS 15.1 Samsung Galaxy Grand Prime VE, LineageOS 15.1 SM-G531H, Galaxy Grand Prime VE Oreo ROM, Android 8.1 Grand Prime VE, unofficial LineageOS Grand Prime, Galaxy Grand Prime custom ROM, TWRP LineageOS 15.1, LineageOS 15.1 download, UzairTechGuide" />
+
+    <meta name="author" content="UzairTechGuide" />
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <link rel="canonical" href="https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/" />
+
+    <!-- Open Graph / Facebook SEO -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Unofficial LineageOS 15.1 for Samsung Galaxy Grand Prime VE — Android 8.1 Oreo" />
+    <meta property="og:description" content="Preserved download page and installation guide for the unofficial LineageOS 15.1 Android 8.1 Oreo ROM for Samsung Galaxy Grand Prime VE." />
+    <meta property="og:url" content="https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/" />
+    <meta property="og:site_name" content="UzairTechGuide" />
+    <meta property="og:image" content="https://uzairtechguide.github.io/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/thumbnail.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card SEO -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Unofficial LineageOS 15.1 for Samsung Galaxy Grand Prime VE" />
+    <meta name="twitter:description" content="Download and installation guide for the preserved unofficial LineageOS 15.1 Android 8.1 Oreo ROM for the Samsung Galaxy Grand Prime VE." />
+    <meta name="twitter:image" content="https://uzairtechguide.github.io/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/thumbnail.webp" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet" />
+
+    <!-- ==========================================
+     JSON-LD STRUCTURAL SCHEMA MARKUP (SEO POWER)
+     ========================================== -->
+    <script type="application/ld+json">
+      {
+  &#34;@context&#34;: &#34;https://schema.org&#34;,
+  &#34;@type&#34;: &#34;TechArticle&#34;,
+  &#34;headline&#34;: &#34;Unofficial LineageOS 15.1 for Samsung Galaxy Grand Prime VE&#34;,
+  &#34;description&#34;: &#34;A preservation and installation guide for the unofficial LineageOS 15.1 Android 8.1 Oreo ROM for the Samsung Galaxy Grand Prime VE.&#34;,
+  &#34;image&#34;: &#34;https://uzairtechguide.github.io/grandprime-lineageos15.jpg&#34;,
+  &#34;author&#34;: {
+    &#34;@type&#34;: &#34;Person&#34;,
+    &#34;name&#34;: &#34;Uzair Shah&#34;
+  },
+  &#34;publisher&#34;: {
+    &#34;@type&#34;: &#34;Organization&#34;,
+    &#34;name&#34;: &#34;UzairTechGuide&#34;,
+    &#34;logo&#34;: {
+      &#34;@type&#34;: &#34;ImageObject&#34;,
+      &#34;url&#34;: &#34;https://uzairtechguide.github.io/favicon.ico&#34;
+    }
+  },
+  &#34;datePublished&#34;: &#34;2026-09-09&#34;,
+  &#34;dateModified&#34;: &#34;2026-09-09&#34;,
+  &#34;mainEntityOfPage&#34;: &#34;https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/&#34;
+}
+    </script>
+
+    <script type="application/ld+json">
+      {
+  &#34;@context&#34;: &#34;https://schema.org&#34;,
+  &#34;@type&#34;: &#34;HowTo&#34;,
+  &#34;name&#34;: &#34;How to Install LineageOS 15.1 on Samsung Galaxy Grand Prime VE&#34;,
+  &#34;description&#34;: &#34;General installation guidance for the unofficial LineageOS 15.1 Android 8.1 Oreo ROM on a compatible Samsung Galaxy Grand Prime VE device.&#34;,
+  &#34;totalTime&#34;: &#34;PT30M&#34;,
+  &#34;estimatedCost&#34;: {
+    &#34;@type&#34;: &#34;MonetaryAmount&#34;,
+    &#34;currency&#34;: &#34;USD&#34;,
+    &#34;value&#34;: &#34;0&#34;
+  },
+  &#34;supply&#34;: [
+    {
+      &#34;@type&#34;: &#34;HowToSupply&#34;,
+      &#34;name&#34;: &#34;LineageOS 15.1 ROM ZIP&#34;
+    },
+    {
+      &#34;@type&#34;: &#34;HowToSupply&#34;,
+      &#34;name&#34;: &#34;Compatible GApps package, if required&#34;
+    }
+  ],
+  &#34;tool&#34;: [
+    {
+      &#34;@type&#34;: &#34;HowToTool&#34;,
+      &#34;name&#34;: &#34;Samsung Galaxy Grand Prime VE&#34;
+    },
+    {
+      &#34;@type&#34;: &#34;HowToTool&#34;,
+      &#34;name&#34;: &#34;TWRP or compatible custom recovery&#34;
+    }
+  ],
+  &#34;step&#34;: [
+    {
+      &#34;@type&#34;: &#34;HowToStep&#34;,
+      &#34;url&#34;: &#34;https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/#step-1&#34;,
+      &#34;name&#34;: &#34;Verify the device model&#34;,
+      &#34;text&#34;: &#34;Confirm that your phone is the exact compatible Galaxy Grand Prime VE variant before flashing anything.&#34;
+    },
+    {
+      &#34;@type&#34;: &#34;HowToStep&#34;,
+      &#34;url&#34;: &#34;https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/#step-2&#34;,
+      &#34;name&#34;: &#34;Back up your data&#34;,
+      &#34;text&#34;: &#34;Create a full backup before modifying recovery, system or data partitions.&#34;
+    },
+    {
+      &#34;@type&#34;: &#34;HowToStep&#34;,
+      &#34;url&#34;: &#34;https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/#step-4&#34;,
+      &#34;name&#34;: &#34;Boot into custom recovery&#34;,
+      &#34;text&#34;: &#34;Boot the compatible Galaxy Grand Prime VE into TWRP or another recovery specified by the ROM developer.&#34;
+    },
+    {
+      &#34;@type&#34;: &#34;HowToStep&#34;,
+      &#34;url&#34;: &#34;https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/#step-6&#34;,
+      &#34;name&#34;: &#34;Wipe the required partitions&#34;,
+      &#34;text&#34;: &#34;Perform the wipes specified by the ROM instructions before installing the ROM.&#34;
+    },
+    {
+      &#34;@type&#34;: &#34;HowToStep&#34;,
+      &#34;url&#34;: &#34;https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/#step-7&#34;,
+      &#34;name&#34;: &#34;Flash LineageOS 15.1&#34;,
+      &#34;text&#34;: &#34;Install the downloaded LineageOS 15.1 ROM ZIP from custom recovery.&#34;
+    },
+    {
+      &#34;@type&#34;: &#34;HowToStep&#34;,
+      &#34;url&#34;: &#34;https://uzairtechguide.github.io/tutorials/unofficial-lineageos-15-1-samsung-galaxy-grand-prime-ve/#step-8&#34;,
+      &#34;name&#34;: &#34;Flash optional GApps&#34;,
+      &#34;text&#34;: &#34;Flash a GApps package only if the ROM setup requires it and make sure its architecture is compatible with the build.&#34;
+    }
+  ]
+}
+    </script>
+
+    <style>
+      /* ============================================================
+   UzairTechGuide 
+   ============================================================ */
+:root{
+  --bg-dark:#0f1113;
+  --panel-dark:#15181a;
+  --text-light:#eef1f3;
+  --muted-light:#bfc7cb;
+  --accent:#ff7a2d;
+  --accent-2:#1db954;
+  --bg-light:#f6f7f8;
+  --panel-light:#ffffff;
+  --text-dark:#111214;
+  --muted-dark:#6b6f73;
+  --radius-md:14px;
+  --shadow-dark:0 8px 24px rgba(3,6,8,0.10);
+  --shadow-light:0 8px 24px rgba(16,24,32,0.06);
+  --transition:220ms cubic-bezier(.2,.9,.3,1);
+  --max-width:1100px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:&#34;Roboto&#34;,system-ui,Arial;
+  background:var(--bg-dark);
+  color:var(--text-light);
+  transition:background .3s,color .3s;
+}
+body.light{
+  background:var(--bg-light);
+  color:var(--text-dark);
+}
+
+/* ===== top controls ===== */
+.top-controls{
+  position:fixed;
+  top:10px;
+  right:10px;
+  display:flex;
+  gap:10px;
+  z-index:1200;
+}
+.control-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:10px;
+  background:rgba(255,255,255,0.06);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:inherit;
+  transition:background .2s,transform .2s,border-color .2s,box-shadow .2s;
+  outline:none;
+}
+.control-btn:hover{transform:translateY(-2px);}
+.control-btn:focus-visible{
+  box-shadow:0 0 0 3px rgba(29,185,84,0.25);
+}
+body.light .control-btn{
+  background:#fff;
+  border:1px solid rgba(17,18,20,0.08);
+  box-shadow:var(--shadow-light);
+  color:var(--text-dark);
+}
+body.light .control-btn:hover{
+  box-shadow:0 10px 24px rgba(16,24,32,0.10);
+}
+
+/* ===== header ===== */
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:&#34;Montserrat&#34;,sans-serif;
+  font-weight:600;
+  font-size:1.2rem;
+  background:rgba(255,255,255,0.02);
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  z-index:1000;
+}
+body.light .header{
+  background:#fff;
+  box-shadow:var(--shadow-light);
+  color:var(--text-dark);
+}
+
+/* ===== hamburger ===== */
+.hamburger{
+  height:36px;
+  width:36px;
+  padding:6px 10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+}
+.hamburger span{
+  width:16px;
+  height:2.5px;
+  background:var(--accent-2);
+  border-radius:2px;
+  margin:1.5px 0;
+  transition:all .3s ease;
+}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(2px,2px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(3px,-3px);}
+.hamburger-fallback{display:none;font-size:22px;color:var(--accent-2);}
+body.light .hamburger span{background:var(--accent-2);}
+
+/* ===== side nav ===== */
+.side-nav{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  height:100vh;
+  background:var(--panel-dark);
+  padding:70px 20px;
+  transition:right .3s;
+  z-index:1100;
+}
+.side-nav.open{right:0;}
+body.light .side-nav{background:var(--panel-light);}
+.side-links a{
+  display:block;
+  padding:10px 12px;
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
+  border-radius:10px;
+  transition:background .2s;
+}
+.side-links a:hover{
+  background:rgba(255,255,255,0.06);
+  color:var(--accent);
+}
+body.light .side-links a:hover{
+  background:rgba(0,0,0,0.05);
+  color:var(--accent-2);
+}
+.side-close{
+  position:absolute;
+  top:10px;
+  left:10px;
+  font-size:28px;
+  background:none;
+  border:none;
+  color:inherit;
+  cursor:pointer;
+}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:1050;
+}
+.overlay.show{opacity:1;pointer-events:auto;}
+body.light .overlay{background:rgba(0,0,0,0.25);}
+
+/* ===== main ===== */
+main{
+  max-width:var(--max-width);
+  margin:112px auto 0;
+  padding:0 20px 10px;
+}
+.tutorial-container{
+  max-width:980px;
+  margin:20px auto 26px;
+  padding:0;
+  font-family:&#34;Roboto&#34;,system-ui,Arial;
+  color:var(--text-light);
+  line-height:1.65;
+}
+body.light .tutorial-container{color:var(--text-dark);}
+.card{
+  background:rgba(255,255,255,0.03);
+  border-radius:12px;
+  padding:26px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  color:inherit;
+}
+body.light .card{
+  background:#fff;
+  color:var(--text-dark);
+  box-shadow:var(--shadow-light);
+  border:1px solid rgba(17,18,20,0.08);
+}
+h1#tut-title{
+  font-family:&#34;Montserrat&#34;,sans-serif;
+  font-size:clamp(1.4rem,2.4vw,1.9rem);
+  line-height:1.25;
+  margin:0 0 12px;
+  letter-spacing:-0.01em;
+  scroll-margin-top:112px;
+}
+p.lead{
+  margin:12px 0 18px;
+  color:rgba(255,255,255,0.88);
+}
+body.light p.lead{color:rgba(0,0,0,0.80);}
+a{color:#58b7ff;text-decoration:none}
+a:hover{text-decoration:underline}
+body.light a{color:#0077cc}
+
+.section-title{
+  font-family:&#34;Montserrat&#34;,sans-serif;
+  font-size:1.25rem;
+  margin:28px 0 12px;
+  font-weight:700;
+  color:inherit;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+body.light .section-title {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+}
+.step{
+  margin:24px 0;
+  background: rgba(255, 255, 255, 0.01);
+  padding: 16px;
+  border-radius: 8px;
+}
+body.light .step {
+  background: rgba(0, 0, 0, 0.01);
+}
+.step h3{
+  font-size:1.1rem;
+  margin:0 0 8px;
+  font-weight:700;
+  color:var(--accent);
+}
+body.light .step h3{
+  color:var(--accent-2);
+}
+.step p{margin:8px 0 12px;}
+ul,ol{
+  margin:8px 0 14px 1.25rem;
+}
+li{margin:8px 0;}
+
+figure{
+  margin:12px 0;
+  text-align:center;
+}
+figure img{
+  width:100%;
+  max-width:820px;
+  border-radius:10px;
+  display:block;
+  margin:8px auto;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+figcaption{
+  font-size:0.92rem;
+  opacity:0.75;
+  margin-top:6px;
+}
+
+.video-wrap{
+  position:relative;
+  width:100%;
+  padding-bottom:56.25%;
+  margin:12px 0 18px;
+  border-radius:10px;
+  overflow:hidden;
+  background:rgba(0,0,0,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+}
+body.light .video-wrap{
+  background:#f7f9fb;
+  border:1px solid rgba(17,18,20,0.08);
+}
+.video-wrap iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+.notice{
+  margin:14px 0 18px;
+  padding:12px 14px;
+  border-left:4px solid var(--accent);
+  border-radius:10px;
+  background:rgba(255,255,255,0.04);
+}
+body.light .notice{
+  background:#f3f5f7;
+  border-left-color:var(--accent-2);
+}
+.notice strong,
+.notice span{color:inherit;}
+
+.code-block{
+  position:relative;
+  margin:14px 0;
+  border-radius:10px;
+  overflow:auto;
+  padding:12px 14px;
+  background:rgba(0,0,0,0.06);
+}
+body.light .code-block{
+  background:linear-gradient(180deg,#f6f8fb,#ffffff);
+  box-shadow:0 6px 18px rgba(16,24,32,0.04);
+}
+.code-block pre{
+  margin:0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,&#34;Roboto Mono&#34;,monospace;
+  font-size:0.95rem;
+  white-space:pre-wrap;
+  word-break:break-word;
+  color:inherit;
+}
+.code-block code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,&#34;Roboto Mono&#34;,monospace;
+  color:inherit;
+}
+.code-inline{
+  display:inline-block;
+  padding:2px 7px;
+  border-radius:6px;
+  background:rgba(255,255,255,0.08);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,&#34;Roboto Mono&#34;,monospace;
+  font-size:0.94em;
+}
+body.light .code-inline{
+  background:#f0f3f6;
+  border:1px solid rgba(17,18,20,0.08);
+}
+
+.copy-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:36px;
+  height:32px;
+  border:none;
+  border-radius:8px;
+  background:rgba(255,255,255,0.10);
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .15s,background .15s,box-shadow .15s;
+}
+.copy-btn:hover{transform:translateY(-1px);}
+body.light .copy-btn{
+  background:rgba(0,0,0,0.06);
+  color:#111;
+  box-shadow:0 4px 12px rgba(16,24,32,0.06);
+}
+.copy-btn.copied{
+  background:#1db954;
+  color:#fff;
+}
+.copy-status{
+  position:absolute;
+  top:12px;
+  right:54px;
+  padding:6px 8px;
+  border-radius:8px;
+  font-size:0.84rem;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  opacity:0;
+  transform:translateY(-6px);
+  transition:opacity .18s,transform .18s;
+  pointer-events:none;
+  white-space:nowrap;
+}
+body.light .copy-status{
+  background:rgba(0,0,0,0.06);
+  color:var(--text-dark);
+}
+.copy-status.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.callout{
+  margin-top:22px;
+  padding:16px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+}
+body.light .callout{background:#f3f5f7;}
+
+.youtube-cta{
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  margin-top:18px;
+  padding:12px 14px;
+  background:#000;
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
+}
+.youtube-cta svg{
+  flex:0 0 auto;
+  width:40px;
+  height:24px;
+}
+
+.note{
+  font-size:0.96rem;
+  opacity:0.92;
+  margin-top:10px;
+}
+
+.footer{
+  text-align:center;
+  padding:25px;
+  color:var(--muted-light);
+}
+body.light .footer{color:var(--muted-dark);}
+
+/* ===== light theme contrast fix for tutorial text ===== */
+body.light .card p,
+body.light .card li,
+body.light .card .note,
+body.light .card .small,
+body.light .card .section-title,
+body.light .card h1,
+body.light .card h3,
+body.light .card strong{
+  color:#111214;
+}
+body.light .card .lead{
+  color:#17191c;
+}
+
+/* ===== Download Buttons ===== */
+.download-grid{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:12px;
+}
+
+.download-btn{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  border-radius:8px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:600;
+  transition:all .25s cubic-bezier(.2,.9,.3,1);
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  position:relative;
+  overflow:hidden;
+}
+
+/* subtle shine effect */
+.download-btn::before{
+  content:&#34;&#34;;
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.15),transparent);
+  opacity:0;
+  transition:opacity .3s;
+}
+.download-btn:hover::before{opacity:1;}
+
+.download-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.35);
+}
+
+.download-btn img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+/* text */
+.download-text{
+  display:flex;
+  flex-direction:column;
+  font-size:1rem;
+}
+
+.download-text span{
+  font-size:0.85rem;
+  opacity:0.85;
+  font-weight:500;
+}
+
+/* brand colors */
+.download-btn.gdrive{
+  background:linear-gradient(135deg,#1a73e8,#4285f4);
+}
+
+.download-btn.mega{
+  background:linear-gradient(135deg,#d9272e,#ff3b3b);
+}
+
+.download-btn.mediafire{
+  background:linear-gradient(135deg,#0077ff,#2aa7ff);
+}
+
+/* light mode fix */
+body.light .download-btn{
+  color:#fff;
+  box-shadow:0 6px 18px rgba(16,24,32,0.15);
+}
+
+/* ===== FAQ / Accordion Section for Rich Snippets ===== */
+.faq-item {
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 12px;
+}
+body.light .faq-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.faq-question {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  margin-bottom: 6px;
+}
+body.light .faq-question {
+  color: #111214;
+}
+.faq-answer {
+  font-size: 0.98rem;
+  opacity: 0.85;
+}
+
+/* ===== responsive ===== */
+@media(max-width:720px){
+  .top-controls{
+    top:9px;
+    right:9px;
+    gap:8px;
+  }
+  .control-btn{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+  }
+  .hamburger{
+    height:34px;
+    width:34px;
+    padding:6px 9px;
+  }
+  .header{
+    height:54px;
+    font-size:1.05rem;
+  }
+  main{
+    margin-top:102px;
+    padding:0 14px 10px;
+  }
+  .tutorial-container{
+    margin:18px auto 24px;
+  }
+  .card{
+    padding:18px;
+    border-radius:14px;
+  }
+  .copy-btn{
+    width:34px;
+    height:30px;
+    top:8px;
+    right:8px;
+  }
+  .copy-status{
+    top:10px;
+    right:44px;
+    font-size:0.78rem;
+  }
+  h1#tut-title{
+    scroll-margin-top:104px;
+  }
+}
+    </style>
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H4XLYPLRZ2">
+    </script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag(&#39;js&#39;, new Date());
+  gtag(&#39;config&#39;, &#39;G-H4XLYPLRZ2&#39;);
+    </script>
+  </head>
+
+  <!-- Google tag (gtag.js) -->
+  <body>
+
+    <!-- controls -->
+    <div class="top-controls">
+      <button id="theme-toggle" class="control-btn" title="Toggle theme" aria-pressed="false" aria-label="Toggle color theme">
+      </button>
+
+      <button id="hamburger-btn" class="hamburger" title="Menu" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="hamburger-fallback">
+          ☰
+        </span>
+      </button>
+    </div>
+
+    <!-- header -->
+    <header class="header">
+      UzairTechGuide
+    </header>
+
+    <!-- side nav -->
+    <aside id="side-nav" class="side-nav" aria-hidden="true">
+      <button class="side-close" id="side-close" aria-label="Close menu">
+        ×
+      </button>
+
+      <nav class="side-links" role="navigation">
+        <!-- Loaded dynamically via JavaScript -->
+      </nav>
+    </aside>
+
+    <div id="overlay" class="overlay" hidden="">
+    </div>
+
+    <main>
+      <article class="tutorial-container" aria-labelledby="tut-title">
+
+        <div class="card" role="article">
+
+          <h1 id="tut-title">
+            Unofficial LineageOS 15.1 for Samsung Galaxy Grand Prime VE
+          </h1>
+
+          <p class="lead">
+            I’m pleased to preserve and share the
+            <strong>Unofficial LineageOS 15.1 ROM</strong>
+            for the Samsung Galaxy Grand Prime VE. This build belongs to the Android 8.1 Oreo generation of LineageOS and is especially interesting for owners of this aging Samsung device who want to revisit one of the later major Android versions made available through the custom-ROM community.
+          </p>
+
+          <p>
+            The original download links for this ROM eventually disappeared from the usual cloud-hosting locations. Because of that, this page is intended as a long-term archive and reference point for the community. The goal is simple: preserve the ROM information, explain the installation process clearly, point users toward the original XDA discussion, and keep verified mirror links together in one place.
+          </p>
+
+          <!-- video -->
+          <div class="video-wrap" aria-hidden="false">
+            <iframe src="https://www.youtube.com/embed/u67F_NYzFbE" title="LineageOS 15.1 Android Oreo installation and review on Samsung Galaxy Grand Prime VE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy">
+            </iframe>
+          </div>
+
+          <div class="notice">
+            <strong style="display:block;margin-bottom:6px;">
+              What you will learn in this guide
+            </strong>
+
+            <span>
+              This page explains what LineageOS 15.1 is, what makes this old ROM interesting, what to check before flashing it, the general TWRP installation flow, GApps considerations, common problems, and where to find the preserved downloads and original XDA references.
+            </span>
+          </div>
+
+          <h2 class="section-title">
+            What is LineageOS 15.1?
+          </h2>
+
+          <p>
+            LineageOS 15.1 is the LineageOS release associated with
+            <strong>Android 8.1 Oreo</strong>.
+            It was part of the era when developers were bringing newer Android versions to hardware that manufacturers had stopped updating. For the Galaxy Grand Prime family, community developers produced multiple unofficial builds and variants rather than an official Samsung-supported upgrade path.
+          </p>
+
+          <p>
+            That makes this ROM historically interesting. The Grand Prime VE is an entry-level device from an older generation, yet community development allowed owners to experiment with an Android experience considerably newer than the software normally supplied by Samsung.
+          </p>
+
+          <h2 class="section-title">
+            About this particular ROM
+          </h2>
+
+          <p>
+            This is an
+            <strong>unofficial community build</strong>,
+            not an official Samsung firmware package. It should therefore be treated differently from an ordinary stock update. Compatibility depends heavily on the exact hardware variant, the recovery version being used, and the specific ROM build.
+          </p>
+
+          <p>
+            Archived community references from the period describe LineageOS 15.1 for the Grand Prime family as an early or
+            <strong>Alpha</strong>
+            generation build. Users reported testing it, discussing bugs, and sharing additional packages through XDA and other Android development communities.
+          </p>
+
+          <div class="callout">
+            <strong>
+              Important:
+            </strong>
+            Always verify your exact model number before flashing. Galaxy Grand Prime devices were released in multiple variants, and a ROM built for one device family or codename should never automatically be assumed to work on another.
+          </div>
+
+          <h2 class="section-title">
+            What should you check before installing?
+          </h2>
+
+          <p>
+            Before touching recovery or system partitions, take a few minutes to prepare the phone. This is the part that can save you from a painful recovery session later.
+          </p>
+
+          <ul>
+            <li>
+              Confirm the exact
+              <strong>Samsung model number</strong>
+              in Settings → About device.
+            </li>
+
+            <li>
+              Make sure the ROM you downloaded explicitly matches your device variant.
+            </li>
+
+            <li>
+              Install and boot into a
+              <strong>compatible custom recovery</strong>,
+              normally TWRP as specified by the ROM instructions.
+            </li>
+
+            <li>
+              Create a complete backup of important personal files before performing wipes.
+            </li>
+
+            <li>
+              Keep the ROM ZIP and any required GApps package readily accessible from the phone's storage or microSD card.
+            </li>
+
+            <li>
+              Read the original XDA developer thread before installation because archived builds can have device-specific requirements and known bugs.
+            </li>
+          </ul>
+
+          <h2 class="section-title">
+            Easy Step-by-Step Installation Guide
+          </h2>
+
+          <div class="step" id="step-1">
+            <h3>
+              STEP 1: Verify your exact Galaxy Grand Prime VE model
+            </h3>
+
+            <p>
+              Start by opening the phone's Settings application and checking the model number under the device information screen.
+              <strong>
+                Do not skip this step.
+              </strong>
+              The Galaxy Grand Prime family contains several hardware variants, and the ROM filename or XDA instructions should be used to determine whether your particular phone is supported.
+            </p>
+
+            <p class="note">
+              <strong>
+                Tip:
+              </strong>
+              If your model number does not match the ROM's intended variant, stop here and find the build specifically intended for your device instead of guessing.
+            </p>
+          </div>
+
+          <div class="step" id="step-2">
+            <h3>
+              STEP 2: Back up your important data
+            </h3>
+
+            <p>
+              Installing a custom ROM can involve wiping partitions, so make a backup of your photos, videos, documents, contacts, messages and anything else you cannot afford to lose.
+            </p>
+
+            <p>
+              A recovery-level backup can also be useful where supported. Older Grand Prime community guides particularly emphasized preserving important partitions such as
+              <span class="code-inline">/efs</span>
+              before modification.
+            </p>
+
+            <div class="notice">
+              <strong style="display:block;margin-bottom:6px;">
+                Do not treat a custom ROM flash like a normal Android update.
+              </strong>
+
+              <span>
+                A failed flash, incompatible build or incorrect wipe can result in boot problems or data loss. This page is an archival guide, so always compare the steps against the original developer instructions for the exact build you are installing.
+              </span>
+            </div>
+          </div>
+
+          <div class="step" id="step-3">
+            <h3>
+              STEP 3: Download the ROM and any required packages
+            </h3>
+
+            <p>
+              Download the correct LineageOS 15.1 ROM ZIP for your device variant before booting into recovery. If the original developer's instructions require GApps, download the appropriate package as well.
+            </p>
+
+            <p>
+              Keep the ROM file intact. Do not extract the ZIP unless the developer specifically tells you to do so.
+            </p>
+
+            <p class="note">
+              <strong>
+                Important:
+              </strong>
+              GApps packages are separate from LineageOS itself. Their architecture and Android version must match the ROM setup described by the developer.
+            </p>
+          </div>
+
+          <div class="step" id="step-4">
+            <h3>
+              STEP 4: Boot into TWRP or the required custom recovery
+            </h3>
+
+            <p>
+              Power off the Galaxy Grand Prime VE and boot into the custom recovery installed for your device. TWRP is commonly used for community ROM installation on these older Samsung devices, but the exact recovery version matters.
+            </p>
+
+            <p>
+              Once recovery starts, make sure you can see the ROM ZIP that you copied earlier. If the file is on a microSD card, check that the card is properly detected before continuing.
+            </p>
+          </div>
+
+          <div class="step" id="step-5">
+            <h3>
+              STEP 5: Confirm that the ROM matches the device
+            </h3>
+
+            <p>
+              Before wiping anything, take one final look at the ROM filename and compare it with the model and codename information given in the original XDA thread.
+            </p>
+
+            <p>
+              This is especially important with the Grand Prime family because several related devices and codenames appear in old ROM databases. Similar-looking names do not mean interchangeable hardware.
+            </p>
+          </div>
+
+          <div class="step" id="step-6">
+            <h3>
+              STEP 6: Perform the required wipes in recovery
+            </h3>
+
+            <p>
+              From TWRP, open the wipe options and perform the partition wipes required by the ROM's installation instructions. Community LineageOS installation guides for this generation commonly used wipes involving
+              <strong>
+                Data, Cache/Dalvik Cache and System
+              </strong>
+              when moving from another ROM.
+            </p>
+
+            <p>
+              Do not wipe partitions simply because an online guide mentions them. Use the original developer's instructions for your exact build and understand what each wipe will erase before confirming it.
+            </p>
+
+            <div class="code-block" data-copy="">
+              <button class="copy-btn" type="button" aria-label="Copy common wipe list to clipboard">
+                ⧉
+              </button>
+
+              <span class="copy-status">
+                Copied
+              </span>
+
+              <pre><code>Common community ROM wipe sequence:
+System
+Data
+Cache
+Dalvik / ART Cache</code></pre>
+            </div>
+
+            <p class="note">
+              <strong>
+                Note:
+              </strong>
+              The list above is a general reference, not a replacement for the exact developer instructions.
+            </p>
+          </div>
+
+          <div class="step" id="step-7">
+            <h3>
+              STEP 7: Flash the LineageOS 15.1 ROM ZIP
+            </h3>
+
+            <p>
+              Select
+              <strong>
+                Install
+              </strong>
+              in TWRP, browse to the LineageOS 15.1 ZIP file and swipe to begin flashing.
+            </p>
+
+            <p>
+              Wait for the recovery process to complete. Do not interrupt the phone while recovery is installing the system image.
+            </p>
+
+            <p>
+              When installation finishes, check the recovery log for obvious errors before moving on.
+            </p>
+          </div>
+
+          <div class="step" id="step-8">
+            <h3>
+              STEP 8: Flash GApps if your setup requires them
+            </h3>
+
+            <p>
+              LineageOS builds do not automatically include Google's proprietary application package. If you want Google Play services and related apps, flash a GApps package compatible with the ROM and its architecture.
+            </p>
+
+            <p>
+              The exact GApps package should come from the original ROM instructions or a compatible source. Do not blindly use a modern GApps package intended for a different Android release.
+            </p>
+          </div>
+
+          <div class="step" id="step-9">
+            <h3>
+              STEP 9: Clear cache if instructed and reboot
+            </h3>
+
+            <p>
+              After the ROM and any required add-ons have been installed, follow the recovery instructions for clearing cache or Dalvik/ART Cache if applicable.
+            </p>
+
+            <p>
+              You can then select
+              <strong>
+                Reboot System
+              </strong>
+              and wait for the first boot.
+            </p>
+          </div>
+
+          <div class="step" id="step-10">
+            <h3>
+              STEP 10: Be patient during the first boot
+            </h3>
+
+            <p>
+              The first boot after a clean ROM installation can take considerably longer than a normal startup because Android is generating system data and preparing applications.
+            </p>
+
+            <p>
+              Do not assume the phone is permanently stuck just because the first boot takes longer than expected. Give it adequate time before forcing a restart.
+            </p>
+          </div>
+
+          <div class="step" id="step-11">
+            <h3>
+              STEP 11: Complete the Android setup
+            </h3>
+
+            <p>
+              Once LineageOS finishes booting, complete the initial Android setup. If you installed GApps, confirm that Google Play services and the Play Store behave normally.
+            </p>
+
+            <p>
+              It is a good idea to test the main hardware functions immediately rather than waiting several days before discovering a compatibility issue.
+            </p>
+          </div>
+
+          <div class="step" id="step-12">
+            <h3>
+              STEP 12: Test the important hardware features
+            </h3>
+
+            <p>
+              Check Wi-Fi, Bluetooth, cellular connectivity, cameras, audio, sensors, storage, USB connectivity and any other feature that matters to you.
+            </p>
+
+            <p>
+              Older unofficial ROMs can contain unfinished components, especially when the build was originally released as an early community port. A device can boot successfully while still having individual functions that do not work correctly.
+            </p>
+          </div>
+
+          <h2 class="section-title">
+            What should you expect from Android 8.1 Oreo on an old Grand Prime?
+          </h2>
+
+          <p>
+            One of the biggest attractions of this ROM is simply the age gap between the hardware and software. Android 8.1 Oreo was designed for a much newer application ecosystem than the stock software originally shipped on many Grand Prime devices.
+          </p>
+
+          <p>
+            That does not automatically mean the phone becomes fast or modern. The underlying hardware remains the same, and newer software can sometimes increase memory pressure rather than reduce it. The main value of a ROM like this is experimentation, preservation and extending the useful life of hardware that would otherwise remain locked to an outdated stock installation.
+          </p>
+
+          <p>
+            LineageOS also follows a more community-driven development model than Samsung's original firmware. Its interface and software philosophy are much closer to a clean Android experience, which is one reason older devices attracted such a large custom-ROM community.
+          </p>
+
+          <h2 class="section-title">
+            Why this ROM is worth preserving
+          </h2>
+
+          <p>
+            Old Android ROMs disappear surprisingly quickly. A developer can stop maintaining a build, a cloud account can be deleted, a file host can shut down, or a forum attachment can vanish during a platform migration. Once several independent links disappear, finding the exact original ZIP becomes much harder.
+          </p>
+
+          <p>
+            This page is therefore intended as a preservation record as much as an installation guide. The objective is to keep the historical ROM information together with the original forum references so future Grand Prime users can understand where the software came from before installing it.
+          </p>
+
+          <div class="callout">
+            <strong>
+              Preservation note:
+            </strong>
+            This is an unofficial legacy ROM. It is not presented as a current LineageOS-supported device release. Treat it as archived community software and always verify the exact build before flashing.
+          </div>
+
+          <h2 class="section-title">
+            Common Problems and Troubleshooting
+          </h2>
+
+          <ul>
+            <li>
+              <strong>Boot loop:</strong>
+              Re-check the device variant, recovery compatibility and the wipe/installation sequence from the original developer thread.
+            </li>
+
+            <li>
+              <strong>ROM will not flash:</strong>
+              The build may not match your model, or the installed recovery may not support the package correctly.
+            </li>
+
+            <li>
+              <strong>No Google apps:</strong>
+              GApps is not necessarily included in the ROM. Check whether the ROM requires a separate compatible package.
+            </li>
+
+            <li>
+              <strong>Camera, Wi-Fi or other hardware problems:</strong>
+              Unofficial legacy builds can have known bugs. Check the XDA discussion for reports specific to the exact build.
+            </li>
+
+            <li>
+              <strong>Very slow first boot:</strong>
+              Allow sufficient time for the first boot after a clean installation before assuming the ROM has failed.
+            </li>
+
+            <li>
+              <strong>Phone behaves differently after restoring a backup:</strong>
+              Avoid blindly restoring system data from another ROM. Old system components can conflict with a clean custom-ROM installation.
+            </li>
+          </ul>
+
+          <h2 class="section-title">
+            Frequently Asked Questions (FAQ)
+          </h2>
+
+          <div class="faq-wrapper">
+
+            <div class="faq-item">
+              <p class="faq-question">
+                Is LineageOS 15.1 officially supported on the Galaxy Grand Prime VE?
+              </p>
+
+              <p class="faq-answer">
+                No. This page is specifically about an unofficial community ROM. It should not be confused with an official modern LineageOS device build.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-question">
+                Which Android version is LineageOS 15.1 based on?
+              </p>
+
+              <p class="faq-answer">
+                LineageOS 15.1 corresponds to Android 8.1 Oreo.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-question">
+                Can I flash this ROM on any Galaxy Grand Prime?
+              </p>
+
+              <p class="faq-answer">
+                No. The Grand Prime family contains multiple hardware variants. The exact model, codename and ROM build must match the developer's compatibility information.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-question">
+                Do I need TWRP?
+              </p>
+
+              <p class="faq-answer">
+                The archived installation flow uses a compatible custom recovery such as TWRP. The exact recovery version should be checked against the original ROM instructions.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-question">
+                Does the ROM include Google Play Store?
+              </p>
+
+              <p class="faq-answer">
+                Not necessarily. GApps is normally distributed separately, so follow the original ROM instructions and use a compatible package if Google services are required.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-question">
+                Can this ROM brick my phone?
+              </p>
+
+              <p class="faq-answer">
+                Incorrect flashing can cause serious boot or software problems and can result in data loss. Verify the device model, recovery and ROM build carefully and keep a backup before modifying the phone.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <p class="faq-question">
+                Why is this ROM difficult to find today?
+              </p>
+
+              <p class="faq-answer">
+                It is a legacy unofficial build, and older Android downloads frequently disappear when developers leave a project or file-hosting services remove old data. This page is intended to preserve the available information and mirrors.
+              </p>
+            </div>
+
+          </div>
+
+          <h2 class="section-title">
+            Original XDA Forums Thread
+          </h2>
+
+          <p>
+            For the original development discussion, installation information, compatibility notes and community feedback, refer to the XDA thread associated with this LineageOS 15.1 build.
+          </p>
+
+          <p>
+            The historical references identify the LineageOS 15.1 Grand Prime discussion as
+            <span class="code-inline">
+              t3814328
+            </span>
+            on XDA.
+          </p>
+
+          <h2 class="section-title">
+            Original Developer / Development Thread
+          </h2>
+
+          <p>
+            The original development thread is particularly important because archived ROM mirrors can survive longer than the detailed bug reports and device-specific notes that originally accompanied them.
+          </p>
+
+          <p>
+            Read the original developer discussion before flashing the ROM, especially when working with a different recovery version or a different Grand Prime hardware variant.
+          </p>
+
+          <!-- ==========================================
+           VERIFIED / PRESERVED DOWNLOAD LINKS
+           ========================================== -->
+          <h2 class="section-title">
+            Download LineageOS 15.1 ROM Files
+          </h2>
+
+          <p>
+            The following buttons preserve the download structure from the original post. Replace the two placeholder URLs below with your actual verified mirror URLs from the original XDA post before publishing this page.
+          </p>
+
+          <div class="download-grid">
+
+            <!-- LINK 1 -->
+            <a href="YOUR_VERIFIED_DOWNLOAD_LINK_1_HERE" class="download-btn gdrive" rel="noopener noreferrer" target="_blank">
+              <img src="/tutorials/3/gdrive.png" alt="Google Drive Icon" />
+
+              <div class="download-text">
+                LineageOS 15.1 — Download Link 1
+                <span>
+                  Preserved ROM mirror from the original post
+                </span>
+              </div>
+            </a>
+
+            <!-- LINK 2 -->
+            <a href="YOUR_VERIFIED_DOWNLOAD_LINK_2_HERE" class="download-btn mega" rel="noopener noreferrer" target="_blank">
+              <img src="/tutorials/3/mega.png" alt="MEGA Cloud Icon" />
+
+              <div class="download-text">
+                LineageOS 15.1 — Download Link 2
+                <span>
+                  Alternative preserved ROM mirror
+                </span>
+              </div>
+            </a>
+
+            <!-- ORIGINAL XDA THREAD -->
+            <a href="https://forum.xda-developers.com/galaxy-grand-prime/development/lineageos-15-1-galaxy-grand-t3814328" class="download-btn mediafire" rel="noopener noreferrer" target="_blank">
+              <div class="download-text">
+                Visit Original XDA Forums Thread
+                <span>
+                  Open the historical development and discussion thread
+                </span>
+              </div>
+            </a>
+
+            <!-- ORIGINAL DEVELOPER THREAD -->
+            <a href="https://forum.xda-developers.com/galaxy-grand-prime/development/lineageos-15-1-galaxy-grand-t3814328" class="download-btn gdrive" rel="noopener noreferrer" target="_blank">
+              <div class="download-text">
+                Visit Original Developer's XDA Thread
+                <span>
+                  View the original developer discussion and ROM information
+                </span>
+              </div>
+            </a>
+
+          </div>
+
+          <h2 class="section-title">
+            Final Notes
+          </h2>
+
+          <p>
+            This ROM is a piece of Android development history. The Galaxy Grand Prime VE was never a flagship device, but the custom-ROM community still pushed it far beyond what the original manufacturer software offered.
+          </p>
+
+          <p>
+            Preserve your current installation before experimenting, verify the exact hardware variant, keep copies of important files, and read the original developer documentation before every flash. Old ROM projects often contain information that cannot be recovered once their original hosting disappears.
+          </p>
+
+          <p>
+            Credits go to the LineageOS project, its contributors, the developers who worked on the Grand Prime community builds, and the wider XDA community that tested, documented and preserved these releases.
+          </p>
+
+          <div class="notice">
+            <strong style="display:block;margin-bottom:6px;">
+              Disclaimer
+            </strong>
+
+            <span>
+              Installing an unofficial custom ROM can cause data loss, boot failures or other device problems. You are responsible for verifying the compatibility of the ROM, recovery and device before proceeding. Always keep a backup of important information.
+            </span>
+          </div>
+
+          <p style="margin-top:22px;">
+            Support the tech channel project:
+          </p>
+
+          <a class="youtube-cta" href="https://m.youtube.com/@MuhammdUzairShah23" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the Official UzairTechGuide YouTube Channel">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#FF0000" d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.112C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.392.574a2.99 2.99 0 0 0-2.106 2.112A31.554 31.554 0 0 0 0 12a31.554 31.554 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.112C4.209 20.5 12 20.5 12 20.5s7.79 0 9.392-.574a2.99 2.99 0 0 0 2.106-2.112A31.554 31.554 0 0 0 24 12a31.554 31.554 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+              </path>
+            </svg>
+
+            <span style="font-size:1rem;">
+              YouTube Channel
+            </span>
+
+          </a>
+
+        </div>
+      </article>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+
+        <small>
+          © 2026 UzairTechGuide. All Rights Reserved.
+        </small>
+
+        <p>
+          <a href="/legal/privacy.html">
+            Privacy Policy
+          </a>
+          |
+          <a href="/legal/terms.html">
+            Terms of Service
+          </a>
+          |
+          <a href="/legal/contact.html">
+            Contact Support
+          </a>
+        </p>
+
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+  const THEME_KEY = &#39;utg_theme&#39;;
+  const bodyEl = document.body;
+  const themeBtn = document.getElementById(&#39;theme-toggle&#39;);
+  const burger = document.getElementById(&#39;hamburger-btn&#39;);
+  const nav = document.getElementById(&#39;side-nav&#39;);
+  const overlay = document.getElementById(&#39;overlay&#39;);
+  const closeBtn = document.getElementById(&#39;side-close&#39;);
+
+  const SVG = {
+    moon: &#39;&lt;svg width=&#34;20&#34; height=&#34;20&#34; viewBox=&#34;0 0 24 24&#34; aria-hidden=&#34;true&#34; focusable=&#34;false&#34;&gt;&lt;path fill=&#34;currentColor&#34; d=&#34;M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z&#34;/&gt;&lt;/svg&gt;&#39;,
+    sun:  &#39;&lt;svg width=&#34;20&#34; height=&#34;20&#34; viewBox=&#34;0 0 24 24&#34; aria-hidden=&#34;true&#34; focusable=&#34;false&#34;&gt;&lt;path fill=&#34;currentColor&#34; d=&#34;M6.76 4.84l-1.8-1.79L3.17 4.85l1.79 1.79 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 7a5 5 0 100 10 5 5 0 000-10zm4.24 11.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM3.17 19.15l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z&#34;/&gt;&lt;/svg&gt;&#39;
+  };
+
+  function applyTheme(mode){
+    const light = mode === &#39;light&#39;;
+    bodyEl.classList.toggle(&#39;light&#39;, light);
+    bodyEl.classList.toggle(&#39;dark&#39;, !light);
+    themeBtn.innerHTML = light ? SVG.sun : SVG.moon;
+    themeBtn.title = light ? &#39;Switch to dark theme style&#39; : &#39;Switch to light theme style&#39;;
+    themeBtn.setAttribute(&#39;aria-pressed&#39;, light ? &#39;true&#39; : &#39;false&#39;);
+    try { localStorage.setItem(THEME_KEY, mode); } catch(e){}
+  }
+
+  (function initTheme(){
+    let saved = null;
+    try { saved = localStorage.getItem(THEME_KEY); } catch(e) { saved = null; }
+    if (!saved) {
+      const prefersLight = window.matchMedia &amp;&amp; window.matchMedia(&#39;(prefers-color-scheme: light)&#39;).matches;
+      saved = prefersLight ? &#39;light&#39; : &#39;dark&#39;;
+    }
+    applyTheme(saved);
+  })();
+
+  themeBtn.addEventListener(&#39;click&#39;, () =&gt; {
+    const current = bodyEl.classList.contains(&#39;light&#39;) ? &#39;light&#39; : &#39;dark&#39;;
+    applyTheme(current === &#39;light&#39; ? &#39;dark&#39; : &#39;light&#39;);
+  });
+
+  themeBtn.addEventListener(&#39;keydown&#39;, (e) =&gt; {
+    if (e.key === &#39;Enter&#39; || e.key === &#39; &#39;) {
+      e.preventDefault();
+      themeBtn.click();
+    }
+  });
+
+  function openSide(){
+    burger.classList.add(&#39;open&#39;);
+    nav.classList.add(&#39;open&#39;);
+    overlay.classList.add(&#39;show&#39;);
+    overlay.hidden = false;
+    burger.setAttribute(&#39;aria-expanded&#39;,&#39;true&#39;);
+    nav.setAttribute(&#39;aria-hidden&#39;,&#39;false&#39;);
+    const first = nav.querySelector(&#39;.side-links a&#39;);
+    if(first) first.focus();
+  }
+
+  function closeSide(){
+    burger.classList.remove(&#39;open&#39;);
+    nav.classList.remove(&#39;open&#39;);
+    overlay.classList.remove(&#39;show&#39;);
+    setTimeout(()=&gt; overlay.hidden = true, 220);
+    burger.setAttribute(&#39;aria-expanded&#39;,&#39;false&#39;);
+    nav.setAttribute(&#39;aria-hidden&#39;,&#39;true&#39;);
+    try { burger.focus(); } catch(e){}
+  }
+
+  burger.addEventListener(&#39;click&#39;, (ev) =&gt; {
+    ev.stopPropagation();
+    if(nav.classList.contains(&#39;open&#39;)) closeSide(); else openSide();
+  });
+
+  closeBtn.addEventListener(&#39;click&#39;, closeSide);
+  overlay.addEventListener(&#39;click&#39;, closeSide);
+
+  document.addEventListener(&#39;keydown&#39;, (e)=&gt; {
+    if(e.key === &#39;Escape&#39; &amp;&amp; nav.classList.contains(&#39;open&#39;)) closeSide();
+  });
+
+  document.addEventListener(&#39;click&#39;, (e)=&gt; {
+    if(!nav.contains(e.target) &amp;&amp; !burger.contains(e.target) &amp;&amp; nav.classList.contains(&#39;open&#39;)) closeSide();
+  });
+
+  if (!document.getElementById(&#39;overlay&#39;)) {
+    const ov = document.createElement(&#39;div&#39;);
+    ov.id = &#39;overlay&#39;;
+    ov.className = &#39;overlay&#39;;
+    ov.hidden = true;
+    document.body.appendChild(ov);
+  }
+
+  function copyText(text){
+    if (navigator.clipboard &amp;&amp; navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise((resolve, reject) =&gt; {
+      try {
+        const ta = document.createElement(&#39;textarea&#39;);
+        ta.value = text;
+        ta.style.position = &#39;fixed&#39;;
+        ta.style.left = &#39;-9999px&#39;;
+        ta.style.top = &#39;0&#39;;
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        const ok = document.execCommand(&#39;copy&#39;);
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error(&#39;Copy process encountered errors&#39;));
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  document.querySelectorAll(&#39;.code-block[data-copy]&#39;).forEach((block) =&gt; {
+    const btn = block.querySelector(&#39;.copy-btn&#39;);
+    const status = block.querySelector(&#39;.copy-status&#39;);
+    const code = block.querySelector(&#39;code&#39;);
+
+    if (!btn || !code) return;
+
+    btn.addEventListener(&#39;click&#39;, async () =&gt; {
+      const text = code.textContent.trim();
+
+      try {
+        await copyText(text);
+
+        btn.classList.add(&#39;copied&#39;);
+
+        if (status) {
+          status.classList.add(&#39;show&#39;);
+          status.textContent = &#39;Copied&#39;;
+          setTimeout(() =&gt; status.classList.remove(&#39;show&#39;), 1000);
+        }
+
+        setTimeout(() =&gt; btn.classList.remove(&#39;copied&#39;), 900);
+
+      } catch (e) {
+
+        if (status) {
+          status.classList.add(&#39;show&#39;);
+          status.textContent = &#39;Copy failed&#39;;
+          setTimeout(() =&gt; status.classList.remove(&#39;show&#39;), 1200);
+        }
+
+      }
+    });
+  });
+
+  try {
+    if (window.matchMedia &amp;&amp; window.matchMedia(&#39;(prefers-reduced-motion: reduce)&#39;).matches) {
+      document.querySelectorAll(&#39;.video-wrap iframe&#39;).forEach(f =&gt; {
+        f.setAttribute(&#39;loading&#39;,&#39;lazy&#39;);
+      });
+    }
+  } catch(e){}
+})();
+    </script>
+
+    <!-- Load side nav dynamically from external component -->
+    <script>
+      fetch(&#39;/components/nav.html&#39;)
+  .then(r =&gt; r.text())
+  .then(html =&gt; {
+    const sideLinks = document.querySelector(&#39;.side-links&#39;);
+    if (sideLinks) sideLinks.innerHTML = html;
+    if (window.initNavigation) window.initNavigation();
+  })
+  .catch(err =&gt; console.warn(&#39;Navigation elements failed to load properly:&#39;, err));
+    </script>
+
+  </body>
+</html>
