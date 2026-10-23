@@ -2,37 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+  if (window.location.hostname.includes('github.io')) {
+    window.location.replace('https://uzairtechguide.me' + window.location.pathname);
+  }
+</script>
 
-    <!-- Redirect Message Container -->
-    <div id="redirect-message" style="display: none; text-align: center; padding: 25px; font-family: sans-serif; background-color: #121212; color: #ffffff; border-bottom: 2px solid #ff6b00;">
-      <h2 style="margin: 0 0 10px 0; color: #ff6b00;">Redirecting to UzairTechGuide...</h2>
-      <p style="margin: 0 0 10px 0;">You are being redirected to our official custom domain in <strong id="countdown" style="font-size: 1.2em; color: #00e676;">3</strong> seconds.</p>
-      <p style="margin: 0;"><a href="https://uzairtechguide.me" style="color: #29b6f6; text-decoration: underline;">Click here if you are not redirected automatically.</a></p>
-    </div>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.hostname.includes('github.io')) {
-          // 1. Unhide the redirect message block
-          const msgBox = document.getElementById('redirect-message');
-          if (msgBox) msgBox.style.display = 'block';
-    
-          // 2. Start the 3-second countdown
-          let seconds = 3;
-          const countdownEl = document.getElementById('countdown');
-    
-          const timer = setInterval(() => {
-            seconds--;
-            if (countdownEl) countdownEl.textContent = seconds;
-    
-            if (seconds <= 0) {
-              clearInterval(timer);
-              window.location.replace('https://uzairtechguide.me' + window.location.pathname + window.location.search);
-            }
-          }, 1000);
-        }
-      });
-    </script>
   <!-- ═══════════════════════════════════════════════
        UzairTechGuide
   ════════════════════════════════════════════════ -->
