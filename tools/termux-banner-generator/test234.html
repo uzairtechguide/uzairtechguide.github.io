@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Termux Banner Maker — UzairTechGuide</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --bg-dark:#0f1113;
+  --panel-dark:#15181a;
+  --panel-dark-2:#1c2023;
+  --text-light:#eef1f3;
+  --muted-light:#bfc7cb;
+  --accent:#ff7a2d;
+  --accent-2:#1db954;
+  --accent-glow:rgba(255,122,45,0.18);
+  --green-glow:rgba(29,185,84,0.15);
+  --bg-light:#f6f7f8;
+  --panel-light:#ffffff;
+  --panel-light-2:#f0f2f4;
+  --text-dark:#111214;
+  --muted-dark:#6b6f73;
+  --radius-md:14px;
+  --radius-sm:8px;
+  --shadow-dark:0 8px 24px rgba(3,6,8,0.4);
+  --shadow-light:0 8px 24px rgba(16,24,32,0.08);
+  --transition:220ms cubic-bezier(.2,.9,.3,1);
+  --max-width:780px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Roboto",system-ui,Arial,sans-serif;
+  background:var(--bg-dark);
+  color:var(--text-light);
+  transition:background .3s,color .3s;
+  min-height:100vh;
+}
+
+body.light{
+  background:var(--bg-light);
+  color:var(--text-dark);
+}
+
+/* Top controls */
+.top-controls{
+  position:fixed;
+  top:10px;
+  right:10px;
+  display:flex;
+  gap:10px;
+  z-index:1200;
+}
+
+.control-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:10px;
+  background:rgba(255,255,255,0.06);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:inherit;
+  transition:background .2s,transform .2s;
+}
+
+.control-btn:hover{
+  transform:translateY(-2px);
+}
+
+body.light .control-btn{
+  background:#fff;
+  box-shadow:var(--shadow-dark);
+}
+
+/* Header */
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:"Montserrat",sans-serif;
+  font-weight:600;
+  font-size:1.2rem;
+  background:rgba(255,255,255,0.02);
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  z-index:1000;
+}
+
+.header-accent{
+  color:var(--accent);
+}
+
+body.light .header{
+  background:#fff;
+  box-shadow:var(--shadow-light);
+}
+
+/* Hamburger */
+.hamburger{
+  height:36px;
+  width:36px;
+  padding:6px 10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+}
+
+.hamburger span{
+  width:16px;
+  height:2.5px;
+  background:var(--accent-2);
+  border-radius:2px;
+  margin:1.5px 0;
+  transition:all .3s ease;
+}
+
+.hamburger.open span:nth-child(1){
+  transform:rotate(45deg) translate(2px,2px);
+}
+
+.hamburger.open span:nth-child(2){
+  opacity:0;
+}
+
+.hamburger.open span:nth-child(3){
+  transform:rotate(-45deg) translate(3px,-3px);
+}
+
+/* Side navigation */
+.side-nav{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  height:100vh;
+  background:var(--panel-dark);
+  padding:70px 20px;
+  transition:right .3s;
+  z-index:1100;
+  border-left:1px solid rgba(255,255,255,0.05);
+}
+
+.side-nav.open{
+  right:0;
+}
+
+body.light .side-nav{
+  background:var(--panel-light);
+}
+
+.side-links a{
+  display:block;
+  padding:10px 12px;
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
+  border-radius:10px;
+  transition:background .2s;
+}
+
+.side-links a:hover{
+  background:rgba(255,255,255,0.06);
+  color:var(--accent);
+}
+
+body.light .side-links a:hover{
+  background:rgba(0,0,0,0.05);
+  color:var(--accent-2);
+}
+
+.side-close{
+  position:absolute;
+  top:10px;
+  left:10px;
+  font-size:28px;
+  background:none;
+  border:none;
+  color:inherit;
+  cursor:pointer;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:1050;
+}
+
+.overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Main and hero */
+main{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:80px 20px 60px;
+}
+
+.hero{
+  text-align:center;
+  padding:48px 0 36px;
+}
+
+.hero-badge{
+  display:inline-block;
+  font-family:"JetBrains Mono",monospace;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent-2);
+  background:var(--green-glow);
+  border:1px solid rgba(29,185,84,0.25);
+  padding:4px 14px;
+  border-radius:100px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-family:"Montserrat",sans-serif;
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  font-weight:700;
+  line-height:1.15;
+  margin-bottom:14px;
+  letter-spacing:-.02em;
+}
+
+.hero h1 em{
+  font-style:normal;
+  color:var(--accent);
+}
+
+.hero p{
+  color:var(--muted-light);
+  font-size:1rem;
+  max-width:520px;
+  margin:0 auto;
+  line-height:1.65;
+}
+
+body.light .hero p{
+  color:var(--muted-dark);
+}
+
+/* Cards */
+.card{
+  background:var(--panel-dark);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius-md);
+  padding:28px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow-dark);
+}
+
+body.light .card{
+  background:var(--panel-light);
+  border-color:rgba(0,0,0,0.07);
+  box-shadow:var(--shadow-light);
+}
+
+.card-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.section-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--text-light);
+  margin-bottom:12px;
+}
+
+body.light .section-title{
+  color:var(--text-dark);
+}
+
+.step-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-size:.65rem;
+  font-weight:700;
+  font-family:"Montserrat",sans-serif;
+  flex-shrink:0;
+}
+
+/* YouTube video */
+.video-card{
+  padding:24px;
+  overflow:hidden;
+}
+
+.video-card .card-title{
+  margin-bottom:16px;
+}
+
+.video-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16 / 9;
+  overflow:hidden;
+  border-radius:13px;
+  background:#090b0c;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.28),
+    0 0 0 1px rgba(255,122,45,0.05);
+}
+
+.video-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.video-frame iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+.video-caption{
+  margin-top:12px;
+  color:var(--muted-light);
+  font-size:.78rem;
+  line-height:1.55;
+  text-align:center;
+}
+
+body.light .video-caption{
+  color:var(--muted-dark);
+}
+
+/* Form */
+label{
+  display:block;
+  font-size:.82rem;
+  font-weight:500;
+  color:var(--muted-light);
+  margin-bottom:6px;
+}
+
+body.light label{
+  color:var(--muted-dark);
+}
+
+.field{
+  margin-bottom:16px;
+}
+
+.field:last-child{
+  margin-bottom:0;
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.input{
+  width:100%;
+  padding:11px 14px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:var(--radius-sm);
+  color:var(--text-light);
+  font-family:"JetBrains Mono",monospace;
+  font-size:.85rem;
+  transition:border-color .2s,box-shadow .2s;
+  outline:none;
+}
+
+body.light .input{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.12);
+  color:var(--text-dark);
+}
+
+.input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-glow);
+}
+
+textarea.input{
+  resize:vertical;
+  min-height:110px;
+  line-height:1.35;
+}
+
+select.input{
+  cursor:pointer;
+}
+
+.mono{
+  font-family:"JetBrains Mono",monospace;
+}
+
+.chk{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:.84rem;
+  color:var(--muted-light);
+  margin:0;
+  cursor:pointer;
+}
+
+body.light .chk{
+  color:var(--muted-dark);
+}
+
+.chk input{
+  width:16px;
+  height:16px;
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+
+.range{
+  width:100%;
+  accent-color:var(--accent);
+}
+
+.val{
+  font-family:"JetBrains Mono",monospace;
+  font-size:.8rem;
+  color:var(--accent-2);
+}
+
+/* Swatches */
+.swatches{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.swatch{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:transform .15s;
+}
+
+.swatch:hover{
+  transform:scale(1.08);
+}
+
+.swatch.active{
+  border-color:var(--text-light);
+  box-shadow:0 0 0 3px var(--accent-glow);
+}
+
+body.light .swatch.active{
+  border-color:var(--text-dark);
+}
+
+/* Chips and rows */
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.chip{
+  padding:7px 12px;
+  border-radius:100px;
+  font-size:.76rem;
+  font-family:"JetBrains Mono",monospace;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.03);
+  color:var(--muted-light);
+  cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+
+.chip:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+body.light .chip{
+  border-color:rgba(0,0,0,0.1);
+  color:var(--muted-dark);
+  background:rgba(0,0,0,0.03);
+}
+
+.row-item{
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:10px;
+  display:grid;
+  gap:8px;
+}
+
+.row-item.is-root{
+  border-color:rgba(255,122,45,0.35);
+}
+
+body.light .row-item{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+
+.row-top{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.row-top .input{
+  flex:1;
+}
+
+.badge-root{
+  font-family:"JetBrains Mono",monospace;
+  font-size:.66rem;
+  font-weight:700;
+  color:var(--accent);
+  border:1px solid rgba(255,122,45,0.5);
+  border-radius:6px;
+  padding:3px 6px;
+  letter-spacing:.06em;
+}
+
+.icon-btn{
+  background:none;
+  border:none;
+  color:var(--muted-light);
+  cursor:pointer;
+  font-size:1rem;
+  padding:6px;
+  border-radius:6px;
+}
+
+.icon-btn:hover{
+  color:#ff5c5c;
+  background:rgba(255,92,92,0.1);
+}
+
+.warn{
+  font-size:.8rem;
+  line-height:1.6;
+  color:var(--accent);
+  background:rgba(255,122,45,0.08);
+  border:1px solid rgba(255,122,45,0.3);
+  border-radius:var(--radius-sm);
+  padding:10px 12px;
+  margin-bottom:14px;
+}
+
+.warn[hidden]{
+  display:none;
+}
+
+/* Preview */
+.preview{
+  background:#0b0d0e;
+  border-radius:var(--radius-sm);
+  padding:18px 20px;
+  overflow-x:auto;
+  min-height:180px;
+  font-family:"JetBrains Mono",monospace;
+  font-size:.82rem;
+  line-height:1.45;
+  white-space:pre;
+}
+
+.preview div{
+  min-height:1.45em;
+}
+
+.preview .b{
+  font-weight:700;
+}
+
+.preview-hint{
+  font-size:.74rem;
+  color:rgba(191,199,203,0.5);
+  margin-top:10px;
+}
+
+body.light .preview-hint{
+  color:rgba(107,111,115,0.6);
+}
+
+/* Buttons */
+.btn{
+  padding:11px 18px;
+  border:none;
+  border-radius:var(--radius-sm);
+  font-family:"Montserrat",sans-serif;
+  font-weight:700;
+  font-size:.88rem;
+  cursor:pointer;
+  color:#fff;
+  transition:filter .2s,transform .15s;
+}
+
+.btn:hover{
+  filter:brightness(1.1);
+  transform:translateY(-1px);
+}
+
+.btn-accent{
+  background:var(--accent);
+  box-shadow:0 4px 18px rgba(255,122,45,0.3);
+}
+
+.btn-green{
+  background:var(--accent-2);
+  box-shadow:0 4px 14px rgba(29,185,84,0.3);
+}
+
+.btn-ghost{
+  background:rgba(255,255,255,0.06);
+  color:var(--text-light);
+}
+
+body.light .btn-ghost{
+  background:var(--panel-light-2);
+  color:var(--text-dark);
+}
+
+.btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+
+/* Steps and FAQ */
+.steps{
+  display:grid;
+  gap:12px;
+}
+
+.step-card{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+body.light .step-card{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+
+.step-card strong{
+  display:block;
+  font-family:"Montserrat",sans-serif;
+  margin-bottom:4px;
+}
+
+.step-card p{
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--muted-light);
+}
+
+body.light .step-card p{
+  color:var(--muted-dark);
+}
+
+.qa{
+  display:grid;
+  gap:10px;
+}
+
+.qa-item{
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--panel-dark-2);
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+body.light .qa-item{
+  background:var(--panel-light-2);
+  border-color:rgba(0,0,0,0.06);
+}
+
+.qa-item h3{
+  font-size:.92rem;
+  font-family:"Montserrat",sans-serif;
+  margin-bottom:8px;
+}
+
+.qa-item p{
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--muted-light);
+}
+
+body.light .qa-item p{
+  color:var(--muted-dark);
+}
+
+.long-content{
+  margin-top:18px;
+  display:grid;
+  gap:16px;
+}
+
+.note{
+  font-size:.77rem;
+  color:rgba(191,199,203,0.5);
+  line-height:1.6;
+  text-align:center;
+  padding:0 10px;
+}
+
+body.light .note{
+  color:rgba(107,111,115,0.6);
+}
+
+.note a{
+  color:var(--accent);
+  text-decoration:none;
+}
+
+.note a:hover{
+  text-decoration:underline;
+}
+
+code{
+  font-family:"JetBrains Mono",monospace;
+  font-size:.82rem;
+  color:var(--accent-2);
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  padding:30px 20px;
+  color:var(--muted-light);
+  border-top:1px solid rgba(255,255,255,0.1);
+  margin-top:30px;
+}
+
+body.light .footer{
+  color:var(--muted-dark);
+  border-top-color:rgba(0,0,0,0.1);
+}
+
+.footer-inner{
+  display:inline-block;
+  background:rgba(0,0,0,0.4);
+  border-radius:12px;
+  padding:10px 20px;
+  box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+body.light .footer-inner{
+  background:rgba(255,255,255,0.8);
+  border:1px solid rgba(0,0,0,0.08);
+}
+
+.footer-inner p{
+  margin:0;
+  font-size:.85rem;
+}
+
+.footer a{
+  color:#00a8ff;
+  text-decoration:none;
+  margin:0 6px;
+  font-weight:500;
+}
+
+body.light .footer a{
+  color:var(--accent-2);
+}
+
+.footer a:hover{
+  text-decoration:underline;
+}
+
+/* Mobile layout improvements */
+@media(max-width:540px){
+  main{
+    padding:72px 12px 42px;
+  }
+
+  .hero{
+    padding:38px 4px 28px;
+  }
+
+  .hero p{
+    font-size:.92rem;
+  }
+
+  .card{
+    padding:20px 16px;
+    margin-bottom:14px;
+  }
+
+  .video-card{
+    padding:16px;
+    margin-bottom:14px;
+  }
+
+  .video-card .card-title{
+    margin-bottom:13px;
+  }
+
+  .video-frame{
+    border-radius:10px;
+  }
+
+  .video-caption{
+    font-size:.73rem;
+    padding:0 4px;
+  }
+
+  .preview{
+    padding:15px 14px;
+    font-size:.74rem;
+  }
+
+  .row-top{
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+
+  .row-top .input{
+    min-width:calc(100% - 48px);
+  }
+
+  .row-top .icon-btn{
+    margin-left:auto;
+  }
+
+  .btn{
+    flex:1 1 auto;
+  }
+
+  .footer{
+    padding:24px 14px;
+  }
+
+  .footer-inner{
+    max-width:100%;
+    padding:10px 14px;
+  }
+}
+
+@media(max-width:360px){
+  .top-controls{
+    right:7px;
+    gap:6px;
+  }
+
+  .control-btn{
+    width:38px;
+    height:38px;
+  }
+
+  .hamburger{
+    width:34px;
+  }
+
+  .hero h1{
+    font-size:1.75rem;
+  }
+
+  .video-card{
+    padding:13px;
+  }
+}
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H4XLYPLRZ2"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+
+function gtag(){
+  dataLayer.push(arguments);
+}
+
+gtag('js',new Date());
+gtag('config','G-H4XLYPLRZ2');
+</script>
+</head>
+
+<body>
+
+<div class="top-controls">
+  <button
+    id="theme-toggle"
+    class="control-btn"
+    title="Toggle theme"
+    aria-label="Toggle color theme"
+    aria-pressed="false">
+  </button>
+
+  <button
+    id="hamburger-btn"
+    class="hamburger"
+    title="Menu"
+    aria-label="Open menu"
+    aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<header class="header">
+  <span>Uzair<span class="header-accent">Tech</span>Guide</span>
+</header>
+
+<aside id="side-nav" class="side-nav" aria-hidden="true">
+  <button id="side-close" class="side-close" aria-label="Close menu">×</button>
+  <nav class="side-links" aria-label="Main navigation"></nav>
+</aside>
+
+<div id="overlay" class="overlay" hidden></div>
+
+<main>
+  <div class="hero">
+    <div class="hero-badge">Termux · Bash · Login Banner</div>
+
+    <h1>
+      Build your Termux <em>banner</em><br />
+      in seconds
+    </h1>
+
+    <p>
+      Edit the text, colors, and info rows, watch the live preview, then export
+      a ready <code>.sh</code> file and the <code>.bashrc</code> line that runs it.
+    </p>
+  </div>
+
+  <!-- Featured YouTube tutorial -->
+  <div class="card video-card">
+    <div class="card-title">Watch the tutorial</div>
+
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/jOzC4mDxflc?rel=0&modestbranding=1"
+        title="Termux Banner Maker tutorial by UzairTechGuide"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <p class="video-caption">
+      Follow the video tutorial to learn how to create and install your custom Termux banner.
+    </p>
+  </div>
+
+  <!-- Live preview -->
+  <div class="card">
+    <div class="card-title">Live preview</div>
+
+    <div class="preview" id="preview"></div>
+
+    <p class="preview-hint">
+      Preview uses sample values. Real output is generated when your phone logs in.
+    </p>
+  </div>
+
+  <!-- Step 1: text -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">1</span>
+      Title &amp; text
+    </div>
+
+    <div class="field">
+      <label for="f-title">Title line</label>
+      <input class="input" id="f-title" maxlength="60" />
+    </div>
+
+    <div class="field">
+      <label for="f-subtitle">Subtitle line</label>
+      <input class="input" id="f-subtitle" maxlength="120" />
+    </div>
+
+    <div class="field">
+      <label for="f-greeting">Greeting line</label>
+      <input class="input" id="f-greeting" maxlength="80" />
+    </div>
+
+    <div class="field">
+      <label for="f-art">
+        ASCII art (optional, paste from figlet or any generator)
+      </label>
+
+      <textarea
+        class="input mono"
+        id="f-art"
+        spellcheck="false"
+        placeholder="Paste ASCII art here. Leave empty for text only."></textarea>
+    </div>
+  </div>
+
+  <!-- Step 2: style -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">2</span>
+      Colors &amp; box
+    </div>
+
+    <div class="field">
+      <label>Accent color</label>
+      <div class="swatches" id="swatches"></div>
+    </div>
+
+    <div class="two-col" style="margin-top:16px">
+      <div class="field">
+        <label for="f-box">Box style</label>
+
+        <select class="input" id="f-box">
+          <option value="heavy">Heavy ┏━┓</option>
+          <option value="double">Double ╔═╗</option>
+          <option value="round">Rounded ╭─╮</option>
+          <option value="single">Single ┌─┐</option>
+          <option value="none">No box</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="f-width">
+          Box width <span class="val" id="width-val"></span>
+        </label>
+
+        <input
+          type="range"
+          class="range"
+          id="f-width"
+          min="36"
+          max="76"
+          step="1" />
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:12px">
+      <label class="chk">
+        <input type="checkbox" id="f-bold" />
+        Bold title and art
+      </label>
+
+      <label class="chk">
+        <input type="checkbox" id="f-showbox" />
+        Draw box around info rows
+      </label>
+    </div>
+  </div>
+
+  <!-- Step 3: info rows -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">3</span>
+      Info rows
+    </div>
+
+    <div class="chips" id="presets"></div>
+
+    <div id="root-warn" class="warn" hidden></div>
+
+    <div id="rows"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="add-custom">
+        + Custom row
+      </button>
+    </div>
+
+    <p class="note" style="text-align:left;margin-top:14px">
+      Rows marked <strong>ROOT</strong> run their command through <code>su</code>.
+      Rows that need Termux:API are noted in their label.
+    </p>
+  </div>
+
+  <!-- Step 4: options -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">4</span>
+      Options
+    </div>
+
+    <div class="btn-row" style="margin-top:0">
+      <label class="chk">
+        <input type="checkbox" id="f-clear" />
+        Clear screen on login
+      </label>
+
+      <label class="chk">
+        <input type="checkbox" id="f-guard" />
+        Guard root rows (skip if su is missing)
+      </label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="reset-btn">
+        Reset to default
+      </button>
+    </div>
+  </div>
+
+  <!-- Export -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step-num">5</span>
+      Export
+    </div>
+
+    <div class="field">
+      <label for="out">banner.sh (updates as you edit)</label>
+
+      <textarea
+        class="input mono"
+        id="out"
+        readonly
+        spellcheck="false"
+        style="min-height:220px;font-size:.78rem"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-accent" id="copy-sh">
+        Copy script
+      </button>
+
+      <button class="btn btn-green" id="dl-sh">
+        Download .sh
+      </button>
+    </div>
+
+    <div class="field" style="margin-top:22px">
+      <label for="bashrc">
+        Add this line to the end of ~/.bashrc
+      </label>
+
+      <textarea
+        class="input mono"
+        id="bashrc"
+        readonly
+        spellcheck="false"
+        style="min-height:90px;font-size:.78rem"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="copy-bashrc">
+        Copy .bashrc snippet
+      </button>
+    </div>
+
+    <div class="section-title" style="margin-top:22px">
+      Install
+    </div>
+
+    <div class="steps">
+      <div class="step-card">
+        <span class="step-num">1</span>
+
+        <div>
+          <strong>Save the script</strong>
+
+          <p>
+            Download the .sh, then move it into Termux:
+            <code>mv ~/storage/emulated/0/downloads/termux_banner.sh ~/.termux_banner.sh</code>
+            Run <code>termux-setup-storage</code> first if the downloads folder is missing.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">2</span>
+
+        <div>
+          <strong>Make it run</strong>
+
+          <p>
+            Run <code>chmod +x ~/.termux_banner.sh</code> then paste the
+            .bashrc snippet at the end of <code>~/.bashrc</code>.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">3</span>
+
+        <div>
+          <strong>Test it</strong>
+
+          <p>
+            Open a new session, or run <code>source ~/.bashrc</code>.
+            The banner should appear.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Long content -->
+  <div class="long-content">
+    <div class="card">
+      <div class="section-title">
+        Frequently asked questions
+      </div>
+
+      <div class="qa">
+        <div class="qa-item">
+          <h3>Why does root need its own marker?</h3>
+
+          <p>
+            Some info, like CPU temperature or your root UID, lives in files
+            that only root can read. Those rows run through <code>su</code>.
+            Each login will then ask Android for root permission, so expect a
+            prompt every time you open a session unless your root manager
+            remembers the choice.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h3>What does the root guard do?</h3>
+
+          <p>
+            With the guard on, root rows only run when the <code>su</code>
+            binary exists. On a non-rooted device the row is skipped, and the
+            rest of the banner still shows. It does not check whether you are
+            actually granted root.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h3>Why does the default welcome text still show?</h3>
+
+          <p>
+            Termux prints its MOTD file before <code>.bashrc</code> runs.
+            To hide it, empty the file:
+            <code>: &gt; $PREFIX/etc/motd</code>.
+            Back it up first if you want the original back.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h3>Some rows show nothing. Why?</h3>
+
+          <p>
+            Commands like the Wi-Fi IP depend on interface names, and battery
+            needs the Termux:API app plus its package. Test a command in the
+            terminal first. If it prints nothing there, it will print nothing
+            in the banner.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">
+        Your settings stay on this device
+      </div>
+
+      <p
+        class="section-subtitle"
+        style="color:var(--muted-light);font-size:.9rem;line-height:1.7">
+        Your banner settings are saved in this browser's local storage so the
+        editor reopens as you left it. Nothing is sent to any server. Use Reset
+        to clear them.
+      </p>
+    </div>
+  </div>
+
+  <p class="note" style="margin-top:28px">
+    Built for Termux users on UzairTechGuide.
+    Your settings never leave this browser.
+  </p>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <small>© 2026 UzairTechGuide - All Rights Reserved.</small>
+
+    <p>
+      <a href="/legal/privacy-policy">Privacy Policy</a> |
+      <a href="/legal/terms-of-service">Terms of Use</a> |
+      <a href="/legal/contact">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ============ THEME + NAV ============ */
+(function(){
+  const THEME_KEY='utg_theme';
+  const body=document.body;
+  const themeBtn=document.getElementById('theme-toggle');
+  const burger=document.getElementById('hamburger-btn');
+  const nav=document.getElementById('side-nav');
+  const overlay=document.getElementById('overlay');
+  const closeBtn=document.getElementById('side-close');
+
+  const SVG={
+    moon:'<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+    sun:'<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 100 10 5 5 0 000-10zM11 1h2v3h-2zM11 20h2v3h-2zM1 11h3v2H1zM20 11h3v2h-3z"/></svg>'
+  };
+
+  function applyTheme(mode){
+    const light=mode==='light';
+
+    body.classList.toggle('light',light);
+    themeBtn.innerHTML=light?SVG.sun:SVG.moon;
+    themeBtn.title=light?'Switch to dark':'Switch to light';
+    themeBtn.setAttribute('aria-pressed',String(light));
+
+    try{
+      localStorage.setItem(THEME_KEY,mode);
+    }catch(e){}
+  }
+
+  let saved=null;
+
+  try{
+    saved=localStorage.getItem(THEME_KEY);
+  }catch(e){}
+
+  if(!saved){
+    saved=window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: light)').matches
+        ? 'light'
+        : 'dark';
+  }
+
+  applyTheme(saved);
+
+  themeBtn.addEventListener('click',()=>{
+    applyTheme(body.classList.contains('light')?'dark':'light');
+  });
+
+  function openSide(){
+    burger.classList.add('open');
+    nav.classList.add('open');
+    overlay.hidden=false;
+    overlay.classList.add('show');
+    burger.setAttribute('aria-expanded','true');
+    nav.setAttribute('aria-hidden','false');
+  }
+
+  function closeSide(){
+    burger.classList.remove('open');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+
+    setTimeout(()=>{
+      overlay.hidden=true;
+    },220);
+
+    burger.setAttribute('aria-expanded','false');
+    nav.setAttribute('aria-hidden','true');
+  }
+
+  burger.addEventListener('click',event=>{
+    event.stopPropagation();
+
+    nav.classList.contains('open')
+      ? closeSide()
+      : openSide();
+  });
+
+  closeBtn.addEventListener('click',closeSide);
+  overlay.addEventListener('click',closeSide);
+
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape' && nav.classList.contains('open')){
+      closeSide();
+    }
+  });
+
+  fetch('/components/nav.html')
+    .then(response=>response.text())
+    .then(html=>{
+      const links=document.querySelector('.side-links');
+
+      if(links){
+        links.innerHTML=html;
+      }
+    })
+    .catch(()=>{});
+
+  fetch('/components/footer.html')
+    .then(response=>response.text())
+    .then(html=>{
+      const footer=document.querySelector('.footer-inner');
+
+      if(footer){
+        footer.innerHTML=html;
+      }
+    })
+    .catch(()=>{});
+})();
+
+/* ============ BANNER MAKER ============ */
+(function(){
+  const KEY='utg_termux_banner';
+
+  const PALETTE={
+    cyan:{code:36,hex:'#22d3ee'},
+    green:{code:32,hex:'#1db954'},
+    yellow:{code:33,hex:'#facc15'},
+    red:{code:31,hex:'#ff5c5c'},
+    magenta:{code:35,hex:'#e879f9'},
+    blue:{code:34,hex:'#60a5fa'},
+    white:{code:37,hex:'#eef1f3'},
+    gray:{code:90,hex:'#8a9499'}
+  };
+
+  const BOXES={
+    heavy:['┏','┓','┗','┛','━','┃'],
+    double:['╔','╗','╚','╝','═','║'],
+    round:['╭','╮','╰','╯','─','│'],
+    single:['┌','┐','└','┘','─','│'],
+    none:null
+  };
+
+  const PRESETS=[
+    {
+      label:'Date',
+      cmd:"date '+%a %d %b %Y %H:%M %Z'",
+      root:false,
+      sample:'Sun 11 Oct 2026 10:18 PKT'
+    },
+    {
+      label:'Uptime',
+      cmd:'uptime -p 2>/dev/null || uptime',
+      root:false,
+      sample:'12 hours, 36 minutes'
+    },
+    {
+      label:'Storage',
+      cmd:"df -h \"$HOME\" | awk 'NR==2{print $3\" used / \"$2\" (\"$5\")\"}'",
+      root:false,
+      sample:'3.6G used / 6.0G (63%)'
+    },
+    {
+      label:'RAM free',
+      cmd:"awk '/MemTotal/{t=$2} /MemAvailable/{a=$2} END{printf \"%d / %d MiB\", a/1024, t/1024}' /proc/meminfo",
+      root:false,
+      sample:'727 / 1846 MiB'
+    },
+    {
+      label:'Kernel',
+      cmd:'uname -sr',
+      root:false,
+      sample:'Linux 4.14.186'
+    },
+    {
+      label:'Wi-Fi IP',
+      cmd:"ip -4 addr show wlan0 2>/dev/null | awk '/inet /{print $2}'",
+      root:false,
+      sample:'192.168.1.42/24'
+    },
+    {
+      label:'Battery (Termux:API)',
+      cmd:"termux-battery-status 2>/dev/null | grep -o '\"percentage\": *[0-9]*' | grep -o '[0-9]*$'",
+      root:false,
+      sample:'87'
+    },
+    {
+      label:'CPU temp',
+      cmd:"awk '{printf \"%.1f C\", $1/1000}' /sys/class/thermal/thermal_zone0/temp",
+      root:true,
+      sample:'41.5 C'
+    },
+    {
+      label:'Root UID',
+      cmd:'id -u',
+      root:true,
+      sample:'0'
+    }
+  ];
+
+  const DEFAULT={
+    art:'',
+    title:'Welcome to Termux',
+    subtitle:'Authorized access only. All activity is monitored.',
+    greeting:'Welcome back, UzairTechGuide User',
+    color:'cyan',
+    bold:true,
+    box:'heavy',
+    width:52,
+    showBox:true,
+    clear:true,
+    guard:true,
+    rows:PRESETS.slice(0,4).map(p=>({
+      on:true,
+      label:p.label,
+      cmd:p.cmd,
+      root:p.root,
+      sample:p.sample
+    }))
+  };
+
+  const bq=value=>String(value)
+    .replace(/\\/g,'\\\\')
+    .replace(/"/g,'\\"')
+    .replace(/\$/g,'\\$')
+    .replace(/`/g,'\\`');
+
+  const he=value=>String(value).replace(/[&<>"]/g,char=>({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;'
+  })[char]);
+
+  function cloneDefault(){
+    return JSON.parse(JSON.stringify(DEFAULT));
+  }
+
+  function load(){
+    try{
+      const stored=JSON.parse(localStorage.getItem(KEY));
+
+      if(stored && typeof stored==='object'){
+        return Object.assign(cloneDefault(),stored);
+      }
+    }catch(error){}
+
+    return cloneDefault();
+  }
+
+  let S=load();
+
+  function save(){
+    try{
+      localStorage.setItem(KEY,JSON.stringify(S));
+    }catch(error){}
+  }
+
+  /* ---------- Preview ---------- */
+  function renderPreview(){
+    const palette=PALETTE[S.color] || PALETTE.cyan;
+    const col=palette.hex;
+    const box=BOXES[S.box] || null;
+    const width=Number(S.width) || 52;
+    const lines=[];
+    const add=(text,color,bold)=>lines.push({
+      text,
+      color,
+      bold
+    });
+
+    if(S.art.trim()){
+      S.art
+        .replace(/\n+$/,'')
+        .split('\n')
+        .forEach(line=>add(line,col,S.bold));
+    }
+
+    if(S.title.trim()){
+      add(S.title,col,S.bold);
+    }
+
+    if(S.subtitle.trim()){
+      add(S.subtitle,PALETTE.gray.hex,false);
+    }
+
+    add('',null,false);
+
+    if(S.greeting.trim()){
+      add(S.greeting,PALETTE.white.hex,false);
+    }
+
+    const rows=S.rows.filter(row=>row.on && row.label.trim());
+    const rail=box ? box[5] : '';
+
+    if(box){
+      add(box[0]+box[4].repeat(width)+box[1],col,false);
+    }
+
+    rows.forEach(row=>{
+      const value=row.sample || '<output>';
+
+      add(
+        `${rail}  ${row.label.padEnd(12)} : ${value}`,
+        col,
+        false
+      );
+    });
+
+    if(box){
+      add(box[2]+box[4].repeat(width)+box[3],col,false);
+    }
+
+    return lines;
+  }
+
+  function drawPreview(){
+    const html=renderPreview()
+      .map(line=>{
+        const style=line.color
+          ? ` style="color:${line.color}"`
+          : '';
+
+        const className=line.bold
+          ? ' class="b"'
+          : '';
+
+        return `<div${className}${style}>${he(line.text) || '&nbsp;'}</div>`;
+      })
+      .join('');
+
+    document.getElementById('preview').innerHTML=html;
+  }
+
+  /* ---------- Bash script ---------- */
+  function buildScript(){
+    const palette=PALETTE[S.color] || PALETTE.cyan;
+    const color=`\\033[${S.bold?'1;':''}${palette.code}m`;
+    const reset='\\033[0m';
+    const box=S.showBox ? BOXES[S.box] : null;
+    const width=Number(S.width) || 52;
+    const rail=box ? box[5] : '';
+    const lines=[];
+
+    lines.push('#!/data/data/com.termux/files/usr/bin/bash');
+    lines.push('# Termux login banner, generated by UzairGuide Banner Maker');
+
+    if(S.clear){
+      lines.push('clear');
+    }
+
+    if(S.art.trim()){
+      lines.push(`printf '${color}'`);
+      lines.push("cat << 'ART'");
+      lines.push(S.art.replace(/\n+$/,''));
+      lines.push('ART');
+      lines.push(`printf '${reset}'`);
+    }
+
+    if(S.title.trim()){
+      lines.push(`printf '${color}%s${reset}\\n' "${bq(S.title)}"`);
+    }
+
+    if(S.subtitle.trim()){
+      lines.push(`printf '\\033[90m%s${reset}\\n' "${bq(S.subtitle)}"`);
+    }
+
+    lines.push('echo');
+
+    if(S.greeting.trim()){
+      lines.push(`printf '%s\\n' "${bq(S.greeting)}"`);
+    }
+
+    if(box){
+      lines.push(
+        `printf '${color}%s${reset}\\n' '${box[0]}${box[4].repeat(width)}${box[1]}'`
+      );
+    }
+
+    S.rows
+      .filter(row=>row.on && row.label.trim() && row.cmd.trim())
+      .forEach(row=>{
+        let command=row.cmd.trim();
+
+        if(row.root){
+          command=`su -c '${command.replace(/'/g,"'\\''")}' 2>/dev/null`;
+        }
+
+        const line=
+          `printf '${color}${rail}  %-12s : %s${reset}\\n' ` +
+          `"${bq(row.label.trim())}" "$(${command})"`;
+
+        if(row.root && S.guard){
+          lines.push('if command -v su >/dev/null 2>&1; then');
+          lines.push('  '+line);
+          lines.push('fi');
+        }else{
+          lines.push(line);
+        }
+      });
+
+    if(box){
+      lines.push(
+        `printf '${color}%s${reset}\\n' '${box[2]}${box[4].repeat(width)}${box[3]}'`
+      );
+    }
+
+    lines.push('echo');
+
+    return lines.join('\n')+'\n';
+  }
+
+  function bashrcSnippet(){
+    return [
+      '# Custom Termux banner',
+      'if [ -n "$PS1" ] && [ -f "$HOME/.termux_banner.sh" ]; then',
+      '    . "$HOME/.termux_banner.sh"',
+      'fi'
+    ].join('\n');
+  }
+
+  /* ---------- Rows editor ---------- */
+  function renderRows(){
+    const wrap=document.getElementById('rows');
+
+    wrap.innerHTML=S.rows.map((row,index)=>`
+      <div class="row-item${row.root?' is-root':''}">
+        <div class="row-top">
+          <label class="chk">
+            <input
+              type="checkbox"
+              data-i="${index}"
+              data-f="on"
+              ${row.on?'checked':''} />
+            On
+          </label>
+
+          <input
+            class="input"
+            data-i="${index}"
+            data-f="label"
+            value="${he(row.label)}"
+            placeholder="Label" />
+
+          ${row.root ? '<span class="badge-root">ROOT</span>' : ''}
+
+          <button
+            class="icon-btn"
+            data-del="${index}"
+            title="Remove row"
+            aria-label="Remove row">
+            ✕
+          </button>
+        </div>
+
+        <input
+          class="input mono"
+          data-i="${index}"
+          data-f="cmd"
+          value="${he(row.cmd)}"
+          spellcheck="false"
+          placeholder="Shell command" />
+
+        <div class="row-top">
+          <label class="chk">
+            <input
+              type="checkbox"
+              data-i="${index}"
+              data-f="root"
+              ${row.root?'checked':''} />
+            Needs root (runs via su)
+          </label>
+        </div>
+      </div>
+    `).join('') || `
+      <p class="note">
+        No rows yet. Add a preset or a custom row.
+      </p>
+    `;
+
+    const rootCount=S.rows.filter(row=>row.on && row.root).length;
+    const warning=document.getElementById('root-warn');
+
+    warning.hidden=rootCount===0;
+    warning.textContent=
+      `${rootCount} active root row(s). Each login calls su, so Android may ask for root permission every time.`;
+  }
+
+  /* ---------- Refresh ---------- */
+  function refresh(){
+    drawPreview();
+
+    document.getElementById('out').value=buildScript();
+    document.getElementById('bashrc').value=bashrcSnippet();
+
+    save();
+  }
+
+  /* ---------- Static fields ---------- */
+  const $=id=>document.getElementById(id);
+
+  function pushStaticToForm(){
+    $('f-title').value=S.title;
+    $('f-subtitle').value=S.subtitle;
+    $('f-greeting').value=S.greeting;
+    $('f-art').value=S.art;
+    $('f-box').value=S.box;
+    $('f-width').value=S.width;
+    $('width-val').textContent=S.width+' cols';
+    $('f-bold').checked=S.bold;
+    $('f-showbox').checked=S.showBox;
+    $('f-clear').checked=S.clear;
+    $('f-guard').checked=S.guard;
+
+    document.querySelectorAll('.swatch').forEach(swatch=>{
+      swatch.classList.toggle(
+        'active',
+        swatch.dataset.color===S.color
+      );
+    });
+  }
+
+  const swatchWrap=$('swatches');
+
+  swatchWrap.innerHTML=Object.keys(PALETTE)
+    .map(name=>`
+      <button
+        class="swatch"
+        data-color="${name}"
+        title="${name}"
+        style="background:${PALETTE[name].hex}"
+        aria-label="${name}">
+      </button>
+    `)
+    .join('');
+
+  swatchWrap.addEventListener('click',event=>{
+    const button=event.target.closest('.swatch');
+
+    if(!button){
+      return;
+    }
+
+    S.color=button.dataset.color;
+    pushStaticToForm();
+    refresh();
+  });
+
+  $('presets').innerHTML=PRESETS
+    .map((preset,index)=>`
+      <button class="chip" data-preset="${index}">
+        + ${he(preset.label)}${preset.root?' · root':''}
+      </button>
+    `)
+    .join('');
+
+  $('presets').addEventListener('click',event=>{
+    const button=event.target.closest('.chip');
+
+    if(!button){
+      return;
+    }
+
+    const preset=PRESETS[Number(button.dataset.preset)];
+
+    S.rows.push({
+      on:true,
+      label:preset.label,
+      cmd:preset.cmd,
+      root:preset.root,
+      sample:preset.sample
+    });
+
+    renderRows();
+    refresh();
+  });
+
+  $('add-custom').addEventListener('click',()=>{
+    S.rows.push({
+      on:true,
+      label:'Custom',
+      cmd:'echo hello',
+      root:false,
+      sample:'hello'
+    });
+
+    renderRows();
+    refresh();
+  });
+
+  const textFields={
+    'f-title':'title',
+    'f-subtitle':'subtitle',
+    'f-greeting':'greeting',
+    'f-art':'art'
+  };
+
+  Object.entries(textFields).forEach(([id,key])=>{
+    $(id).addEventListener('input',event=>{
+      S[key]=event.target.value;
+      refresh();
+    });
+  });
+
+  $('f-box').addEventListener('change',event=>{
+    S.box=event.target.value;
+    refresh();
+  });
+
+  $('f-width').addEventListener('input',event=>{
+    S.width=Number(event.target.value);
+    $('width-val').textContent=S.width+' cols';
+    refresh();
+  });
+
+  $('f-bold').addEventListener('change',event=>{
+    S.bold=event.target.checked;
+    refresh();
+  });
+
+  $('f-showbox').addEventListener('change',event=>{
+    S.showBox=event.target.checked;
+    refresh();
+  });
+
+  $('f-clear').addEventListener('change',event=>{
+    S.clear=event.target.checked;
+    refresh();
+  });
+
+  $('f-guard').addEventListener('change',event=>{
+    S.guard=event.target.checked;
+    refresh();
+  });
+
+  /* ---------- Rows delegated editing ---------- */
+  $('rows').addEventListener('input',handleRowEvent);
+  $('rows').addEventListener('change',handleRowEvent);
+
+  $('rows').addEventListener('click',event=>{
+    const deleteButton=event.target.closest('[data-del]');
+
+    if(!deleteButton){
+      return;
+    }
+
+    S.rows.splice(Number(deleteButton.dataset.del),1);
+    renderRows();
+    refresh();
+  });
+
+  function handleRowEvent(event){
+    const target=event.target;
+
+    if(target.dataset.i===undefined){
+      return;
+    }
+
+    const row=S.rows[Number(target.dataset.i)];
+
+    if(!row){
+      return;
+    }
+
+    const field=target.dataset.f;
+
+    if(target.type==='checkbox'){
+      row[field]=target.checked;
+
+      if(field==='root'){
+        renderRows();
+      }
+    }else{
+      row[field]=target.value;
+    }
+
+    refresh();
+  }
+
+  /* ---------- Reset ---------- */
+  $('reset-btn').addEventListener('click',()=>{
+    if(!confirm('Reset all banner settings to default?')){
+      return;
+    }
+
+    S=cloneDefault();
+
+    pushStaticToForm();
+    renderRows();
+    refresh();
+  });
+
+  /* ---------- Export ---------- */
+  function copyText(text,button){
+    const done=()=>{
+      const oldText=button.textContent;
+
+      button.textContent='Copied!';
+
+      setTimeout(()=>{
+        button.textContent=oldText;
+      },1400);
+    };
+
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard
+        .writeText(text)
+        .then(done)
+        .catch(()=>fallbackCopy(text,done));
+    }else{
+      fallbackCopy(text,done);
+    }
+  }
+
+  function fallbackCopy(text,done){
+    const textarea=document.createElement('textarea');
+
+    textarea.value=text;
+    textarea.setAttribute('readonly','');
+    textarea.style.position='fixed';
+    textarea.style.opacity='0';
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try{
+      document.execCommand('copy');
+      done();
+    }catch(error){}
+
+    textarea.remove();
+  }
+
+  $('copy-sh').addEventListener('click',event=>{
+    copyText($('out').value,event.currentTarget);
+  });
+
+  $('copy-bashrc').addEventListener('click',event=>{
+    copyText($('bashrc').value,event.currentTarget);
+  });
+
+  $('dl-sh').addEventListener('click',()=>{
+    const blob=new Blob(
+      [$('out').value],
+      {type:'text/x-sh;charset=utf-8'}
+    );
+
+    const url=URL.createObjectURL(blob);
+    const anchor=document.createElement('a');
+
+    anchor.href=url;
+    anchor.download='termux_banner.sh';
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    setTimeout(()=>{
+      URL.revokeObjectURL(url);
+    },1000);
+  });
+
+  /* ---------- Init ---------- */
+  pushStaticToForm();
+  renderRows();
+  refresh();
+})();
+</script>
+
+</body>
+</html>
